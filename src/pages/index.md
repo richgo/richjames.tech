@@ -1,16 +1,14 @@
 ---
 templateKey: index-page
-title: Great coffee with a conscience
-image: /img/home-jumbotron.jpg
-heading: Great coffee with a conscience
-subheading: Support sustainable farming while enjoying a cup
+title: Rich James
+image: /img/hero-background.png
+heading: Rich James
+subheading: Technology Leader
 mainpitch:
-  title: Why Kaldi
-  description: >
-    Kaldi is the coffee store for everyone who believes that great coffee
-    shouldn't just taste good, it should do good too. We source all of our beans
-    directly from small scale sustainable farmers and make sure part of the
-    profits are reinvested in their communities.
+  title: Who am I?
+  description: >-
+     A highly experienced technology leader with in-depth software development and architectural knowledge. Two decades experience developing and delivering enterprise, web, desktop, mobile and serverless applications. Experience leading multiple cross-functional teams. A problem solver with an entrepreneurial mindset.
+
 description: >-
   Kaldi is the ultimate spot for coffee lovers who want to learn about their
   java’s origin and support the farmers that grew it. We take coffee production,
