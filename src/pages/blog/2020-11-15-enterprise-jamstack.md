@@ -26,7 +26,7 @@ In recent years there has been some great progress with JavaScript framework sup
 
 ## Jamstack
 
-Open source software has steadily matured over the last 10 years. Today open source technology underpins the majority of the digital services we use. In the modern world of the web, organisations like Netlify have created their own GitOps CMS systems that automatically build and deploy a developers code commit to a static hosted website in minutes. These are Jamstack sites. That's:
+Open source software has steadily matured over the last 10 years. Today open source technology underpins the majority of the digital services we use. Jamstack is the latest category of open source software to reach mainstream maturity. In the modern world of the web, organisations like Netlify have created their own GitOps CMS systems that automatically build and deploy a developers code commit to a static hosted website in minutes. These are Jamstack sites. That's:
 
 ![Javascript, APIs and Markdown](/img/jamstackbreakdown.jpg "Javascript, APIs and Markdown")
 
@@ -38,7 +38,7 @@ The core principles of pre-rendering, and decoupling, enable sites and applicati
 
 I would highly recommend reading the Jamstack website here for more detail: <https://jamstack.org/>
 
-A sign of the maturity of Jamstack platforms is the excellent Jamstack Conf conference that runs biannually. The big players in this space are Netlify, Hugo, Gatsby, NextJs.
+A sign of the maturity of Jamstack platforms is the excellent Jamstack Conf conference that runs biannually. The big players in this space are Netlify, Hugo, Gatsby, NextJs. You're reading this on a Netlify hosted Gatsby website, which [I builtin 2 hours](https://richjames.tech/blog/2020-01-31-zero-to-website-in-2-hours).
 
 ![The Jamstack site generation workflow](/img/jamstack.jpeg "The Jamstack site generation workflow")
 
@@ -47,7 +47,7 @@ A sign of the maturity of Jamstack platforms is the excellent Jamstack Conf conf
 There's a fundamental and competing difference between these two worlds:
 
 * Enterprise CMS platforms place marketer features and experience first
-* Jamstackis squarely aimed at developer experience and performance
+* Jamstack is squarely aimed at developer experience and performance
 
 There's a battle going on between the established enterprise marketing platforms and the world of open source Jamstack. The latterpromises to provide a better developer and user experience at the expense of the marketeers toolkit but at a fraction of the price (sometimes free).
 
