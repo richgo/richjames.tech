@@ -18,8 +18,6 @@ Which in this case means "Enterprise CMS". We're talking about Content Managemen
 
 ![A diagram of the enterprise CMS](/img/enterprisecms.jpeg "The Enterprise CMS")
 
-<!--StartFragment-->
-
 So why would anyone pay for a system that can cost (potentially) millions when it clearly delivers content via a suboptimal mechanism? The answer is simple: they provide features like drag drop page creation, controls on publishing and as many editor customisations as you can afford. To phrase that differently: business agility. The engineers pain is the marketers gain.
 
 The major players can be found on the top right of the Gartner magic quadrant under the DXP category: Adobe and Sitecore.
