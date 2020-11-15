@@ -49,7 +49,7 @@ There's a fundamental and competing difference between these two worlds:
 * Enterprise CMS platforms place marketer features and experience first
 * Jamstack is squarely aimed at developer experience and performance
 
-There's a battle going on between the established enterprise marketing platforms and the world of open source Jamstack. The latterpromises to provide a better developer and user experience at the expense of the marketeers toolkit but at a fraction of the price (sometimes free).
+There's a battle going on between the established enterprise marketing platforms and the world of open source Jamstack. The latter promises to provide a better developer and user experience at the expense of the marketeers toolkit but at a fraction of the price (sometimes free).
 
 It's easy to think that these two approaches are incompatible, but that's not the case.
 
