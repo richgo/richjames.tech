@@ -20,7 +20,7 @@ Which in this case means "Enterprise CMS". We're talking about Content Managemen
 
 <!--StartFragment-->
 
-So why would anyone pay for a system that can costs (potentially) millions when it clearly delivers content via a suboptimal mechanism? The answer is simple: they provide features like drag drop page creation, controls on publishing and as many editor customisations as you can afford. To phrase that differently: business agility.The engineers pain is the marketers gain.
+So why would anyone pay for a system that can costs (potentially) millions when it clearly delivers content via a suboptimal mechanism? The answer is simple: they provide features like drag drop page creation, controls on publishing and as many editor customisations as you can afford. To phrase that differently: business agility. The engineers pain is the marketers gain.
 
 The major players can be found on the top right of the Gartner magic quadrant under the DXP category: Adobe and Sitecore.
 
@@ -28,7 +28,7 @@ In recent years there has been some great progress with JavaScript framework sup
 
 ## Jamstack
 
-Open source software has steadily matured over the last 10 years. Today open source technology underpins the majority of the digital services we use. In the modern world of the web, organisations like Netlify have created their own Git Ops CMS systems that automatically build and deploy a developers code commit to a static hosted website in minutes. These are Jamstack applications. That's:
+Open source software has steadily matured over the last 10 years. Today open source technology underpins the majority of the digital services we use. In the modern world of the web, organisations like Netlify have created their own GitOps CMS systems that automatically build and deploy a developers code commit to a static hosted website in minutes. These are Jamstack sites. That's:
 
 ![Javascript, APIs and Markdown](/img/jamstackbreakdown.jpg "Javascript, APIs and Markdown")
 
@@ -78,6 +78,8 @@ With modern websites comprising more functionality delivered by 3rd party Javasc
 
 The other aspect of hyper resilience is protection from Distributed Denial of Service (DDoS) attacks. DDoS attacks generally attempt to overwhelm a website with huge numbers of requests. Now that you're backed by a global CDN with cheap and replicable storage you can add a rudimentary layer of DDoS protection. By simply specifying enough storage IOPS the sheer number of requests per second required to overwhelm your system becomes an unassailable numbers game. To be clear, this mechanism is not a replacement for proper DDoS protection, but complimentary.
 
+**Our JAM is actually TGS - TypeScript, GraphQL & Sitecore**
+
 ## Transitioning
 
 About halfway through development we had a rethink. We wanted the benefits of both an enterprise CMS and a Jamstack architecture. NextJs provided was maturing and [Uniform](https://uniform.dev) (founded by the Sitecore JSS developers) provided another option. By combining these technologies and approaches we eventually settled on a new approach: Enterprise Jamstack
@@ -107,8 +109,6 @@ Sitecore's isomorphic React is what gives you the best of both with server side 
 4. If the above succeeds (this is where we could fail on 500 errors) we copy to either the blue or green storage
 5. Run smoketests
 6. Switch storage
-
-
 
 ## vNext
 
