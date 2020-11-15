@@ -59,20 +59,20 @@ As a large financial organisation following Enterprise Architecture principals w
 
 Nationwide began our journey with a decoupled CMS back in 2018, in line with the release of Sitecore's JSS SDK. During development one thing stood out: there was increased complexity because of the mixture of technologies. Sitecore's preferred deployment is Azure App Service but Nationwide's microservices all run in Kubernetes, on Linux. This created a natural solution boundary for us: Sitecore, run as a service, is built and deployed separately from the front end React application and associated business microservices. So more pipelines, more automation and more complexity.
 
-Taking a new architecture into production is always going to be a bit nerve wracking. Moving to a DevOps model (Site Reliability Engineering) where you are also responsible for running that system makes it even more so.
+Taking a new architecture into production is always going to be a bit nerve wracking. Moving to a DevOps model (Site Reliability Engineering) where you are also responsible for running that system makes it even more so. 
 
 The operational beauty of Jamstack is twofold:
 
 * Shift left
 * Hyper resilience
 
-Shifting left in Jamstack terms means catching 500 server errors at generation time - whilst you export your static website. This means you can catch those errors earlier so your users should never see them.
+**Shifting left** in Jamstack terms means catching 500 server errors at generation time - whilst you export your static website. This means you can catch those errors earlier so your users should never see them.
 
-Hyper resilience comes from the ability to distribute your static assets to multiple cloud storage accounts in multiple regions and even across multiple cloud service providers. The use of a global CDN then makes sure your assets are efficiently compressed and delivered to your users from the closest possible location. Its beautifully simple and can easily return upwards of five nines of availability.
+**Hyper resilience** comes from the ability to distribute your static assets to multiple cloud storage accounts in multiple regions and even across multiple cloud service providers. The use of a global CDN then makes sure your assets are efficiently compressed and delivered to your users from the closest possible location. Its beautifully simple and can easily return upwards of five nines of availability.
 
 **There's no compute.**
 
-With modern websites comprising more functionality delivered by 3rd party Javascript libraries, the need to have compute server side is significantly reduced. Without compute you have significant air cover.What are the chances of cloud storage failures across multiple regions and clouds? Slim to none. Your blast radius is drastically reduced. This means your on call engineers can fix any broken compute issues in the morning as your users will likely not be impacted.Disaster Recovery (DR) is built in.
+With modern websites comprising more functionality delivered by 3rd party Javascript libraries, the need to have compute server side is significantly reduced. Without compute you have significant air cover. What are the chances of cloud storage failures across multiple regions and clouds? Slim to none. Your blast radius is drastically reduced. This means your on call engineers can fix any broken compute issues in the morning as your users will likely not be impacted. Disaster Recovery (DR) is built in.
 
 The other aspect of hyper resilience is protection from Distributed Denial of Service (DDoS) attacks. DDoS attacks generally attempt to overwhelm a website with huge numbers of requests. Now that you're backed by a global CDN with cheap and replicable storage you can add a rudimentary layer of DDoS protection. By simply specifying enough storage IOPS the sheer number of requests per second required to overwhelm your system becomes an unassailable numbers game. To be clear, this mechanism is not a replacement for proper DDoS protection, but complimentary.
 
