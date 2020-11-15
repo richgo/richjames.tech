@@ -59,7 +59,7 @@ As a large financial organisation following Enterprise Architecture principals w
 
 Nationwide began our journey with a decoupled CMS back in 2018, in line with the release of Sitecore's JSS SDK. During development one thing stood out: there was increased complexity because of the mixture of technologies. Sitecore's preferred deployment is Azure App Service but Nationwide's microservices all run in Kubernetes, on Linux. This created a natural solution boundary for us: Sitecore, run as a service, is built and deployed separately from the front end React application and associated business microservices. So more pipelines, more automation and more complexity.
 
-Taking a new architecture into production is always going to be a bit nerve wracking. Moving to a DevOps model (Site Reliability Engineering) where you are also responsible for running that system makes it even more so. 
+Taking a new architecture into production is always going to be a bit nerve wracking. Moving to a DevOps model (Site Reliability Engineering) where you are also responsible for running that system makes it even more so. This is where Jamstack can really help.
 
 The operational beauty of Jamstack is twofold:
 
