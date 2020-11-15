@@ -78,8 +78,6 @@ With modern websites comprising more functionality delivered by 3rd party Javasc
 
 The other aspect of hyper resilience is protection from Distributed Denial of Service (DDoS) attacks. DDoS attacks generally attempt to overwhelm a website with huge numbers of requests. Now that you're backed by a global CDN with cheap and replicable storage you can add a rudimentary layer of DDoS protection. By simply specifying enough storage IOPS the sheer number of requests per second required to overwhelm your system becomes an unassailable numbers game. To be clear, this mechanism is not a replacement for proper DDoS protection, but complimentary.
 
-**Our JAM is actually TGS - TypeScript, GraphQL & Sitecore**
-
 ## Transitioning
 
 About halfway through development we had a rethink. We wanted the benefits of both an enterprise CMS and a Jamstack architecture. NextJs was maturing and [Uniform](https://uniform.dev) (founded by the Sitecore JSS developers) provided another option. By combining these technologies and approaches we eventually settled on a new approach: Enterprise Jamstack
@@ -94,6 +92,10 @@ We had to transition to this architecture as it was not what we originally envis
 4. Build the automation pipeline to a blob deploy
 
 Other than the use of an Enterprise CMS there are some subtle differences that make up our stack:
+
+## JAM = TGS
+
+The JAM in Jamstack for us is TGS: TypeScript, GraphQL and Sitecore.
 
 ## Blue/Green blobs & buckets
 
