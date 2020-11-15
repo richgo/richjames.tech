@@ -82,7 +82,7 @@ The other aspect of hyper resilience is protection from Distributed Denial of Se
 
 ## Transitioning
 
-About halfway through development we had a rethink. We wanted the benefits of both an enterprise CMS and a Jamstack architecture. NextJs provided was maturing and [Uniform](https://uniform.dev) (founded by the Sitecore JSS developers) provided another option. By combining these technologies and approaches we eventually settled on a new approach: Enterprise Jamstack
+About halfway through development we had a rethink. We wanted the benefits of both an enterprise CMS and a Jamstack architecture. NextJs was maturing and [Uniform](https://uniform.dev) (founded by the Sitecore JSS developers) provided another option. By combining these technologies and approaches we eventually settled on a new approach: Enterprise Jamstack
 
 ![Nationwide's Enterprise Jamstack](/img/enterprisejamstack.jpeg "Nationwide's Enterprise Jamstack")
 
