@@ -105,15 +105,13 @@ That's now a thing. We've had blue/green deploys in the world of DevOps for some
 
 Sitecore's isomorphic React is what gives you the best of both with server side rendering and app-like behaviour after the initial page load. We wanted to keep that functionality whilst not being reliant on the content delivery servers compute. This is where Uniform helps. A publish now consists of:
 
-1. Export all media assets to a storage
-2. Export all layout service JSON to a storage (this contains everything required to render each route e.g. content, layout configuration)
+1. Export all media assets to storage
+2. Export all layout service JSON to storage (this contains everything required to render each route e.g. content, layout configuration)
 3. Run the SSR site exporter against the layout JSON in the blob then copy the rendered assets into storage
-4. If the above succeeds (this is where we could fail on 500 errors) we copy to either the blue or green storage
+4. If the above succeeds (this is where we could fail on 500 errors) we copy to either blue or green storage
 5. Run smoketests
-6. Switch storage
+6. Switch the blue/green storage to put the new site in to production
 
 ## vNext
 
-If I were a betting man I suspect the future of the enterprise CMS is for there not to be one. Content hubs provide the missing collaboration features that no WCMS has ever managed to achieve. With the addition of content as a service features I can see a world where Enterprise Jamstack is indistinguishable from Jamstack. As a developer, you would simply choose the SaaS service that aligns with your business needs and meets your SLA requirements. For some websites, Sitecore's Content Hub would be perfect, for others Gather Content or Contentful might be the right choice.
-
-Jamstack has enabled an incredibly diverse technology stack for web developers. There's never been more choice.
+If I were a betting man I suspect the future of the enterprise CMS is for there not to be one. Content hubs provide the missing collaboration features that no WCMS has ever managed to achieve. With the addition of content as a service features I can see a world where Enterprise Jamstack is indistinguishable from Jamstack. As a developer, you would simply choose the SaaS service that aligns with your business needs and meets your SLA requirements. For some websites, Sitecore's Content Hub would be perfect, for others Gather Content or Contentful might be the right choice and using platforms like Uniform as the glue.
