@@ -87,7 +87,7 @@ We had to transition to this architecture as it was not what we originally envis
 1. Terraform the new storage accounts and CDN configuration
 2. Convert the React SSR Node application to use NextJs
 3. Install and configure the Uniform Sitecore plugin (used to trigger export)
-4. Build the automation pipeline to a blob deploy
+4. Build the automation pipeline for the static site deploy
 
 Other than the use of an Enterprise CMS there are some subtle differences that make up our stack:
 
@@ -105,7 +105,7 @@ Sitecore's isomorphic React is what gives you the best of both with server side 
 
 1. Export all media assets to storage
 2. Export all layout service JSON to storage (this contains everything required to render each route e.g. content, layout configuration)
-3. Run the SSR site exporter against the layout JSON in the blob then copy the rendered assets into storage
+3. Run the SSR site exporter against the layout JSON in storage then copy the rendered assets into storage
 4. If the above succeeds (this is where we could fail on 500 errors) we copy to either blue or green storage
 5. Run smoketests
 6. Switch the blue/green storage to put the new site in to production
