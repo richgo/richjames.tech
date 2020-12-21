@@ -1,11 +1,9 @@
 ---
 templateKey: blog-post
-title: >-
-  Decoupled digital: supporting a modern business with micro-frontends and
-  micro-services
+title: 'Decoupled digital: an approach to micro-frontends and micro-services'
 date: 2020-12-21T22:24:49.595Z
 description: >-
-  TL;DR
+  TL;DR:
 
   This is an opinionated technology solution using NextJs  Zones and federated
   GraphQL. For the techies, there's a fair amount of upfront business context.
@@ -174,11 +172,13 @@ service ](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACNwAAAYcCAYAAADToQVKAAAM
 
 ## In code
 
-You can find a working example here: <https://github.com/richgo/micro-frontend-basic>
+You can find a working example in the repo here: <https://github.com/richgo/micro-frontend-basic>
 
 The repository has been divided to support both logical applications with separate client and server applications that are independently deployable like so:
 
 ![](/img/repo.png)
+
+And yes, that is 8 node apps! (3x NextJs, 5x Apollo GQL).
 
 If you follow the instructions on the readme to get the application running and navigate to <http://localhost:4000/> you will find the GraphQL playground. From here you can run queries like:
 
