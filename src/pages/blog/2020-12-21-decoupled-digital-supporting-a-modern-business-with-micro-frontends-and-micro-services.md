@@ -26,8 +26,6 @@ tags:
 
 Large organisations, be they modern tech giants or established enterprises, face tough challenges when it comes to ownership of digital assets. As organisations grow and shrink, technology trends shift from monoliths to microservices, shared platforms to value streams, the brunt of the pain is felt by the teams maintaining those assets. We are all too aware of the discomfort of endless restructures in order to align to the latest tech or agile trends: change fatigue.
 
-
-
 ### Where have we come from
 
 We once aligned ourselves by department, or discipline. This led to multi hand-offs, long lead times for change, and helped internal political systems \[which add no value] to thrive. These problems were exacerbated by the scale of enterprise organisations.
@@ -107,13 +105,13 @@ If you want total control and isolated testing you could use a traffic manager t
 
 ##### Zone Apps
 
-There is another way to decouple: Zone apps. This is a NextJs framework based approach and is thereforeopinionated. It allows you to stitch together the routing of multiple NextJs apps running in different locations. The only coupling sits with configuration within the main home app. This is necessary so it knowswhere to find the other zone apps. Beyond that, the applications are fully decoupled.
+There is another way to decouple: Zone apps. This is a NextJs framework based approach and which will work with React only. It allows you to stitch together the routing of multiple NextJs apps running in different locations. The only coupling sits with configuration within the main home app. This is necessary so it knows where to find the other zone apps. Beyond that, the applications are fully decoupled.
 
 There are some downsides with the separate app approach. We have only solved the IA/SEO issue. The UI could easily become inconsistent. To solve that we can use a design system which includes components for standard furniture like header/nav/footer. We could even content control the config by consuming a shared configuration file hosted and versioned on a CDN or a headless CMS.
 
-## An opinionated approach
+## An example
 
-To solve our complex business needs we need to make some decisions. Our business, FakeFurniture.com,has the following requirements:
+To solve our complex business needs we need to make some decisions. Our example business (FakeFurniture.com) has the following requirements:
 
 * The architecture must support a
 * * Home team looking after core brand
@@ -288,7 +286,7 @@ The NextJs Zones config lives in the home-app/client/next.config.js
 >
 > ]
 >
-> }``
+> }
 
 It is really as simple as that. Next handles all the routing for you from then on.
 
