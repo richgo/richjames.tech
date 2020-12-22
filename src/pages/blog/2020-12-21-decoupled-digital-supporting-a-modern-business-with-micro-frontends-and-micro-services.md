@@ -263,6 +263,6 @@ It is really as simple as that. Next handles all the routing for you from then o
 
 ## Conclusion
 
-As you can see, there needs to be considerable DevOps investment required to get all the servers up and running. You could handle this orchestration neatly with Google Skaffold (that's for another day!). Sharing components e.g. the header, is something to plan. You either need a design system or some shared library to import components from. A version controlled GraphQL schema registry is also adivsed for a federated graph endpoint.
+As you can see, there needs to be considerable DevOps investment to get all the servers up and running. You could handle this orchestration neatly with Google Skaffold (that's for another day!). Sharing components e.g. the header, is something to plan. You either need a design system or some shared library to import components from. A version controlled GraphQL schema registry is also adivsed for a federated graph endpoint.
 
 If you are using React and considering GraphQL for a large application estate that needs a lot of decoupling then this is a solid approach. This is geniunely the first architecture I have seen   that can solve consistency and shared services elegantly for a large organisation whilst deliverying blisteringly fast Jamstack experiences. And all with off-the-shelf opensource frameworks.
