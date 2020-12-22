@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: Decoupling digital with micro-frontends and micro-services
-date: 2020-12-21T22:24:49.595Z
+date: 2020-12-22T08:55:49.595Z
 description: >-
   TL;DR:
 
@@ -209,39 +209,24 @@ This example is essentially a combination of the nextjs with zones and apollo fe
 
 [](https://github.com/apollographql/federation-demo)The federated GraphQL server configuration lives here:
 
-> const{ ApolloServer }=require("apollo-server");
->
-> const{ ApolloGateway }=require("@apollo/gateway");
->
-> constgateway=newApolloGateway({
->
-> // This entire \`serviceList\` is optional when running in managed federation
->
-> // mode, using Apollo Graph Manager as the source of truth. In production,
->
-> // using a single source of truth to compose a schema is recommended and
->
-> // prevents composition failures at runtime using schema validation using
->
-> // real usage-based metrics.
->
-> serviceList:[
->
-> {name:"accounts",url:"http://localhost:4001/graphql"},
->
-> {name:"reviews",url:"http://localhost:4002/graphql"},
->
-> {name:"products",url:"http://localhost:4003/graphql"},
->
-> {name:"inventory",url:"http://localhost:4004/graphql"}
->
-> ],
->
-> // Experimental: Enabling this enables the query plan view in Playground.
->
-> __exposeQueryPlanExperimental:false,
->
-> });
+```javascript
+const gateway = new ApolloGateway({
+  // This entire `serviceList` is optional when running in managed federation
+  // mode, using Apollo Graph Manager as the source of truth.  In production,
+  // using a single source of truth to compose a schema is recommended and
+  // prevents composition failures at runtime using schema validation using
+  // real usage-based metrics.
+  serviceList: [
+    { name: "accounts", url: "http://localhost:4001/graphql" },
+    { name: "reviews", url: "http://localhost:4002/graphql" },
+    { name: "products", url: "http://localhost:4003/graphql" },
+    { name: "inventory", url: "http://localhost:4004/graphql" }
+  ],
+
+  // Experimental: Enabling this enables the query plan view in Playground.
+  __exposeQueryPlanExperimental: false,
+});
+```
 
 You can navigate to any of those servers and they will run just their piece of the graph schema.
 
@@ -249,51 +234,30 @@ Of note, is that changes to the individual servers will not reflect in the gatew
 
 The NextJs Zones config lives in the home-app/client/next.config.js
 
-> const{ACCOUNT_URL}=process.env
->
-> const{PRODUCT_URL}=process.en
->
-> module.exports={
->
-> rewrites() {
->
-> return[
->
-> {
->
-> source:'/account',
->
-> destination:`${ACCOUNT_URL}/account`,
->
-> },
->
-> {
->
-> source:'/account/:path*',
->
-> destination:`${ACCOUNT_URL}/account/:path*`,
->
-> },
->
-> {
->
-> source:'/products',
->
-> destination:`${PRODUCT_URL}/products`,
->
-> },
->
-> {
->
-> source:'/products/:path*',
->
-> destination:`${PRODUCT_URL}/products/:path*`,
->
-> },
->
-> ]
->
-> }
+```javascript
+module.exports = {
+  rewrites() {
+    return [
+      {
+        source: '/account',
+        destination: `${ACCOUNT_URL}/account`,
+      },
+      {
+        source: '/account/:path*',
+        destination: `${ACCOUNT_URL}/account/:path*`,
+      },
+      {
+        source: '/products',
+        destination: `${PRODUCT_URL}/products`,
+      },
+      {
+        source: '/products/:path*',
+        destination: `${PRODUCT_URL}/products/:path*`,
+      },
+    ]
+  },
+}
+```
 
 It is really as simple as that. Next handles all the routing for you from then on.
 
