@@ -97,6 +97,8 @@ The cons of this approach are complexity in deployment and testing. If you opt f
 
 #### Separate Apps
 
+This approach is as simple as it sounds: you have completely separate apps. Itworks really well if you have lots of individual apps aligned to journeys, like applying for a bank account. The downside is that inconsistency will creap in without strong design standards, or preferebly, a design system. You also have to solve the IA issue with an approach that is SEO friendly. There are two main ways to do this:
+
 ##### Layer 7 routing
 
 If you want total control and isolated testing you could use a traffic manager to split your traffic based on URL. This means separate apps, that could be on different tech stacks, in different regions and even different cloud providers. This approach puts a dependency on infra engineering, which could be a bottle neck if you have an IA that is immature or emerging.
