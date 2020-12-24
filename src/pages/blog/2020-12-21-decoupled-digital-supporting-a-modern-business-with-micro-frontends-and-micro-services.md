@@ -192,7 +192,7 @@ If you search for a product by upc "1" you should see the 'Table' product return
 
 ![](/img/gp2.png)
 
-The code behind shows our mock json data which we are using instead iofa real data store. 
+The code behind shows our mock json data which we are using instead of a real data store. 
 
 The same behaviour should be reflected through our (not very polished) UI. You can see this by navigating to <http://localhost:3000/account>
 
