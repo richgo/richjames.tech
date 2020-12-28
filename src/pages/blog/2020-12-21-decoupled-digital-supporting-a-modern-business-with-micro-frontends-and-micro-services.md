@@ -101,7 +101,7 @@ This approach is as simple as it sounds: you have completely separate apps. Itwo
 
 ##### Layer 7 routing
 
-This approach is as simple as it sounds: you have completely separate apps, or — complete isolation and maximum decoupling. It works really well if you have lots of individual apps aligned to journeys, like applying for a bank account. The downside is that inconsistency will creap in without strong design standards, or preferebly, a design system. You also have to solve the IA issue with an approach that is SEO friendly and centres around a core domain to enable cross site tracking. There are two main ways to do this:
+If you want total control and isolated testing you could use a traffic manager to split your traffic based on URL. This means separate apps, that could be on different tech stacks, in different regions and even different cloud providers. This approach puts a dependency on infra engineering, which could be a bottle neck if you have an IA that is immature or emerging.
 
 ##### Zone Apps
 
