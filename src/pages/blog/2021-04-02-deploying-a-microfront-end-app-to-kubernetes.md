@@ -14,8 +14,6 @@ tags:
   - devops
   - kubernetes
 ---
-
-
 This is a follow on from a previous post on microfront-ends and federated GraphQL which you can find here:
 
 # [Decoupling digital with micro-frontends and micro-services](https://richjames.tech/blog/2020-12-21-decoupled-digital-supporting-a-modern-business-with-micro-frontends-and-micro-services/)
@@ -51,13 +49,25 @@ skaffold deploy
 
 What could be simpler? 
 
-Then we added production configuration via the [profiles](https://skaffold.dev/docs/environment/profiles/) feature. It soon became a giant yaml file that was dificult to read. 
+You can speed up the build times massively by using Docker Buildkits layer caching and concurrency suppport:
+
+```
+  tagPolicy:
+    sha256: {}
+  local:
+    useBuildkit: true
+    concurrency: 4
+```
+
+The way to add production configuration is using *setValue* overrides via the [profiles](https://skaffold.dev/docs/environment/profiles/) feature. 
 
 **We also fell into a trap with profiles: they use a regex**. If you read the docs it does say that, but we learned the hard way. A profile named 'prod' and a profile named 'nonprod' could catch you out - they both fire when you run:
 
 ```
 skaffold dev -p prod
 ```
+
+Caveat: you will quickly find yourself with an unmaintainable giant yaml file.
 
 The way to solve the giant yaml problem is to use the new modules feature. It allows you to have a *requires* section like so:
 
