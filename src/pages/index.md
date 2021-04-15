@@ -2,12 +2,16 @@
 templateKey: index-page
 title: Hi, I'm Rich James
 image: /img/hero-background.png
-heading: Hi, I'm Rich James
+heading: Rich James
 subheading: Technology Leader
 mainpitch:
-  title: Who am I?
+  title: About Me
   description: >-
-     A highly experienced technology leader with in-depth software development and architectural knowledge. Two decades experience developing and delivering enterprise, web, desktop, mobile and serverless applications. Experience leading multiple cross-functional teams. A problem solver with an entrepreneurial mindset.
+     I'm a highly experienced technology leader with in-depth software development and architectural knowledge. I have spent the last two decades developing and delivering enterprise, web, desktop, mobile and serverless applications. 
+        
+     I have worked across multiple industries including simulation, military, academic, games, finance and public sectors. 
+      
+     I'm currently leading multiple cross-functional teams at Nationwide Building Society. My recent work has involved architecting a large scale enterprise Azure web estate running GraphQL and dotnet core microservices.
 
 description: >-
   Rich James' personal website
