@@ -1,6 +1,6 @@
 ---
 templateKey: index-page
-title: Hi, I'm Rich James
+title: Rich James
 image: /img/hero-background.png
 heading: Rich James
 subheading: Technology Leader
