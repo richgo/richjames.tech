@@ -1,52 +1,56 @@
 # richjames.tech Modernization
 
 ## Overview
-Modernize Rich James' personal website from an aging Gatsby 3 + React 17 stack to a modern Next.js 14 + React 18 + TypeScript stack.
+Complete modernization of Rich James' personal website from Gatsby 3 to Next.js 14 with React 18 and TypeScript.
+
+## Why Single Migration?
+Originally planned as 3 separate tasks (React → TypeScript → Next.js), but Gatsby 3.x requires React 17 as a peer dependency. Independent React 18 upgrade isn't possible without Gatsby upgrade, which is nearly as much work as the full Next.js migration. Combined approach is cleaner.
 
 ## Goals
-1. **Performance** - Faster builds, better runtime performance
-2. **Maintainability** - TypeScript for type safety, modern patterns
-3. **Future-proof** - Next.js is actively developed, Gatsby 3 is EOL
+1. **Modern Stack** - Next.js 14, React 18, TypeScript
+2. **Performance** - Faster builds, better runtime perf
+3. **Maintainability** - Type safety, modern patterns
+4. **Future-proof** - Active framework, not EOL Gatsby 3
 
 ## Current Stack
-- Gatsby 3.3.0
-- React 17.0.2
-- JavaScript (no TypeScript)
-- Netlify CMS
-- SCSS with Bulma
-- Deployed on Netlify
+| Component | Version | Issue |
+|-----------|---------|-------|
+| Gatsby | 3.3.0 | EOL, no React 18 support |
+| React | 17.0.2 | One version behind |
+| Language | JavaScript | No type safety |
+| Sass | node-sass 5.0 | Deprecated package |
+| CMS | Netlify CMS | Will be dropped |
 
 ## Target Stack
-- Next.js 14+ (App Router)
-- React 18.x
-- TypeScript (strict mode)
-- Markdown with gray-matter/remark
-- SCSS with Bulma (preserved)
-- Deployed on Netlify
+| Component | Version |
+|-----------|---------|
+| Next.js | 14+ (App Router) |
+| React | 18.x |
+| Language | TypeScript (strict) |
+| Sass | sass (dart-sass) |
+| Content | File-based markdown |
 
-## Migration Strategy
+## Task
+**t-001**: Migrate to Next.js 14 with React 18 + TypeScript
 
-### Phase 1: React 18 Upgrade (t-001)
-Upgrade React within Gatsby first to isolate React-specific breaking changes.
-
-### Phase 2: TypeScript Migration (t-002)
-Convert all JS to TS while still on Gatsby. This ensures type safety is in place before the framework migration.
-
-### Phase 3: Next.js Migration (t-003)
-Replace Gatsby with Next.js App Router. This is the largest change but builds on the stable React 18 + TS foundation.
+Single comprehensive migration covering:
+- Framework swap (Gatsby → Next.js)
+- React upgrade (17 → 18)
+- TypeScript conversion
+- Dependency modernization
 
 ## Constraints
-- Preserve all existing content and URLs
-- Maintain SEO (meta tags, structured data)
-- Keep deployment on Netlify
-- Minimize downtime during migration
+- Preserve all existing URLs (SEO)
+- Keep Bulma styling
+- Maintain Netlify deployment
+- Minimize downtime
 
 ## Success Criteria
-- [ ] Site builds and deploys successfully
-- [ ] All existing pages accessible at same URLs
-- [ ] Lighthouse Performance score ≥ 90
-- [ ] No TypeScript errors in strict mode
-- [ ] Blog posts render correctly with images
+- [ ] Site builds and deploys
+- [ ] All pages accessible at same URLs
+- [ ] Lighthouse Performance ≥ 90
+- [ ] Zero TypeScript errors (strict mode)
+- [ ] Blog posts render correctly
 
 ## Repository
 https://github.com/richgo/richjames.tech

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "eas": {
+      "args": [
+        "mcp",
+        "serve"
+      ],
+      "command": "eas",
+      "cwd": "/home/rj/.openclaw/workspace/richjames.tech"
+    }
+  }
+}
