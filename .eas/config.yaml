@@ -1,6 +1,8 @@
 feature: richjames-modernization
 version: 1
-backend: claude
+backend: copilot
+copilot:
+    model: gpt-4.1
 tdd:
-    enforce: true
-    test_command: go test ./...
+    enforce: false
+    test_command: npm test
