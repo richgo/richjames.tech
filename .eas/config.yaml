@@ -1,0 +1,6 @@
+feature: richjames-modernization
+version: 1
+backend: claude
+tdd:
+    enforce: true
+    test_command: go test ./...

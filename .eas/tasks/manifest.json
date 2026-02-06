@@ -1,0 +1,35 @@
+{
+  "tasks": [
+    {
+      "id": "t-001",
+      "title": "Upgrade to React 18",
+      "status": "pending",
+      "priority": 1,
+      "created_at": "2026-02-06T05:58:19.111794179Z",
+      "updated_at": "2026-02-06T05:58:19.111794309Z"
+    },
+    {
+      "id": "t-002",
+      "title": "Migrate to TypeScript",
+      "status": "pending",
+      "priority": 2,
+      "deps": [
+        "t-001"
+      ],
+      "created_at": "2026-02-06T05:58:23.092528679Z",
+      "updated_at": "2026-02-06T05:58:23.092528808Z"
+    },
+    {
+      "id": "t-003",
+      "title": "Migrate from Gatsby to Next.js",
+      "status": "pending",
+      "priority": 3,
+      "deps": [
+        "t-001",
+        "t-002"
+      ],
+      "created_at": "2026-02-06T05:58:26.147098167Z",
+      "updated_at": "2026-02-06T05:58:26.147098297Z"
+    }
+  ]
+}
