@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { Linkedin } from 'lucide-react'
 import type { BlogPost } from '@/lib/markdown'
 
 interface BlogListClientProps {
@@ -43,6 +44,12 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                     <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center text-6xl">
                       📝
                     </div>
+                    {/* LinkedIn Badge */}
+                    {post.frontMatter.source === 'linkedin' && (
+                      <div className="absolute top-3 right-3 bg-[#0077b5] p-2 rounded-full shadow-lg">
+                        <Linkedin className="w-4 h-4 text-white" />
+                      </div>
+                    )}
                   </div>
                   
                   <div className="p-6 flex-1 flex flex-col">

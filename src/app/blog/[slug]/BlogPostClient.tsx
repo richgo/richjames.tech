@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Linkedin } from 'lucide-react'
 import type { BlogPost } from '@/lib/markdown'
 
 interface BlogPostClientProps {
@@ -68,9 +69,22 @@ export default function BlogPostClient({ post, relatedPosts }: BlogPostClientPro
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <h1 className="text-5xl font-bold text-slate-50 mb-6 leading-tight">
-              {post.frontMatter.title}
-            </h1>
+            <div className="flex items-start justify-between gap-4 mb-6">
+              <h1 className="text-5xl font-bold text-slate-50 leading-tight flex-1">
+                {post.frontMatter.title}
+              </h1>
+              {post.frontMatter.linkedinUrl && (
+                <a
+                  href={post.frontMatter.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors duration-200 whitespace-nowrap text-sm font-medium"
+                >
+                  <Linkedin className="w-4 h-4" />
+                  View on LinkedIn
+                </a>
+              )}
+            </div>
 
             <div className="flex items-center gap-4 text-slate-400 mb-6">
               {post.frontMatter.date && (
