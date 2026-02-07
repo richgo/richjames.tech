@@ -16,4 +16,4 @@ A highly experienced technology & AI leader with in-depth software development a
 
 - Expert generalist, with numerous proffesional GCP & Azure certs.
 
-Find me on linkedIn or Twitter at the links below.
+Find me on linkedIn at the link below.
