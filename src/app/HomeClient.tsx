@@ -12,7 +12,8 @@ interface HomeClientProps {
 const techStack = [
   'TypeScript', 'React', 'Next.js', 'Node.js', 'Python', 
   'AWS', 'Docker', 'Kubernetes', 'PostgreSQL', 'MongoDB',
-  'GraphQL', 'REST APIs', 'Microservices', 'CI/CD', 'Terraform'
+  'GraphQL', 'REST APIs', 'Microservices', 'CI/CD', 'Terraform',
+  'AI', 'agent', 'LLM', 'kubernetes', 'docker', 'terraform'
 ]
 
 function HeroSection() {
@@ -28,7 +29,7 @@ function HeroSection() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-900">
       {/* AI-themed background elements */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-30">
         {codeSnippets.map((snippet, i) => (
           <motion.div
             key={i}
@@ -97,7 +98,7 @@ function HeroSection() {
           transition={{ duration: 0.5, delay: words.length * 0.2 }}
           className="mb-8 text-xl text-slate-400 sm:text-2xl"
         >
-          Chief Engineer • Building the future of digital
+          Chief Engineer • AI app and agentic SDLC system builder
         </motion.p>
 
         {/* CTA buttons */}

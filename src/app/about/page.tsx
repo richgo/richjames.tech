@@ -8,7 +8,7 @@ export default function AboutPage() {
   const experience = [
     {
       year: '2023 - Present',
-      title: 'Chief Engineer',
+      title: 'Principal Technology Lead',
       company: 'Nationwide Building Society',
       description: 'Leading 8 full stack tech/creative teams (45+ people)',
     },
