@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: "Rich James - Technology Blog and Portfolio",
   icons: {
     icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/img/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/img/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
     ],

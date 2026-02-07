@@ -48,10 +48,10 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 z-50">
               <Image
-                src="/img/logo.png"
+                src="/img/logo.svg"
                 alt="richjames.tech"
-                width={88}
-                height={40}
+                width={200}
+                height={60}
                 className="h-10 w-auto"
               />
             </Link>

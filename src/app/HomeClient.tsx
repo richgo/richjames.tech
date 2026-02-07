@@ -51,7 +51,7 @@ function HeroSection() {
           transition={{ duration: 0.5, delay: words.length * 0.2 }}
           className="mb-8 text-xl text-slate-400 sm:text-2xl"
         >
-          Senior Technical Architect • Building the future of digital
+          Chief Engineer • Building the future of digital
         </motion.p>
 
         {/* CTA buttons */}
