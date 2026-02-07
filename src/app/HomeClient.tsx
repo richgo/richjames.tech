@@ -19,8 +19,54 @@ function HeroSection() {
   const headline = "Hi, I'm Rich James"
   const words = headline.split(' ')
 
+  const codeSnippets = [
+    'const', 'function', 'async', 'await', 'import', 'export',
+    'return', 'class', 'interface', 'type', '=>', 'useState',
+    '01010101', '11001100', '10101010', '01100110'
+  ]
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-900">
+      {/* AI-themed background elements */}
+      <div className="absolute inset-0 opacity-20">
+        {codeSnippets.map((snippet, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: Math.random() * 100 - 50, y: Math.random() * 100 }}
+            animate={{
+              opacity: [0.1, 0.3, 0.1],
+              x: [
+                Math.random() * 100 - 50,
+                Math.random() * 100 - 50,
+                Math.random() * 100 - 50
+              ],
+              y: [
+                Math.random() * 100,
+                Math.random() * 100 + 50,
+                Math.random() * 100
+              ]
+            }}
+            transition={{
+              duration: 15 + Math.random() * 10,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: "linear"
+            }}
+            className="absolute text-slate-700 font-mono"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              fontSize: `${12 + Math.random() * 8}px`
+            }}
+          >
+            {snippet}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-slate-900/60" />
+
       {/* Animated gradient mesh background */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-pink-500/20 to-purple-500/20">
         <div className="animate-gradient-slow absolute inset-0 bg-gradient-to-tr from-pink-500/20 via-indigo-500/20 to-blue-500/20" />
