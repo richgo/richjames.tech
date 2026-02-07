@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/markdown'
 import type { Metadata } from 'next'
-import ReactMarkdown from 'react-markdown'
+import BlogPostClient from './BlogPostClient'
 
 interface BlogPostProps {
   params: Promise<{
@@ -40,38 +40,15 @@ export default async function BlogPost({ params }: BlogPostProps) {
   if (!post) {
     notFound()
   }
+
+  // Get all posts for related posts
+  const allPosts = getAllBlogPosts()
+  // Find related posts (posts with matching tags, excluding current)
+  const relatedPosts = allPosts
+    .filter(p => p.slug !== slug && p.frontMatter.tags?.some(tag => 
+      post.frontMatter.tags?.includes(tag)
+    ))
+    .slice(0, 3)
   
-  return (
-    <section className="section">
-      <div className="container">
-        <div className="content">
-          <h1 className="title">{post.frontMatter.title}</h1>
-          
-          {post.frontMatter.date && (
-            <p className="subtitle is-6 has-text-grey">
-              {new Date(post.frontMatter.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </p>
-          )}
-          
-          {post.frontMatter.tags && post.frontMatter.tags.length > 0 && (
-            <div className="tags">
-              {post.frontMatter.tags.map((tag) => (
-                <span key={tag} className="tag is-info is-light">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-          
-          <div className="content">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+  return <BlogPostClient post={post} relatedPosts={relatedPosts} />
 }

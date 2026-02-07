@@ -21,6 +21,8 @@ export interface MarkdownContent {
   content: string
 }
 
+export type BlogPost = MarkdownContent
+
 /**
  * Get all markdown files from a directory
  */

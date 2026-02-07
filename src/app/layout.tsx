@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import "./globals.scss";
+import PageTransition from "@/components/PageTransition";
+import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://richjames.tech'),
@@ -35,7 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
-        <main>{children}</main>
+        <PageTransition>{children}</PageTransition>
         <Footer />
       </body>
     </html>
