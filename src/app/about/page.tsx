@@ -7,20 +7,22 @@ import type { Metadata } from 'next'
 export default function AboutPage() {
   const experience = [
     {
-      year: '2023 - Present',
+      year: '2024 - Present',
+      title: 'Distinguished Engineer',
+      company: 'Lloyds Banking Group',
+      description: 'AI and agentic SDLC systems. Enterprise scale engineering.',
+    },
+    {
+      year: '2019 - 2024',
       title: 'Principal Technology Lead',
       company: 'Nationwide Building Society',
-      description: 'Leading 8 full stack tech/creative teams (45+ people)',
+      description: 'Cloud transformation to Azure. First GraphQL API, first headless CMS. React & Sitecore JSS. DevOps Enterprise Summit speaker.',
     },
     {
-      year: '2013 - 2023',
-      title: 'Technical Leadership',
-      description: '10 years managing full lifecycle software development',
-    },
-    {
-      year: '2003 - Present',
-      title: 'Software Development',
-      description: '20+ years developing enterprise, web, desktop, mobile and serverless applications',
+      year: 'Earlier',
+      title: 'Developer/Technical Lead',
+      company: 'Eduserv',
+      description: 'K2, MVC, SQL development',
     },
   ]
 
