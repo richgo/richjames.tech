@@ -96,9 +96,8 @@ async def scrape_posts(page, max_posts=20):
     posts = []
     
     print(f"\n📡 Navigating to activity page...")
-    await page.goto(POSTS_URL)
-    await page.wait_for_load_state("networkidle")
-    await asyncio.sleep(2)
+    await page.goto(POSTS_URL, timeout=60000)
+    await asyncio.sleep(5)  # Give LinkedIn time to load
     
     # Scroll to load more posts
     print("📜 Scrolling to load posts...")
