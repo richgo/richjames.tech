@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "allowedRoles": ["authenticated"]
+    }
+  ],
+  "defaultHeaders": {
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
+  },
+  "mimeTypes": {
+    "custom": "text/html"
+  }
+}
