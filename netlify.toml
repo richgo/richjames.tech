@@ -1,7 +1,9 @@
 [build]
-  publish = "public"
-  command = "yarn build"
-  functions = "lambda"
+  command = "npm run build"
+  publish = ".next"
+
 [build.environment]
-  YARN_VERSION = "1.9.4"
-  YARN_FLAGS = "--no-ignore-optional"
+  NODE_VERSION = "22"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
