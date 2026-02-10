@@ -15,6 +15,67 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
     return Math.ceil(words / 200)
   }
 
+  const getPostIcon = (post: BlogPost) => {
+    const title = post.frontMatter.title?.toLowerCase() || ''
+    const tags = post.frontMatter.tags?.map(t => t.toLowerCase()) || []
+    const content = post.content.toLowerCase()
+
+    // AI/ML related
+    if (title.includes('ai') || title.includes('machine learning') || title.includes('gpt') || 
+        tags.some(t => t.includes('ai'))) return '🤖'
+    
+    // Cloud/Infrastructure
+    if (title.includes('azure') || title.includes('cloud') || title.includes('aws') || title.includes('gcp') ||
+        tags.some(t => ['azure', 'cloud', 'aws', 'gcp'].includes(t))) return '☁️'
+    
+    // DevOps/CI/CD
+    if (title.includes('devops') || title.includes('pipeline') || title.includes('deploy') ||
+        tags.some(t => t.includes('devops'))) return '🔄'
+    
+    // Architecture/System Design
+    if (title.includes('architect') || title.includes('design') || title.includes('system') ||
+        content.includes('architecture')) return '🏗️'
+    
+    // Security
+    if (title.includes('security') || title.includes('auth') || tags.some(t => t.includes('security'))) return '🔒'
+    
+    // API/GraphQL/Backend
+    if (title.includes('api') || title.includes('graphql') || title.includes('backend')) return '🔌'
+    
+    // Frontend/UI/React
+    if (title.includes('react') || title.includes('frontend') || title.includes('ui')) return '⚛️'
+    
+    // Performance/Optimization
+    if (title.includes('performance') || title.includes('optimization') || title.includes('speed')) return '⚡'
+    
+    // Database/Data
+    if (title.includes('database') || title.includes('data') || title.includes('sql')) return '🗄️'
+    
+    // Testing/Quality
+    if (title.includes('test') || title.includes('quality')) return '✅'
+    
+    // Leadership/Team/Culture
+    if (title.includes('team') || title.includes('culture') || title.includes('lead')) return '👥'
+    
+    // Conference/Speaking
+    if (title.includes('summit') || title.includes('conference') || title.includes('speaking')) return '🎤'
+    
+    // Default tech icon
+    return '💻'
+  }
+
+  const getGradient = (index: number) => {
+    const gradients = [
+      'from-indigo-500 to-purple-600',
+      'from-cyan-500 to-blue-600',
+      'from-pink-500 to-rose-600',
+      'from-amber-500 to-orange-600',
+      'from-emerald-500 to-teal-600',
+      'from-violet-500 to-fuchsia-600',
+    ]
+    return gradients[index % gradients.length]
+  }
+
   return (
     <section className="min-h-screen bg-slate-900 pt-24 pb-16">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -39,10 +100,10 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
               <Link href={`/blog/${post.slug}`} className="block">
                 <div className="bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
                   {/* Featured image placeholder */}
-                  <div className="relative h-48 bg-gradient-to-br from-indigo-500 to-pink-500 overflow-hidden">
+                  <div className={`relative h-48 bg-gradient-to-br ${getGradient(index)} overflow-hidden`}>
                     <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/0 transition-colors duration-300" />
-                    <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center text-6xl">
-                      📝
+                    <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center text-6xl drop-shadow-lg">
+                      {getPostIcon(post)}
                     </div>
                     {/* LinkedIn Badge */}
                     {post.frontMatter.source === 'linkedin' && (

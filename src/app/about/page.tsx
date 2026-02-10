@@ -7,8 +7,8 @@ import type { Metadata } from 'next'
 export default function AboutPage() {
   const experience = [
     {
-      year: '2024 - Present',
-      title: 'Distinguished Engineer',
+      year: '2023 - Present',
+      title: 'Chief Engineer',
       company: 'Lloyds Banking Group',
       description: 'AI and agentic SDLC systems. Enterprise scale engineering.',
     },
@@ -29,8 +29,11 @@ export default function AboutPage() {
   const skills = [
     'Technical Leadership',
     'Software Architecture',
+    'AI & Machine Learning',
+    'Agentic Systems',
     'DevOps',
     'Azure',
+    'GCP',
     'SCRUM/Kanban',
     'Team Building',
     'Mentoring',

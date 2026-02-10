@@ -21,9 +21,10 @@ function HeroSection() {
   const words = headline.split(' ')
 
   const codeSnippets = [
-    'const', 'function', 'async', 'await', 'import', 'export',
-    'return', 'class', 'interface', 'type', '=>', 'useState',
-    '01010101', '11001100', '10101010', '01100110'
+    'AI', 'ML', 'LLM', 'GPT', 'agent', 'neural', 'vector', 'embedding',
+    'const', 'async', 'await', '=>', 'prompt', 'context', 'inference',
+    '🤖', '⚡', '🧠', '💡', 'transform', 'attention', 'tokens',
+    '01010101', '11001100', 'agentic', 'SDLC', 'workflow', 'orchestrate'
   ]
 
   return (
