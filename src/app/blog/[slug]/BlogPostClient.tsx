@@ -133,7 +133,7 @@ export default function BlogPostClient({ post, relatedPosts }: BlogPostClientPro
               prose-blockquote:border-l-4 prose-blockquote:border-indigo-500 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:my-6
               prose-ul:text-slate-300 prose-ul:my-6 prose-ul:space-y-2 prose-ol:text-slate-300 prose-ol:my-6 prose-ol:space-y-2
               prose-li:my-2 prose-li:leading-relaxed
-              prose-img:my-8 prose-img:rounded-lg prose-img:shadow-xl"
+              prose-img:my-8 prose-img:rounded-lg prose-img:w-full prose-img:h-auto"
           >
             <ReactMarkdown
               components={{
@@ -167,6 +167,17 @@ export default function BlogPostClient({ post, relatedPosts }: BlogPostClientPro
                     <code className={className} {...props}>
                       {children}
                     </code>
+                  )
+                },
+                img: ({ src, alt, ...props }) => {
+                  return (
+                    <img
+                      src={src}
+                      alt={alt}
+                      {...props}
+                      className="w-full h-auto rounded-lg my-8 block bg-transparent"
+                      style={{ margin: '2rem 0', padding: 0, background: 'transparent' }}
+                    />
                   )
                 }
               }}
