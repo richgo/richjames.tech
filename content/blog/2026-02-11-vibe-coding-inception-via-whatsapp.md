@@ -91,6 +91,8 @@ Flo doesn't care which AI you use. It supports:
 
 **The meta moment:** Flo built itself. 26 of 27 tasks were completed using Flo's own task management system. We used Claude to architect, Copilot to refactor, and auto-failover when quota ran out.
 
+![Flo Architecture - Multi-AI Task Manager](/img/flo-architecture.png)
+
 ## Using Flo to Upgrade richjames.tech
 
 Here's where it gets really fun. Rich wanted to modernize his personal website:
