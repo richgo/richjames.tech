@@ -123,13 +123,15 @@ export default function BlogPostClient({ post, relatedPosts }: BlogPostClientPro
               prose-headings:text-slate-50 prose-headings:font-bold
               prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
               prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+              prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-3
+              prose-h5:text-lg prose-h5:mt-4 prose-h5:mb-2
               prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-6
               prose-a:text-indigo-400 prose-a:no-underline hover:prose-a:text-indigo-300
               prose-strong:text-slate-50 prose-strong:font-semibold
               prose-code:text-pink-400 prose-code:bg-slate-800 prose-code:px-2 prose-code:py-1 prose-code:rounded
               prose-pre:bg-slate-800 prose-pre:border prose-pre:border-slate-700 prose-pre:rounded-lg
               prose-blockquote:border-l-4 prose-blockquote:border-indigo-500 prose-blockquote:pl-6 prose-blockquote:italic
-              prose-ul:text-slate-300 prose-ol:text-slate-300
+              prose-ul:text-slate-300 prose-ul:mb-6 prose-ol:text-slate-300 prose-ol:mb-6
               prose-li:my-2"
           >
             <ReactMarkdown
