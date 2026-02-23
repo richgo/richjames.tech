@@ -114,9 +114,15 @@ That's the ecosystem play. The bank server is ours. The map server is someone el
 
 ## The Development Story: Markdown All the Way Down
 
-Here's where things get really interesting. Building AIBank didn't require a complex agent framework or a custom orchestration DSL. We used **flat markdown files** for everything.
+Here's where things get really interesting. Building AIBank didn't require a complex agent framework or a custom orchestration DSL. We used **flat markdown files** for everything, following a pattern inspired by [OpenSpec-Agents](https://github.com/richgo/OpenSpec-Agents)—a spec-driven development workflow where agents are just markdown files in `.github/agents/` that hand off to each other through natural conversation.
 
-Each banking tool is defined in a markdown file. Here's what `tools/get_transactions.md` looks like:
+Let me walk you through how this works, because it fundamentally changes how you think about building AI systems.
+
+### The AGENTS.md Pattern
+
+In traditional software development, you define capabilities in code. Functions, classes, modules—the usual suspects. With OpenSpec, you define capabilities in markdown files that describe what an agent can do, what tools it has access to, and which other agents it should hand off to when its job is done.
+
+AIBank uses a simplified version of this pattern. Each banking tool is defined in a markdown file. Here's what `tools/get_transactions.md` looks like:
 
 ```markdown
 ## Tool: get_transactions
@@ -139,7 +145,7 @@ Returns recent transactions for a user's bank account.
 \`\`\`
 ```
 
-That's it. No code generation. No compilation step. No SDK dependencies. Just a markdown file that describes what the tool does and what parameters it expects.
+That's it. No code generation. No compilation step. No SDK dependencies. Just a markdown file that describes what the tool does and what parameters it expects. Both `copilot-cli` and `claude-cli` parse this markdown, understand the tool contract, and make it available to the agent runtime.
 
 Routing logic? Also markdown. Here's `routing.md`:
 
@@ -155,18 +161,88 @@ When user mentions location/address/map → call map server geocode tool.
 
 Subagent configuration? You guessed it—markdown. Model selection, context limits, system prompts, all declarative. No framework to learn, no YAML to validate, no JSON schema to debug.
 
-And here's the magic part: **both `copilot-cli` and `claude-cli` can run these specs**. They're not tied to a specific vendor or runtime. They're just markdown files that describe what you want, and any compliant CLI can wire them up.
+### The OpenSpec Workflow: From Idea to Code
 
-This means I can develop locally with `copilot-cli`, then deploy to production with `claude-cli`, or vice versa. The specs are portable. The tooling is swappable. There's zero lock-in.
+The OpenSpec-Agents repo takes this pattern further by defining an entire development workflow as a series of handoffs between specialized agents. It's like a relay race where each agent does one thing well, then passes the baton to the next agent in the chain.
 
-The development workflow becomes absurdly simple:
+Here's how it works:
 
-1. Write a markdown file describing a tool
-2. Save it
-3. The agent hot-reloads
-4. Test it in the app
+**1. explore** — You start by investigating the codebase, thinking through ideas, checking what exists. This agent has read and search tools. When you're ready to actually build something, it hands off to either `new` (for a structured approach) or `ff` (fast-forward for simple changes).
 
-No build step. No restart. No deployment pipeline. Just markdown → running agent.
+**2. new** — This agent scaffolds a change directory in `openspec/changes/`. It creates the folder structure, initializes metadata, and sets you up for the full workflow. Then it hands off to `proposal`.
+
+**3. proposal** — Here you write the **WHY**. What's the intent? What problem are you solving? What's in scope and what's not? This is pure thinking, no code yet. When you're satisfied, hand off to `specs`.
+
+**4. specs** — Now you write the **WHAT**. What are the requirements? What are the acceptance criteria? What edge cases do we need to handle? This agent helps you write proper specifications—not vague wishes, but concrete scenarios that can be tested. Hand off to `design`.
+
+**5. design** — Here you write the **HOW**. What are the technical decisions? What patterns are you using? How does this fit into the existing architecture? This is where you make the hard choices about structure and approach. Hand off to `tasks`.
+
+**6. tasks** — Break the work into a **DO** checklist. Concrete implementation steps, ordered by dependency. Each task should be small enough to complete in one sitting. This becomes your implementation roadmap. Hand off to `apply`.
+
+**7. apply** — This is where markdown becomes code. The `apply` agent follows a **BDD-first workflow**: it writes a failing scenario (Behavior-Driven Development), analyzes edge cases, then implements the code using strict TDD (Test-Driven Development). Red → Green → Refactor, but with a behavior scenario wrapping the unit tests.
+
+Here's where the magic happens. The agent reads your specs markdown, understands the requirements, writes a test that captures the expected behavior, then implements the minimal code to make it pass. It's not magic—it's just following the pattern you described in markdown, but doing it systematically.
+
+**8. verify** — Once implementation is complete, this agent checks spec compliance. Did we actually build what we said we'd build? Are all scenarios passing? Any edge cases missed? If issues are found, it hands back to `apply` for fixes. If everything looks good, hand off to `archive`.
+
+**9. archive** — Close out the change. Merge the specs into the canonical library, move the change to the archive folder, clean up. You're done. Hand off to `new` for the next feature.
+
+There's also an **ff** (fast-forward) agent that combines proposal → specs → design → tasks into one pass for simple changes. Use it when you don't need the full ceremony.
+
+### How Markdown Becomes Code
+
+The critical insight is that **the workflow itself is declarative**. Each agent is a markdown file that says:
+
+"I can do X, Y, Z. I have these tools. When I'm done, here are the next steps you might want to take."
+
+When you run `gh copilot --agent apply "Implement get_transactions"`, the CLI:
+
+1. Loads `apply.md` from `.github/agents/`
+2. Parses the agent definition (tools, instructions, handoffs)
+3. Reads the relevant spec markdown from `openspec/changes/<change-name>/specs/`
+4. Uses the LLM to generate code that satisfies the spec
+5. Runs tests (BDD scenario → TDD units)
+6. Suggests handoffs to `verify` or `archive`
+
+All of this happens because you described what you wanted in markdown. The agent runtime wires up the tools, manages context, and executes the workflow. But the **definitions are portable**. You can take these same `.md` files and run them with `claude-cli`, `gpt-cli`, or any other compliant runtime.
+
+This is powerful because it decouples **what you're building** from **how you're building it**. The specs don't care which LLM you use or which CLI you prefer. They're just descriptions of desired behavior, written in plain language (with some structure), stored as version-controlled markdown files.
+
+### AIBank's Simplified Workflow
+
+AIBank doesn't use the full OpenSpec workflow because it's a demo, not a production system. But it follows the same principle: **markdown as the source of truth**.
+
+The agent configuration is just a directory of markdown files:
+
+```
+agent/
+├── tools/
+│   ├── get_accounts.md
+│   ├── get_transactions.md
+│   ├── calculate_mortgage.md
+│   └── geocode.md (external MCP)
+├── routing.md
+└── config.md
+```
+
+When you run `copilot-cli agent run --spec agent/` or `claude-cli agent run --spec agent/`, the CLI:
+
+1. Scans the `agent/` directory
+2. Parses each markdown file
+3. Builds an internal representation of tools and routing rules
+4. Starts the FastAPI server with those capabilities
+5. Hot-reloads when any `.md` file changes
+
+The development loop becomes:
+
+1. Edit `tools/get_transactions.md` to add a parameter
+2. Save the file
+3. The agent runtime notices the change and reloads
+4. Test the updated tool immediately in the Flutter app
+
+No compilation. No deployment. No build artifacts. Just markdown → running system.
+
+And because the specs are portable, you can run the exact same markdown with a different CLI or a different LLM without changing a single line. The tool definitions don't know or care about the runtime. They're just descriptions of what the tool does, written in a format that any compliant parser can understand.
 
 ![Flat agent workflow](/img/flat-agent-workflow.png)
 
