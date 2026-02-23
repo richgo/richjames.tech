@@ -195,7 +195,7 @@ The critical insight is that **the workflow itself is declarative**. Each agent 
 
 "I can do X, Y, Z. I have these tools. When I'm done, here are the next steps you might want to take."
 
-When you run `gh copilot --agent apply "Implement get_transactions"`, the CLI:
+When you run `copilot --agent apply "Implement get_transactions"`, the CLI:
 
 1. Loads `apply.md` from `.github/agents/`
 2. Parses the agent definition (tools, instructions, handoffs)
@@ -204,13 +204,13 @@ When you run `gh copilot --agent apply "Implement get_transactions"`, the CLI:
 5. Runs tests (BDD scenario → TDD units)
 6. Suggests handoffs to `verify` or `archive`
 
-All of this happens because you described what you wanted in markdown. The agent runtime wires up the tools, manages context, and executes the workflow. But the **definitions are portable**. You can take these same `.md` files and run them with `claude-cli`, `gpt-cli`, or any other compliant runtime.
+All of this happens because you described what you wanted in markdown. The agent runtime wires up the tools, manages context, and executes the workflow. But the **definitions are portable**. You can take these same `.md` files and run them with `claude`, `copilot`, or any other CLI.
 
 This is powerful because it decouples **what you're building** from **how you're building it**. The specs don't care which LLM you use or which CLI you prefer. They're just descriptions of desired behavior, written in plain language (with some structure), stored as version-controlled markdown files.
 
 ### AIBank's Simplified Workflow
 
-AIBank doesn't use the full OpenSpec workflow because it's a demo, not a production system. But it follows the same principle: **markdown as the source of truth**.
+AIBank takes what is great from OpenSpec's .md workflow and extends the principle: **markdown as the source of truth**.
 
 The agent configuration is just a directory of markdown files:
 
@@ -225,7 +225,7 @@ agent/
 └── config.md
 ```
 
-When you run `copilot-cli agent run --spec agent/` or `claude-cli agent run --spec agent/`, the CLI:
+When you or the LLM invoked by the CLI changes something:
 
 1. Scans the `agent/` directory
 2. Parses each markdown file
@@ -250,7 +250,7 @@ And because the specs are portable, you can run the exact same markdown with a d
 
 ## What This Means for You
 
-If you're building an AI app today, here's my advice: **stop trying to pick a side**. Don't choose between MCP and A2UI. Don't let anyone tell you they're competing visions. They're not.
+If you're building an AI app today, here's my advice: **stop trying to pick a side**. Don't choose between MCP and A2UI. They're not competing visions.
 
 Think of A2UI as your **internal rendering strategy**. It's how you build the core product experience—your accounts page, your transaction history, your settings screen. It gives you native performance, brand consistency, and tight integration with your platform.
 
