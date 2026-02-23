@@ -8,134 +8,117 @@ featured: true
 
 # MCP Apps vs A2UI: Better Together
 
-When I set out to build [AIBank](https://github.com/richgo/aibank), a demo AI-powered banking app, I had a clear goal: **prove that AI UIs can feel native while staying extensible**. The solution? Use both **MCP Apps-ext** (Anthropic's 3rd-party extensibility protocol) and **A2UI/GenUI** (Google's agent-to-UI standard). Not one or the other—**both**.
+Let me tell you about building [AIBank](https://github.com/richgo/aibank), a demo AI-powered banking app that taught me something important about the current state of AI UI development. It's a story about two competing standards that actually aren't competing at all—and why you need both of them to build something that feels real.
 
-Here's why you need both standards, how they complement each other, and how we built AIBank using nothing more than markdown config files and flat agent specs.
+The problem I set out to solve was simple on the surface: **prove that AI UIs can feel native while staying extensible**. Turns out that's harder than it sounds, because the industry has collectively decided to make us choose between polish and openness. But here's the thing—we don't have to choose. We just need to understand what problems each standard solves, and use them both intelligently.
 
----
+## The Impossible Trinity
 
-## The Problem: Pick Two
+If you're building an AI application today, you're forced into an impossible choice. You can pick two of these three things, but not all three:
 
-Modern AI app development forces an impossible choice:
+**Native feel** — The kind of smooth, platform-native UI that makes an app feel like it belongs on your device. Real Flutter widgets on mobile, real SwiftUI on iOS, proper Jetpack Compose on Android. The stuff that makes users forget they're using an AI app and just focus on getting things done.
 
-1. **Native feel** — Smooth, platform-native UI that feels like a real app
-2. **Agent intelligence** — LLM-powered reasoning that adapts to user intent
-3. **3rd-party extensibility** — Ability to plug in external tools and services
+**Agent intelligence** — LLM-powered reasoning that actually understands what users want and adapts to their intent. Not just keyword matching or rigid command structures, but genuine understanding that gets better as the conversation develops.
 
-Pick two. You can't have all three.
+**3rd-party extensibility** — The ability for anyone in the ecosystem to plug in new tools, new services, new capabilities. The kind of open plugin architecture that lets your app grow beyond what you initially built.
 
-Or... can you?
+I spent years in enterprise software watching companies try to have all three and fail. They'd get the native feel and the intelligence but lock themselves into proprietary tool ecosystems. Or they'd go open and extensible but end up with web-view UIs that feel second-class. Or they'd nail the native experience and open it up, but lose the intelligence trying to coordinate everything.
 
----
+For the longest time, I accepted this as just how things work. You pick your battles. You optimize for your users' top priorities and compromise on the rest.
 
-## The Standards
+Then I started looking at MCP Apps-ext and A2UI, and something clicked.
 
-### MCP Apps-ext: Extensibility First
+## Two Standards, Two Problems
 
-[Anthropic's MCP Apps extension](https://github.com/modelcontextprotocol/ext-apps) solves the **3rd-party extensibility problem**. It lets agents call external MCP servers (tools, data sources, UI components) over HTTP using JSON-RPC.
+Let's talk about what each of these standards actually solves, because the marketing material makes it sound like they're competing visions for the future of AI. They're not.
 
-**What it gives you:**
-- ✅ **Plug-and-play ecosystem** — Any MCP server works with any MCP client
-- ✅ **Hosted UIs** — MCP servers can serve interactive web components (`ui://`)
-- ✅ **Zero platform lock-in** — HTTP + JSON-RPC runs anywhere
+### MCP Apps-ext: Opening the Ecosystem
 
-**What it doesn't give you:**
-- ❌ **Native UI feel** — MCP app UIs are web-based (iframes/WebViews)
-- ❌ **Consistent design** — Each MCP server brings its own UI
-- ❌ **Platform integration** — No access to native platform features
+Anthropic's [MCP Apps extension](https://github.com/modelcontextprotocol/ext-apps) tackles the **extensibility problem**. It's a protocol that lets agents call external MCP servers over HTTP using JSON-RPC. Think of it as the npm of AI capabilities—anyone can publish an MCP server, any agent can consume it.
 
-### A2UI/GenUI: Native Polish
+What this gives you is **plug-and-play 3rd-party integration**. Want a weather service? There's an MCP server for that. Need maps? Stock data? Translation services? Someone's probably already built it, and you can wire it into your agent with a few lines of configuration.
 
-[Google's A2UI standard](https://github.com/google/A2UI) solves the **native feel problem**. It defines a contract between agents and UI frameworks: agents emit structured **A2UI templates**, and the UI framework renders them using **native platform components**.
+The clever bit is the **hosted UIs**. MCP servers don't just provide data—they can serve interactive web components using the `ui://` scheme. So when your banking app needs to show a map, it doesn't need to implement map rendering. It just calls the map MCP server, which returns a fully functional web app that gets embedded in your UI.
 
-**What it gives you:**
-- ✅ **Platform-native UI** — Real Flutter/Swift/Kotlin widgets, not web views
-- ✅ **Consistent design** — Your app's design system, not third-party styles
-- ✅ **Performance** — Native rendering, no iframe overhead
+This is brilliant for extensibility. It means the ecosystem can grow horizontally without every app developer needing to become an expert in every domain. But here's what it doesn't give you: **native feel**.
 
-**What it doesn't give you:**
-- ❌ **Extensibility** — Agents must know all UI patterns upfront
-- ❌ **3rd-party plugins** — No standard way to integrate external tools
-- ❌ **Dynamic capabilities** — Adding new features requires app updates
+MCP app UIs are web-based. They run in iframes or WebViews. They bring their own styling, their own interaction patterns, their own quirks. Each MCP server is its own little universe, and while that's great for diversity, it's terrible for consistency. Your banking app might have a beautiful native transaction list, but then the user asks about a merchant location and suddenly they're staring at a different design language, different fonts, different everything.
 
----
+It works. It's functional. But it doesn't feel **cohesive**.
 
-## The Insight: Use Both
+### A2UI/GenUI: Polishing the Core
 
-Here's the key insight: **MCP Apps-ext and A2UI solve different problems**. They're not competitors—they're **complements**.
+Google's [A2UI standard](https://github.com/google/A2UI) tackles the **native feel problem**. It defines a contract between agents and UI frameworks: agents emit structured templates in a standardized format, and the UI framework renders them using native platform components.
 
-- **A2UI** handles your **core product UI** (banking transactions, account summaries, mortgage calculators)
-- **MCP Apps** handles **extensible plugins** (maps, weather, stock tickers, 3rd-party integrations)
+This is the opposite philosophy from MCP Apps. Instead of letting every tool bring its own UI, A2UI says: "Agents describe what they want to show, platforms decide how to render it." So when your agent needs to display a transaction list, it doesn't emit HTML or React JSX. It emits an A2UI template that says "here's a list of items with these fields," and your Flutter app renders that using proper Material Design widgets. Your iOS app uses SwiftUI. Your web app uses whatever component library you've chosen.
 
-When you need to render a transaction list? **A2UI** → native Flutter widgets.  
-When a user asks "Where was this transaction?" **MCP Apps** → embedded map from an external MCP server.
+The result is **genuine platform-native UI**. It looks right. It feels right. It performs like a native app because it *is* a native app. Your brand guidelines are maintained. Your design system is consistent across features. There's no iframe jank, no WebView memory overhead, no CSS conflicts.
+
+But here's what A2UI doesn't give you: **extensibility at the boundaries**. If you want to add a new capability, you need to define it in your agent, implement the UI components in your app, deploy both in lockstep. There's no "just plug in this MCP server and it works" moment. You're back in the world of coordinated releases and tight coupling.
 
 ![MCP Apps vs A2UI comparison](/img/mcp-vs-a2ui-comparison.png)
 
 *Figure 1: Why both standards are needed—they solve different problems*
 
----
+## The Insight: Stop Choosing
 
-## AIBank Architecture
+Here's what I realized while building AIBank: **these standards aren't alternatives**. They're complements.
 
-AIBank demonstrates this dual-standard approach:
+MCP Apps-ext and A2UI solve different problems in the same architecture. They can—and should—coexist in the same app. Use A2UI for your core product UI, the features you control, the experiences you want to polish. Use MCP Apps for the boundaries, the 3rd-party integrations, the places where you want ecosystem growth.
 
-### The Stack
+When a user asks "What's my account balance?" your agent generates an A2UI template. Your app renders it with native Flutter widgets. It's fast, polished, on-brand.
 
-```
-┌─────────────────────────────────────┐
-│  Flutter App (GenUI Host)           │  ← A2UI rendering
-│  ├─ Native widgets (accounts, tx)   │
-│  └─ mcp:AppFrame (embedded MCP UIs) │  ← MCP Apps hosting
-└─────────────────────────────────────┘
-              ↓ HTTP
-┌─────────────────────────────────────┐
-│  FastAPI Agent (Orchestrator)       │
-│  ├─ A2UI template generation        │
-│  ├─ In-process bank MCP server      │  ← Internal tools
-│  └─ HTTP calls to map MCP server    │  ← External tools
-└─────────────────────────────────────┘
-              ↓ MCP JSON-RPC
-┌─────────────────────────────────────┐
-│  @modelcontextprotocol/server-map   │  ← 3rd-party MCP server
-│  ├─ Geocoding API                   │
-│  └─ ui://cesium-map/mcp-app.html    │  ← Hosted map UI
-└─────────────────────────────────────┘
-```
+When they ask "Where was this transaction?" your agent calls an external map MCP server. It returns a hosted map UI. Your app embeds it inline. It's functional, interactive, and you didn't have to build it.
+
+Same conversation flow. Same agent. Two different rendering strategies, chosen based on what you're showing.
 
 ![AIBank architecture](/img/aibank-architecture.png)
 
 *Figure 2: AIBank architecture—three layers working together*
 
-### Custom GenUI Extension
+## Building AIBank: Architecture in Practice
 
-To make this work, we extended GenUI with a custom **`mcp:AppFrame`** catalog item:
+Let me walk you through how this dual-standard approach works in practice. AIBank has three layers, each with a specific job.
 
-- **Web**: Sandboxed iframe + `postMessage` relay
-- **Native**: WebView + JavaScript shim for `window.parent.postMessage`
-- **MCP bridge**: Handles `ui/initialize`, `tools/list`, `tools/call` over JSON-RPC
+### Layer 1: The Flutter App
 
-This lets A2UI templates embed MCP app UIs **inline**, making them feel like first-class app components.
+This is the user-facing layer. It's a Flutter app that hosts the GenUI SDK, which is Google's reference implementation of A2UI rendering. But we extended it with a custom **`mcp:AppFrame`** catalog item.
 
----
+What's a catalog item? In GenUI, it's basically a UI component type that the agent can reference. Out of the box, you get things like `list`, `card`, `button`, `text-field`—the building blocks of most UIs. We added `mcp:AppFrame` to that catalog, which tells GenUI: "When you see this component in an A2UI template, render an MCP app UI inline."
 
-## The Magic: Flat Agent Files
+The implementation varies by platform. On web, it's a sandboxed iframe with a `postMessage` bridge. On mobile native (iOS/Android), it's a WebView with a JavaScript shim that intercepts `window.parent.postMessage` calls. Either way, it creates a bidirectional JSON-RPC channel between the app and the MCP server.
 
-Here's where it gets interesting. Building AIBank required **zero custom agent frameworks**. Instead, we used:
+So now when an A2UI template says "embed this MCP app here," GenUI knows how to do it. It loads the hosted UI from the MCP server, sets up the communication channel, and makes it feel like a first-class part of the app.
 
-1. **OpenSpec as flat agent files** — Each endpoint (A2A, chat, tools) defined as a markdown spec
-2. **Dual CLI support** — Same specs run by both `copilot-cli` and `claude-cli`
-3. **Subagent config as markdown** — Tool definitions, routing logic, all in markdown
+This is the key integration point. A2UI handles everything you want native and polished. MCP Apps handles everything you want pluggable and dynamic. The `mcp:AppFrame` component bridges them.
 
-### What This Means
+### Layer 2: The Agent
 
-**Before**: Complex agent frameworks with custom DSLs, rigid tool definitions, vendor lock-in.
+The orchestration layer is a FastAPI server that sits between the Flutter app and the various data sources. It receives chat messages from the app, figures out what the user wants, gathers the necessary data, and returns A2UI templates.
 
-**After**: Drop a markdown file in a directory. Done.
+This layer does a few different things depending on the request. For core banking queries—account balances, recent transactions, mortgage calculators—it calls an **in-process bank MCP server**. This is essentially a Python module that implements the MCP protocol locally. No HTTP, no network hop. It's fast, it's deterministic, and it returns structured data that the agent can format into A2UI templates.
+
+For location-related queries—"Where was this merchant?" or "Show me branch locations"—it calls an **external map MCP server** over HTTP. This is `@modelcontextprotocol/server-map`, a reference implementation from the MCP Apps repo. The agent sends it a merchant name, gets back coordinates, then requests the hosted map UI using the `ui://cesium-map/mcp-app.html` resource path.
+
+The agent doesn't know or care whether it's calling an internal MCP server or an external one. It's all just MCP JSON-RPC. And it doesn't know or care whether the result will be rendered as A2UI or as an embedded app. It just returns whatever makes sense for the data type.
+
+This separation of concerns is powerful. The agent focuses on **what to show**. The app focuses on **how to render it**. The MCP servers focus on **where the data comes from**. Clean boundaries, loosely coupled components.
+
+### Layer 3: The MCP Servers
+
+At the bottom layer, we have the actual capability providers. The bank MCP server is custom-built for this demo. It has tools for getting account data, retrieving transactions, calculating mortgages, checking credit card balances. Standard banking stuff, but implemented as MCP tools.
+
+The map MCP server is off-the-shelf. We didn't build it. We just pointed our agent at `http://localhost:3001/mcp` and started calling its tools. It provides geocoding (merchant name → coordinates), map rendering (coordinates → interactive Cesium map), and a few other location-related utilities.
+
+That's the ecosystem play. The bank server is ours. The map server is someone else's. But they both speak MCP, so they both plug into our agent seamlessly. As the MCP ecosystem grows, we'll be able to add weather, stock tickers, news feeds, whatever—without changing our app code or redeploying our agent.
+
+## The Development Story: Markdown All the Way Down
+
+Here's where things get really interesting. Building AIBank didn't require a complex agent framework or a custom orchestration DSL. We used **flat markdown files** for everything.
+
+Each banking tool is defined in a markdown file. Here's what `tools/get_transactions.md` looks like:
 
 ```markdown
-# tools/get_transactions.md
-
 ## Tool: get_transactions
 
 Returns recent transactions for a user's bank account.
@@ -156,13 +139,11 @@ Returns recent transactions for a user's bank account.
 \`\`\`
 ```
 
-That's it. Both `copilot-cli` and `claude-cli` parse this markdown, understand the tool contract, and wire it up. No code generation, no compilation, no SDK dependencies.
+That's it. No code generation. No compilation step. No SDK dependencies. Just a markdown file that describes what the tool does and what parameters it expects.
 
-**Subagent routing?** Another markdown file:
+Routing logic? Also markdown. Here's `routing.md`:
 
 ```markdown
-# routing.md
-
 ## Request Routing
 
 - `/chat` → Main conversational agent (account questions, transaction lookup)
@@ -172,103 +153,68 @@ That's it. Both `copilot-cli` and `claude-cli` parse this markdown, understand t
 When user mentions location/address/map → call map server geocode tool.
 ```
 
-The agent runtime reads this, builds a decision tree, routes requests accordingly. All declarative. All markdown.
+Subagent configuration? You guessed it—markdown. Model selection, context limits, system prompts, all declarative. No framework to learn, no YAML to validate, no JSON schema to debug.
+
+And here's the magic part: **both `copilot-cli` and `claude-cli` can run these specs**. They're not tied to a specific vendor or runtime. They're just markdown files that describe what you want, and any compliant CLI can wire them up.
+
+This means I can develop locally with `copilot-cli`, then deploy to production with `claude-cli`, or vice versa. The specs are portable. The tooling is swappable. There's zero lock-in.
+
+The development workflow becomes absurdly simple:
+
+1. Write a markdown file describing a tool
+2. Save it
+3. The agent hot-reloads
+4. Test it in the app
+
+No build step. No restart. No deployment pipeline. Just markdown → running agent.
 
 ![Flat agent workflow](/img/flat-agent-workflow.png)
 
 *Figure 3: Development workflow—markdown specs to running agent with no build step*
 
----
+## What This Means for You
 
-## The Development Process
+If you're building an AI app today, here's my advice: **stop trying to pick a side**. Don't choose between MCP and A2UI. Don't let anyone tell you they're competing visions. They're not.
 
-Building AIBank looked like this:
+Think of A2UI as your **internal rendering strategy**. It's how you build the core product experience—your accounts page, your transaction history, your settings screen. It gives you native performance, brand consistency, and tight integration with your platform.
 
-### 1. Define Tools (Markdown)
+Think of MCP Apps as your **external integration strategy**. It's how you add maps, weather, news, stocks, or any other capability where you want to tap into the ecosystem rather than build everything yourself. It gives you flexibility, speed to market, and access to specialized tools you'd never have time to perfect.
 
-Create flat markdown files for each banking tool:
-- `tools/get_accounts.md`
-- `tools/get_transactions.md`
-- `tools/calculate_mortgage.md`
+Together, they give you both sides of the impossible trinity. You get native feel (A2UI) and extensibility (MCP Apps). The only thing missing is agent intelligence, and that's what your LLM provides. Use Claude, use GPT, use Gemini—doesn't matter. As long as your agent can emit A2UI templates and call MCP servers, you're in business.
 
-### 2. Configure Routing (Markdown)
+And if you design your agent using flat markdown specs like we did with AIBank, you get one more thing: **portability**. Your entire agent configuration is just a directory of markdown files. You can version it in git, share it on GitHub, review it in a PR. You can run it with any compliant CLI. You can hand it to another developer and they'll understand it immediately, because it's just markdown.
 
-Define how requests map to tools:
-- Chat about accounts → `get_accounts`
-- "Where was this transaction?" → Map MCP server
-- Mortgage questions → `calculate_mortgage` + A2UI template
+No framework lock-in. No vendor dependencies. No proprietary DSLs. Just descriptions of what you want, in a format anyone can read.
 
-### 3. Run with Any CLI
+## The Future
 
-```bash
-# Option 1: copilot-cli
-copilot-cli agent run --spec agent/
+The AI UI space is moving fast, and everyone's got an opinion about which standard will win. MCP vs A2UI. Claude vs GPT. Flutter vs React Native. It's exhausting.
 
-# Option 2: claude-cli  
-claude-cli agent run --spec agent/
+But here's what I learned building AIBank: **the winners won't be the ones who pick a side**. They'll be the ones who understand what each tool is good at and combine them intelligently.
 
-# Both work. Same specs.
-```
+Use A2UI for your core product. Use MCP Apps for your ecosystem. Use markdown for your agent specs. Use whatever LLM makes sense for your use case. Stay flexible. Stay portable. Stay focused on what actually matters: **building something that works and feels good**.
 
-### 4. Iterate
-
-Change a markdown file. Save. Agent hot-reloads. Test again. No build step, no compilation, no framework magic.
-
----
-
-## Key Takeaways
-
-1. **MCP Apps-ext ≠ A2UI**  
-   They solve different problems. Use both.
-
-2. **A2UI for core product**  
-   Your primary UI should be native, consistent, polished.
-
-3. **MCP Apps for extensibility**  
-   3rd-party plugins, dynamic capabilities, ecosystem growth.
-
-4. **Markdown > Frameworks**  
-   Flat agent specs are portable, readable, tooling-agnostic.
-
-5. **Dual CLI support is free**  
-   If your specs are declarative enough, any compliant CLI works.
+Because at the end of the day, users don't care about standards. They care about whether your app helps them get things done. And if using two standards together lets you ship faster and build better, that's not a compromise—it's a win.
 
 ---
 
 ## Try It Yourself
 
-Clone [AIBank](https://github.com/richgo/aibank) and run:
+Want to see this in action? Clone [AIBank](https://github.com/richgo/aibank) and run:
 
 ```bash
 ./dev.sh
 ```
 
-This starts:
-- Agent backend (FastAPI + MCP servers)
-- Map MCP server (@modelcontextprotocol/server-map)
-- MCP inspector (explore tools in browser)
-- Flutter web app (GenUI host with mcp:AppFrame)
+This starts the agent backend, the map MCP server, the MCP inspector (for exploring tools in your browser), and the Flutter web app. Open `http://localhost:3000` and try these queries:
 
-Open `http://localhost:3000` and ask:
-- "Show me my account balance"
-- "What transactions did I make last week?"
-- "Where was my coffee shop purchase?"
+"Show me my account balance"—watch A2UI render native transaction widgets.
 
-Watch as A2UI renders native transaction lists **and** MCP Apps embeds an interactive map—all in the same conversational flow.
+"What transactions did I make last week?"—see structured data formatted beautifully.
 
----
+"Where was my coffee shop purchase?"—experience an MCP app embedding a live map inline.
 
-## What's Next?
-
-The future of AI UIs isn't **MCP vs A2UI**—it's **MCP + A2UI**.
-
-- **Product teams** get native polish and brand consistency (A2UI)
-- **Developers** get an open plugin ecosystem (MCP Apps)
-- **Users** get the best of both worlds
-
-And with flat markdown specs, **you don't need a PhD in agent frameworks to build it**.
-
-Start simple. Add a markdown file. Ship.
+All in the same conversational flow. All feeling like one cohesive app. Because that's what happens when you stop choosing and start combining.
 
 ---
 
@@ -281,4 +227,4 @@ Start simple. Add a markdown file. Ship.
 
 ---
 
-*Built with nothing but markdown, curiosity, and a refusal to pick just two.*
+*Built with markdown, curiosity, and a refusal to be told I have to choose.*
