@@ -72,6 +72,12 @@ Same conversation flow. Same agent. Two different rendering strategies, chosen b
 
 *Figure 2: AIBank architecture—three layers working together*
 
+Here's what it looks like in action. The account balance and transaction list at the top are rendered using A2UI—native Flutter widgets that feel platform-native. The map at the bottom showing the "Council Tax" transaction location is an embedded MCP app UI from the external map server. Both in the same view, both feeling cohesive, both types of rendering working together seamlessly:
+
+![AIBank app screenshot](/img/aibank-screenshot.jpg)
+
+*Figure 3: AIBank running—A2UI for core banking UI (top) + MCP Apps for location mapping (bottom)*
+
 ## Building AIBank: Architecture in Practice
 
 Let me walk you through how this dual-standard approach works in practice. AIBank has three layers, each with a specific job.
@@ -242,7 +248,7 @@ And because the specs are portable, you can run the exact same markdown with a d
 
 ![Flat agent workflow](/img/flat-agent-workflow.png)
 
-*Figure 3: Development workflow—markdown specs to running agent with no build step*
+*Figure 4: Development workflow—markdown specs to running agent with no build step*
 
 ## What This Means for You
 
