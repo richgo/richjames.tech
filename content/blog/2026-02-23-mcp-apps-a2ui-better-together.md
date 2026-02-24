@@ -114,9 +114,9 @@ The map MCP server is off-the-shelf. We didn't build it. We just pointed our age
 
 That's the ecosystem play. The bank server is ours. The map server is someone else's. But they both speak MCP, so they both plug into our agent seamlessly. As the MCP ecosystem grows, we'll be able to add weather, stock tickers, news feeds, whatever—without changing our app code or redeploying our agent.
 
-## What This Means for You
+## If you're building an AI app today
 
-If you're building an AI app today, here's my advice: **no need to pick a side**. Don't choose between MCP and A2UI. They're not competing visions.
+Here's my advice: **no need to pick a side**. Don't choose between MCP and A2UI. They're not competing visions.
 
 Think of A2UI as your **internal rendering strategy**. It's how you build the core product experience—your accounts page, your transaction history, your settings screen. It gives you native performance, brand consistency, and tight integration with your platform.
 
