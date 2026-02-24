@@ -8,23 +8,19 @@ featured: true
 
 # MCP Apps vs A2UI: Better Together
 
-Let me tell you about building [AIBank](https://github.com/richgo/aibank), a demo AI-powered banking app that taught me something important about the current state of AI UI development. It's a story about two competing standards that actually aren't competing at all—and why you need both of them to build something that feels real.
+Recently I set about building a POC named [AIBank](https://github.com/richgo/aibank), a demo AI-powered banking app that taught me something important about the current state of AI UI development.
 
 The problem I set out to solve was simple on the surface: **prove that AI UIs can feel native while staying extensible**. Turns out that's harder than it sounds, because the industry has collectively decided to make us choose between polish and openness. But here's the thing—we don't have to choose. We just need to understand what problems each standard solves, and use them both intelligently.
 
-## The Impossible Trinity
+## The Tradeoff
 
-If you're building an AI application today, you're forced into an impossible choice. You can pick two of these three things, but not all three:
+If you're building an AI application today, you're forced into an impossible choice. You can pick only one:
 
 **Native feel** — The kind of smooth, platform-native UI that makes an app feel like it belongs on your device. Real Flutter widgets on mobile, real SwiftUI on iOS, proper Jetpack Compose on Android. The stuff that makes users forget they're using an AI app and just focus on getting things done.
 
-**Agent intelligence** — LLM-powered reasoning that actually understands what users want and adapts to their intent. Not just keyword matching or rigid command structures, but genuine understanding that gets better as the conversation develops.
-
 **3rd-party extensibility** — The ability for anyone in the ecosystem to plug in new tools, new services, new capabilities. The kind of open plugin architecture that lets your app grow beyond what you initially built.
 
-I spent years in enterprise software watching companies try to have all three and fail. They'd get the native feel and the intelligence but lock themselves into proprietary tool ecosystems. Or they'd go open and extensible but end up with web-view UIs that feel second-class. Or they'd nail the native experience and open it up, but lose the intelligence trying to coordinate everything.
-
-For the longest time, I accepted this as just how things work. You pick your battles. You optimize for your users' top priorities and compromise on the rest.
+For  time some time, I accepted this as just how things work with mobile development. You pick your battles. You optimize for your users' top priorities and compromise on the rest.
 
 Then I started looking at MCP Apps-ext and A2UI, and something clicked.
 
@@ -60,7 +56,7 @@ But here's what A2UI doesn't give you: **extensibility at the boundaries**. If y
 
 *Figure 1: Why both standards are needed—they solve different problems*
 
-## The Insight: Stop Choosing
+## The Insight: No Choosing
 
 Here's what I realized while building AIBank: **these standards aren't alternatives**. They're complements.
 
