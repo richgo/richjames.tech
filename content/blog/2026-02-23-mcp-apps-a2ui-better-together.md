@@ -20,7 +20,7 @@ If you're building an AI application today, you're forced into an impossible cho
 
 **3rd-party extensibility** — The ability for anyone in the ecosystem to plug in new tools, new services, new capabilities. The kind of open plugin architecture that lets your app grow beyond what you initially built.
 
-For  time some time, I accepted this as just how things work with mobile development. You pick your battles. You optimize for your users' top priorities and compromise on the rest.
+For  time some time, I accepted this as just how things work with mobile development. You pick your battles. You optimise for your users' top priorities and compromise on the rest.
 
 Then I started looking at MCP Apps-ext and A2UI, and something clicked.
 
@@ -64,7 +64,7 @@ MCP Apps-ext and A2UI solve different problems in the same architecture. They ca
 
 When a user asks "What's my account balance?" your agent generates an A2UI template. Your app renders it with native Flutter widgets. It's fast, polished, on-brand.
 
-When they ask "Where was this transaction?" your agent calls an external map MCP server. It returns a hosted map UI. Your app embeds it inline. It's functional, interactive, and you didn't have to build it.
+When they ask "Where was xxx transaction?" your agent calls an external map MCP server. It returns a hosted map UI. Your app embeds it inline. It's functional, interactive, and you didn't have to build it.
 
 Same conversation flow. Same agent. Two different rendering strategies, chosen based on what you're showing.
 
@@ -116,7 +116,7 @@ That's the ecosystem play. The bank server is ours. The map server is someone el
 
 ## What This Means for You
 
-If you're building an AI app today, here's my advice: **stop trying to pick a side**. Don't choose between MCP and A2UI. They're not competing visions.
+If you're building an AI app today, here's my advice: **no need to pick a side**. Don't choose between MCP and A2UI. They're not competing visions.
 
 Think of A2UI as your **internal rendering strategy**. It's how you build the core product experience—your accounts page, your transaction history, your settings screen. It gives you native performance, brand consistency, and tight integration with your platform.
 
@@ -151,7 +151,7 @@ This starts the agent backend, the map MCP server, the MCP inspector (for explor
 
 "What transactions did I make last week?"—see structured data formatted beautifully.
 
-"Where was my coffee shop purchase?"—experience an MCP app embedding a live map inline.
+"Where was my Pret purchase?"—experience an MCP app embedding a live map inline.
 
 All in the same conversational flow. All feeling like one cohesive app. Because that's what happens when you stop choosing and start combining.
 
