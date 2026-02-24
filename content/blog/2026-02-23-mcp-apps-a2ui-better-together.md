@@ -114,142 +114,6 @@ The map MCP server is off-the-shelf. We didn't build it. We just pointed our age
 
 That's the ecosystem play. The bank server is ours. The map server is someone else's. But they both speak MCP, so they both plug into our agent seamlessly. As the MCP ecosystem grows, we'll be able to add weather, stock tickers, news feeds, whatever—without changing our app code or redeploying our agent.
 
-## The Development Story: Markdown All the Way Down
-
-Here's where things get really interesting. Building AIBank didn't require a complex agent framework or a custom orchestration DSL. We used **flat markdown files** for everything, following a pattern inspired by [OpenSpec-Agents](https://github.com/richgo/OpenSpec-Agents)—a spec-driven development workflow where agents are just markdown files in `.github/agents/` that hand off to each other through natural conversation.
-
-Let me walk you through how this works, because it fundamentally changes how you think about building AI systems.
-
-### The AGENTS.md Pattern
-
-In traditional software development, you define capabilities in code. Functions, classes, modules—the usual suspects. With OpenSpec, you define capabilities in markdown files that describe what an agent can do, what tools it has access to, and which other agents it should hand off to when its job is done.
-
-AIBank uses a simplified version of this pattern. Each banking tool is defined in a markdown file. Here's what `tools/get_transactions.md` looks like:
-
-```markdown
-## Tool: get_transactions
-
-Returns recent transactions for a user's bank account.
-
-**Parameters:**
-- `account_id` (string, required) - Account identifier
-- `limit` (integer, optional) - Max transactions to return (default: 10)
-
-**Returns:** List of transaction objects with:
-- `id`, `date`, `merchant`, `amount`, `category`
-
-**Example:**
-\`\`\`json
-{
-  "account_id": "acc_123",
-  "limit": 5
-}
-\`\`\`
-```
-
-That's it. No code generation. No compilation step. No SDK dependencies. Just a markdown file that describes what the tool does and what parameters it expects. Both `copilot-cli` and `claude-cli` parse this markdown, understand the tool contract, and make it available to the agent runtime.
-
-Routing logic? Also markdown. Here's `routing.md`:
-
-```markdown
-## Request Routing
-
-- `/chat` → Main conversational agent (account questions, transaction lookup)
-- `/a2a/message` → A2A standard agent (structured message/response)
-- Map questions → Delegate to external map MCP server
-
-When user mentions location/address/map → call map server geocode tool.
-```
-
-Subagent configuration? You guessed it—markdown. Model selection, context limits, system prompts, all declarative. No framework to learn, no YAML to validate, no JSON schema to debug.
-
-### The OpenSpec Workflow: From Idea to Code
-
-The OpenSpec-Agents repo takes this pattern further by defining an entire development workflow as a series of handoffs between specialized agents. It's like a relay race where each agent does one thing well, then passes the baton to the next agent in the chain.
-
-Here's how it works:
-
-**1. explore** — You start by investigating the codebase, thinking through ideas, checking what exists. This agent has read and search tools. When you're ready to actually build something, it hands off to either `new` (for a structured approach) or `ff` (fast-forward for simple changes).
-
-**2. new** — This agent scaffolds a change directory in `openspec/changes/`. It creates the folder structure, initializes metadata, and sets you up for the full workflow. Then it hands off to `proposal`.
-
-**3. proposal** — Here you write the **WHY**. What's the intent? What problem are you solving? What's in scope and what's not? This is pure thinking, no code yet. When you're satisfied, hand off to `specs`.
-
-**4. specs** — Now you write the **WHAT**. What are the requirements? What are the acceptance criteria? What edge cases do we need to handle? This agent helps you write proper specifications—not vague wishes, but concrete scenarios that can be tested. Hand off to `design`.
-
-**5. design** — Here you write the **HOW**. What are the technical decisions? What patterns are you using? How does this fit into the existing architecture? This is where you make the hard choices about structure and approach. Hand off to `tasks`.
-
-**6. tasks** — Break the work into a **DO** checklist. Concrete implementation steps, ordered by dependency. Each task should be small enough to complete in one sitting. This becomes your implementation roadmap. Hand off to `apply`.
-
-**7. apply** — This is where markdown becomes code. The `apply` agent follows a **BDD-first workflow**: it writes a failing scenario (Behavior-Driven Development), analyzes edge cases, then implements the code using strict TDD (Test-Driven Development). Red → Green → Refactor, but with a behavior scenario wrapping the unit tests.
-
-Here's where the magic happens. The agent reads your specs markdown, understands the requirements, writes a test that captures the expected behavior, then implements the minimal code to make it pass. It's not magic—it's just following the pattern you described in markdown, but doing it systematically.
-
-**8. verify** — Once implementation is complete, this agent checks spec compliance. Did we actually build what we said we'd build? Are all scenarios passing? Any edge cases missed? If issues are found, it hands back to `apply` for fixes. If everything looks good, hand off to `archive`.
-
-**9. archive** — Close out the change. Merge the specs into the canonical library, move the change to the archive folder, clean up. You're done. Hand off to `new` for the next feature.
-
-There's also an **ff** (fast-forward) agent that combines proposal → specs → design → tasks into one pass for simple changes. Use it when you don't need the full ceremony.
-
-### How Markdown Becomes Code
-
-The critical insight is that **the workflow itself is declarative**. Each agent is a markdown file that says:
-
-"I can do X, Y, Z. I have these tools. When I'm done, here are the next steps you might want to take."
-
-When you run `copilot --agent apply "Implement get_transactions"`, the CLI:
-
-1. Loads `apply.md` from `.github/agents/`
-2. Parses the agent definition (tools, instructions, handoffs)
-3. Reads the relevant spec markdown from `openspec/changes/<change-name>/specs/`
-4. Uses the LLM to generate code that satisfies the spec
-5. Runs tests (BDD scenario → TDD units)
-6. Suggests handoffs to `verify` or `archive`
-
-All of this happens because you described what you wanted in markdown. The agent runtime wires up the tools, manages context, and executes the workflow. But the **definitions are portable**. You can take these same `.md` files and run them with `claude`, `copilot`, or any other CLI.
-
-This is powerful because it decouples **what you're building** from **how you're building it**. The specs don't care which LLM you use or which CLI you prefer. They're just descriptions of desired behavior, written in plain language (with some structure), stored as version-controlled markdown files.
-
-### AIBank's Simplified Workflow
-
-AIBank takes what is great from OpenSpec's .md workflow and extends the principle: **markdown as the source of truth**.
-
-The agent configuration is just a directory of markdown files:
-
-```
-agent/
-├── tools/
-│   ├── get_accounts.md
-│   ├── get_transactions.md
-│   ├── calculate_mortgage.md
-│   └── geocode.md (external MCP)
-├── routing.md
-└── config.md
-```
-
-When you or the LLM invoked by the CLI changes something:
-
-1. Scans the `agent/` directory
-2. Parses each markdown file
-3. Builds an internal representation of tools and routing rules
-4. Starts the FastAPI server with those capabilities
-5. Hot-reloads when any `.md` file changes
-
-The development loop becomes:
-
-1. Edit `tools/get_transactions.md` to add a parameter
-2. Save the file
-3. The agent runtime notices the change and reloads
-4. Test the updated tool immediately in the Flutter app
-
-No compilation. No deployment. No build artifacts. Just markdown → running system.
-
-And because the specs are portable, you can run the exact same markdown with a different CLI or a different LLM without changing a single line. The tool definitions don't know or care about the runtime. They're just descriptions of what the tool does, written in a format that any compliant parser can understand.
-
-![Flat agent workflow](/img/flat-agent-workflow.png)
-
-*Figure 4: Development workflow—markdown specs to running agent with no build step*
-
 ## What This Means for You
 
 If you're building an AI app today, here's my advice: **stop trying to pick a side**. Don't choose between MCP and A2UI. They're not competing visions.
@@ -260,9 +124,6 @@ Think of MCP Apps as your **external integration strategy**. It's how you add ma
 
 Together, they give you both sides of the impossible trinity. You get native feel (A2UI) and extensibility (MCP Apps). The only thing missing is agent intelligence, and that's what your LLM provides. Use Claude, use GPT, use Gemini—doesn't matter. As long as your agent can emit A2UI templates and call MCP servers, you're in business.
 
-And if you design your agent using flat markdown specs like we did with AIBank, you get one more thing: **portability**. Your entire agent configuration is just a directory of markdown files. You can version it in git, share it on GitHub, review it in a PR. You can run it with any compliant CLI. You can hand it to another developer and they'll understand it immediately, because it's just markdown.
-
-No framework lock-in. No vendor dependencies. No proprietary DSLs. Just descriptions of what you want, in a format anyone can read.
 
 ## The Future
 
@@ -270,7 +131,7 @@ The AI UI space is moving fast, and everyone's got an opinion about which standa
 
 But here's what I learned building AIBank: **the winners won't be the ones who pick a side**. They'll be the ones who understand what each tool is good at and combine them intelligently.
 
-Use A2UI for your core product. Use MCP Apps for your ecosystem. Use markdown for your agent specs. Use whatever LLM makes sense for your use case. Stay flexible. Stay portable. Stay focused on what actually matters: **building something that works and feels good**.
+Use A2UI for your core product. Use MCP Apps for your ecosystem. Use whatever LLM makes sense for your use case. Stay flexible. Stay portable. Stay focused on what actually matters: **building something that works and feels good**.
 
 Because at the end of the day, users don't care about standards. They care about whether your app helps them get things done. And if using two standards together lets you ship faster and build better, that's not a compromise—it's a win.
 
@@ -305,4 +166,3 @@ All in the same conversational flow. All feeling like one cohesive app. Because 
 
 ---
 
-*Built with markdown, curiosity, and a refusal to be told I have to choose.*
