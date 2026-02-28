@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.3"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1536" height="1024" fill="url(#bg)"/>
+  
+  <!-- Subtle grid -->
+  <g opacity="0.05" stroke="#94a3b8" stroke-width="1">
+    <line x1="0" y1="0" x2="0" y2="1024"/><line x1="64" y1="0" x2="64" y2="1024"/>
+    <line x1="128" y1="0" x2="128" y2="1024"/><line x1="192" y1="0" x2="192" y2="1024"/>
+    <line x1="256" y1="0" x2="256" y2="1024"/><line x1="320" y1="0" x2="320" y2="1024"/>
+    <line x1="384" y1="0" x2="384" y2="1024"/><line x1="448" y1="0" x2="448" y2="1024"/>
+    <line x1="512" y1="0" x2="512" y2="1024"/><line x1="576" y1="0" x2="576" y2="1024"/>
+    <line x1="640" y1="0" x2="640" y2="1024"/><line x1="704" y1="0" x2="704" y2="1024"/>
+    <line x1="768" y1="0" x2="768" y2="1024"/><line x1="832" y1="0" x2="832" y2="1024"/>
+    <line x1="896" y1="0" x2="896" y2="1024"/><line x1="960" y1="0" x2="960" y2="1024"/>
+    <line x1="1024" y1="0" x2="1024" y2="1024"/><line x1="1088" y1="0" x2="1088" y2="1024"/>
+    <line x1="1152" y1="0" x2="1152" y2="1024"/><line x1="1216" y1="0" x2="1216" y2="1024"/>
+    <line x1="1280" y1="0" x2="1280" y2="1024"/><line x1="1344" y1="0" x2="1344" y2="1024"/>
+    <line x1="1408" y1="0" x2="1408" y2="1024"/><line x1="1472" y1="0" x2="1472" y2="1024"/>
+    <line x1="0" y1="64" x2="1536" y2="64"/><line x1="0" y1="128" x2="1536" y2="128"/>
+    <line x1="0" y1="192" x2="1536" y2="192"/><line x1="0" y1="256" x2="1536" y2="256"/>
+    <line x1="0" y1="320" x2="1536" y2="320"/><line x1="0" y1="384" x2="1536" y2="384"/>
+    <line x1="0" y1="448" x2="1536" y2="448"/><line x1="0" y1="512" x2="1536" y2="512"/>
+    <line x1="0" y1="576" x2="1536" y2="576"/><line x1="0" y1="640" x2="1536" y2="640"/>
+    <line x1="0" y1="704" x2="1536" y2="704"/><line x1="0" y1="768" x2="1536" y2="768"/>
+    <line x1="0" y1="832" x2="1536" y2="832"/><line x1="0" y1="896" x2="1536" y2="896"/>
+    <line x1="0" y1="960" x2="1536" y2="960"/>
+  </g>
+
+  <!-- LEFT SIDE: Framework chaos -->
+  <!-- Tangled dependency lines -->
+  <g opacity="0.15" stroke="#ef4444" stroke-width="2" fill="none">
+    <path d="M100,200 Q200,100 300,250 Q400,150 350,350"/>
+    <path d="M150,300 Q250,200 200,400 Q350,300 400,450"/>
+    <path d="M80,400 Q180,350 250,500 Q320,380 380,520"/>
+    <path d="M200,150 Q300,250 150,350 Q280,280 350,400"/>
+    <path d="M120,500 Q220,420 300,550 Q350,480 400,600"/>
+  </g>
+  
+  <!-- Framework boxes (cluttered, overlapping) -->
+  <g opacity="0.7">
+    <!-- Box 1 -->
+    <rect x="80" y="180" width="260" height="60" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <text x="210" y="200" font-family="monospace" font-size="11" fill="#ef4444" text-anchor="middle">$ npm install openspec-cli</text>
+    <text x="210" y="220" font-family="monospace" font-size="11" fill="#64748b" text-anchor="middle">+ 847 packages in 32s</text>
+    
+    <!-- Box 2 -->
+    <rect x="100" y="270" width="280" height="60" rx="8" fill="#1e293b" stroke="#f97316" stroke-width="2"/>
+    <text x="240" y="290" font-family="monospace" font-size="11" fill="#f97316" text-anchor="middle">$ uv pip install spec-kit</text>
+    <text x="240" y="310" font-family="monospace" font-size="11" fill="#64748b" text-anchor="middle">Resolving dependencies...</text>
+    
+    <!-- Box 3 -->
+    <rect x="60" y="360" width="300" height="60" rx="8" fill="#1e293b" stroke="#eab308" stroke-width="2"/>
+    <text x="210" y="380" font-family="monospace" font-size="11" fill="#eab308" text-anchor="middle">$ bmad init --mode=full</text>
+    <text x="210" y="400" font-family="monospace" font-size="11" fill="#64748b" text-anchor="middle">Loading 12 agents, 34 workflows...</text>
+    
+    <!-- Box 4 -->
+    <rect x="120" y="450" width="250" height="60" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <text x="245" y="470" font-family="monospace" font-size="11" fill="#ef4444" text-anchor="middle">/opsx:propose → /opsx:apply</text>
+    <text x="245" y="490" font-family="monospace" font-size="11" fill="#64748b" text-anchor="middle">/speckit.constitution</text>
+    
+    <!-- Box 5 -->
+    <rect x="70" y="540" width="280" height="60" rx="8" fill="#1e293b" stroke="#f97316" stroke-width="2"/>
+    <text x="210" y="560" font-family="monospace" font-size="11" fill="#f97316" text-anchor="middle">⚠ peer dep conflict: node ≥20</text>
+    <text x="210" y="580" font-family="monospace" font-size="11" fill="#64748b" text-anchor="middle">WARN deprecated module@2.1.0</text>
+  </g>
+
+  <!-- Confusion marks -->
+  <text x="420" y="350" font-family="sans-serif" font-size="48" fill="#ef4444" opacity="0.3">?</text>
+  <text x="50" y="170" font-family="sans-serif" font-size="36" fill="#f97316" opacity="0.3">?</text>
+  <text x="380" y="560" font-family="sans-serif" font-size="40" fill="#eab308" opacity="0.3">?</text>
+
+  <!-- CENTER DIVIDER -->
+  <line x1="530" y1="120" x2="530" y2="900" stroke="#334155" stroke-width="2" stroke-dasharray="8,8"/>
+  
+  <!-- VS label -->
+  <rect x="505" y="480" width="50" height="50" rx="25" fill="#334155"/>
+  <text x="530" y="512" font-family="sans-serif" font-size="18" font-weight="bold" fill="#94a3b8" text-anchor="middle">vs</text>
+
+  <!-- RIGHT SIDE: Markdown simplicity -->
+  <!-- Clean .md file representation -->
+  <g transform="translate(780, 220)">
+    <!-- File shadow -->
+    <rect x="4" y="4" width="440" height="560" rx="12" fill="#000" opacity="0.3"/>
+    <!-- File body -->
+    <rect x="0" y="0" width="440" height="560" rx="12" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    
+    <!-- Title bar -->
+    <rect x="0" y="0" width="440" height="44" rx="12" fill="#334155"/>
+    <rect x="0" y="32" width="440" height="12" fill="#334155"/>
+    <!-- File icon and name -->
+    <circle cx="24" cy="22" r="6" fill="#3b82f6"/>
+    <text x="42" y="27" font-family="monospace" font-size="14" fill="#e2e8f0">proposal.md</text>
+    
+    <!-- Markdown content -->
+    <text x="24" y="75" font-family="monospace" font-size="14" fill="#3b82f6" font-weight="bold"># Feature Proposal</text>
+    <text x="24" y="100" font-family="monospace" font-size="13" fill="#94a3b8">## Problem</text>
+    <rect x="24" y="112" width="280" height="3" rx="1" fill="#475569" opacity="0.5"/>
+    <rect x="24" y="124" width="220" height="3" rx="1" fill="#475569" opacity="0.5"/>
+    <rect x="24" y="136" width="260" height="3" rx="1" fill="#475569" opacity="0.5"/>
+    
+    <text x="24" y="168" font-family="monospace" font-size="13" fill="#94a3b8">## Solution</text>
+    <rect x="24" y="180" width="300" height="3" rx="1" fill="#475569" opacity="0.5"/>
+    <rect x="24" y="192" width="240" height="3" rx="1" fill="#475569" opacity="0.5"/>
+    <rect x="24" y="204" width="270" height="3" rx="1" fill="#475569" opacity="0.5"/>
+    
+    <text x="24" y="236" font-family="monospace" font-size="13" fill="#94a3b8">## Handoffs</text>
+    
+    <!-- Handoff buttons -->
+    <rect x="24" y="250" width="120" height="32" rx="6" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+    <text x="84" y="271" font-family="monospace" font-size="12" fill="#3b82f6" text-anchor="middle">→ specs</text>
+    
+    <rect x="156" y="250" width="120" height="32" rx="6" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" stroke-width="1"/>
+    <text x="216" y="271" font-family="monospace" font-size="12" fill="#8b5cf6" text-anchor="middle">→ design</text>
+    
+    <rect x="288" y="250" width="120" height="32" rx="6" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="1"/>
+    <text x="348" y="271" font-family="monospace" font-size="12" fill="#10b981" text-anchor="middle">→ tasks</text>
+
+    <!-- More content lines -->
+    <text x="24" y="318" font-family="monospace" font-size="13" fill="#94a3b8">## Tools</text>
+    <text x="24" y="340" font-family="monospace" font-size="12" fill="#64748b">- read, edit, search, execute</text>
+    
+    <text x="24" y="375" font-family="monospace" font-size="13" fill="#94a3b8">## Purpose</text>
+    <rect x="24" y="387" width="320" height="3" rx="1" fill="#475569" opacity="0.5"/>
+    <rect x="24" y="399" width="260" height="3" rx="1" fill="#475569" opacity="0.5"/>
+    <rect x="24" y="411" width="290" height="3" rx="1" fill="#475569" opacity="0.5"/>
+    
+    <!-- Clean checkmarks -->
+    <text x="24" y="455" font-family="sans-serif" font-size="14" fill="#10b981">✓ Zero dependencies</text>
+    <text x="24" y="480" font-family="sans-serif" font-size="14" fill="#10b981">✓ Total transparency</text>
+    <text x="24" y="505" font-family="sans-serif" font-size="14" fill="#10b981">✓ Instant customization</text>
+    <text x="24" y="530" font-family="sans-serif" font-size="14" fill="#10b981">✓ No lock-in</text>
+  </g>
+
+  <!-- Workflow arrow (clean) -->
+  <g transform="translate(680, 830)">
+    <text x="320" y="0" font-family="monospace" font-size="13" fill="#3b82f6" text-anchor="middle">
+      new → proposal → specs → design → tasks → apply → verify
+    </text>
+  </g>
+
+  <!-- Title text -->
+  <text x="768" y="80" font-family="sans-serif" font-size="28" font-weight="bold" fill="#e2e8f0" text-anchor="middle" letter-spacing="1">
+    FRAMEWORKS vs MARKDOWN
+  </text>
+  <text x="768" y="115" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle">
+    Same workflow. Different packaging.
+  </text>
+
+  <!-- Left label -->
+  <text x="260" y="145" font-family="sans-serif" font-size="18" font-weight="bold" fill="#ef4444" text-anchor="middle" opacity="0.8">
+    npm install · CLI · modules
+  </text>
+  
+  <!-- Right label -->
+  <text x="1000" y="185" font-family="sans-serif" font-size="18" font-weight="bold" fill="#3b82f6" text-anchor="middle" opacity="0.8">
+    just .md files
+  </text>
+
+  <!-- Bottom highlight -->
+  <rect x="0" y="1014" width="1536" height="10" fill="url(#glow)"/>
+</svg>
