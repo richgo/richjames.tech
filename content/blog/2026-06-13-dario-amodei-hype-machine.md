@@ -36,26 +36,31 @@ Mythos Preview was real. It was capable. The SWE-bench Verified score of 93.9% w
 
 ## Act II: Fable — The "Mythos for the Rest of Us"
 
-On June 9th, 2026, Anthropic launched **Claude Fable 5** — described as "a Mythos-class model we've made safe for general use." The benchmark headlines were genuinely strong: 95.0% on SWE-bench Verified, 80.3% on SWE-bench Pro, state-of-the-art on FrontierCode, and an 11-point lead over the nearest competitor on that SWE-bench Pro score.
+On June 9th, 2026, Anthropic launched **Claude Fable 5** — described as "a Mythos-class model we've made safe for general use." The marketing was predictably spectacular. SWE-bench Pro scores! FrontierCode leadership! An 11-point lead! Stripe migrated a 50 million line codebase in a day!
 
-Sounds incredible. Until you look at who it was beating and by how much.
+Before we get into numbers, a word on benchmark integrity. SWE-bench Pro and Anthropic's internal evals have both faced serious questions about methodology — vendor scaffolding, self-reported scores, and in some cases outright contamination. They're not worthless, but they're not gospel either. The one benchmark that has consistently held up as a genuine, third-party, hard-to-game test of real agentic coding ability is **[DeepSWE](https://deepswe.net/)** — along with Terminal-Bench and SWE-Atlas-QnA as part of the [Artificial Analysis Coding Agent Index](https://artificialanalysis.ai/agents/coding-agents).
 
-**SWE-bench Pro results (June 2026):**
+So let's look at what the unimpeachable leaderboard actually shows:
 
-| Model | SWE-Bench Pro |
-|---|---|
-| Claude Fable 5 | 80.3% |
-| Claude Opus 4.8 | 69.2% |
-| **GPT-5.5** | **58.6%** |
-| Gemini 3.1 Pro | 54.2% |
+![Artificial Analysis Coding Agent Index — composite average pass@1 across DeepSWE, Terminal-Bench v2, and SWE-Atlas-QnA](/img/aa-coding-agent-index.jpg)
+*Source: [Artificial Analysis Coding Agent Index](https://artificialanalysis.ai/agents/coding-agents) — composite average pass@1 across DeepSWE, Terminal-Bench v2, and SWE-Atlas-QnA. Higher is better.*
 
-*(Source: [claude5.ai benchmark analysis](https://claude5.ai/en/news/claude-fable-5-benchmarks-swe-bench-pro-80-percent), Anthropic launch data)*
+Let that sink in. **Claude Code + Fable 5 (max, with fallback): 77. Codex + GPT-5.5 (xhigh): 76.** One point. That's the gap between Anthropic's most powerful model at maximum compute and OpenAI's GPT-5.5 running at merely "extra high" reasoning effort.
 
-For the real-world coding agent race — the one developers actually care about — check [Artificial Analysis's Coding Agent Leaderboard](https://artificialanalysis.ai/agents/coding-agents), where the picture gets more nuanced under standardised harnesses.
+But it gets better. Drop Fable down to **max without fallback** and it scores **73** — *below* Codex + GPT-5.5 at **medium** effort (**71**). Claude Code + Opus 4.8 at max? **73** — same as Fable, at half the price.
 
-**But here's the thing.** According to [vals.ai's SWE-bench Verified leaderboard](https://www.vals.ai/benchmarks/swebench), GPT-5.5 sits at **82.6%** on SWE-bench Verified — the same benchmark. Fable 5 scores 95.0%. That's a real gap. But Fable 5 is using a `compute_effort: max` setting. GPT-5.5 is running at `reasoning_effort: xhigh`.
+In other words: on the benchmark that actually matters, Fable 5 at full throttle barely edges out GPT-5.5 — and Claude Code + Opus 4.8 matches it entirely.
 
-Translation: Anthropic is essentially running its engine at **twice the compute burn** and charging you accordingly. Input: $10/MTok, Output: $50/MTok. Compare that to Opus 4.8 at $5/$25.
+Now here's the cost comparison that should be on every slide deck in Silicon Valley:
+
+| Model | AA Index Score | Input $/MTok | Output $/MTok |
+|---|---|---|---|
+| Claude Fable 5 (max) | 77 | $10 | $50 |
+| GPT-5.5 (xhigh) | 76 | ~$5 | ~$20 |
+| Claude Opus 4.8 (max) | 73 | $5 | $25 |
+| GPT-5.5 (medium) | 71 | ~$2.50 | ~$10 |
+
+Fable 5 costs **2–5× more than GPT-5.5** depending on the effort tier you compare it to, for a 1-point lead on the gold-standard benchmark. One. Point.
 
 ---
 
@@ -65,7 +70,7 @@ There's a reason the automotive world moved on from the 6.2-litre naturally aspi
 
 What Anthropic appears to have done with Fable 5 is the AI equivalent of boring out a V8 and calling it a revolution. The model — widely speculated to be architecturally identical to Opus 4.8 with inference compute roughly doubled — delivers meaningfully better results on long-horizon tasks. But at **double the inference time and double the cost**.
 
-The [morphllm benchmark breakdown](https://www.morphllm.com/claude-benchmarks) is pretty clear: Claude Opus 4.8 scores 88.6% on SWE-bench Verified at $5/$25. Fable 5 gets to 95.0% at $10/$50, using `compute_effort: max`. That 6.4 percentage point improvement costs you 100% more money per token.
+The [Artificial Analysis Coding Agent Index](https://artificialanalysis.ai/agents/coding-agents) makes it brutally clear: Claude Code + Opus 4.8 at max scores **73** on the composite DeepSWE/Terminal-Bench index. Fable 5 at max scores **73** too — identical — at double the price. The only time Fable pulls ahead is with the fallback safety net enabled, where it scrapes to **77** vs GPT-5.5's **76**. One point. At 2–5× the cost depending on how you compare.
 
 A Chevy Camaro ZL1 will beat a hybrid on a drag strip too. That doesn't mean it's a better car.
 
@@ -102,11 +107,11 @@ So Fable and Mythos are the same underlying model. And Mythos Preview — the ea
 Meanwhile, Opus 4.8 was quietly shipped on May 28th, two weeks before Fable's launch, at the same price as 4.7. It scores 88.6%.
 
 The pricing structure tells a story:
-- Opus 4.8: $5/$25 per MTok
-- Fable 5: $10/$50 per MTok
-- Fable 5 running at max compute effort on benchmarks
+- Opus 4.8: $5/$25 per MTok — scores **73** on the AA Index
+- Fable 5: $10/$50 per MTok — scores **73** on the AA Index (or 77 with fallback)
+- GPT-5.5 at xhigh: roughly $5/$20 — scores **76** on the AA Index
 
-This is the engine theory made real. The improvement exists. It's real. But it's bought, not engineered. You're paying for GPU time, not for a fundamentally smarter architecture.
+This is the engine theory made real. The improvement exists — barely, on the one benchmark worth trusting. But it's bought, not engineered. You're paying for GPU time, not for a fundamentally smarter architecture.
 
 ---
 
@@ -157,4 +162,4 @@ Because if Anthropic is serious about being the safety-first AI lab for the worl
 
 ---
 
-**Benchmarks via [Artificial Analysis Coding Agent Leaderboard](https://artificialanalysis.ai/agents/coding-agents) | [vals.ai SWE-bench](https://www.vals.ai/benchmarks/swebench) | [morphllm Claude Benchmarks](https://www.morphllm.com/claude-benchmarks)**
+**Benchmarks via [Artificial Analysis Coding Agent Index](https://artificialanalysis.ai/agents/coding-agents) (DeepSWE / Terminal-Bench v2 / SWE-Atlas-QnA)**
