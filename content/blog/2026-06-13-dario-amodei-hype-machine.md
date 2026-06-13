@@ -53,12 +53,7 @@ In other words: on the benchmark that actually matters, Fable 5 at full throttle
 
 Now here's the cost comparison that should be on every slide deck in Silicon Valley:
 
-| Model | AA Index Score | Input $/MTok | Output $/MTok |
-|---|---|---|---|
-| Claude Fable 5 (max) | 77 | $10 | $50 |
-| GPT-5.5 (xhigh) | 76 | ~$5 | ~$20 |
-| Claude Opus 4.8 (max) | 73 | $5 | $25 |
-| GPT-5.5 (medium) | 71 | ~$2.50 | ~$10 |
+![DeepSWE Coding Agent Index vs Cost](/img/benchmark-table.png)
 
 Fable 5 costs **2–5× more than GPT-5.5** depending on the effort tier you compare it to, for a 1-point lead on the gold-standard benchmark. One. Point.
 
