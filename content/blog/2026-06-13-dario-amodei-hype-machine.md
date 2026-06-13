@@ -62,6 +62,15 @@ Now here's the cost comparison that should be on every slide deck in Silicon Val
 
 Fable 5 costs **2–5× more than GPT-5.5** depending on the effort tier you compare it to, for a 1-point lead on the gold-standard benchmark. One. Point.
 
+And if you think the token pricing table above is abstract, here's what it looks like in cold hard dollars per task:
+
+![Artificial Analysis — Cost per Task (mean pay-per-token API cost, USD). Lower is better.](/img/aa-cost-per-task.jpg)
+*Source: [Artificial Analysis Coding Agent Index](https://artificialanalysis.ai/agents/coding-agents) — mean pay-per-token API cost per task (USD). Lower is better.*
+
+Claude Code + Fable 5 (max, with fallback): **$11.50 per task**. Codex + GPT-5.5 (xhigh): **$5.07**. Claude Code + Opus 4.8 (max): **$7.70**. DeepSeek V4 Pro at high effort: **$0.27**.
+
+Fable 5 is literally **43× more expensive per task than DeepSeek**, and **2.3× more expensive than GPT-5.5**, for one benchmark point of advantage. If that's not a tax on brand loyalty, I don't know what is.
+
 ---
 
 ## The V8 Problem: More Cylinders Isn't Engineering
