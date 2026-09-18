@@ -3,7 +3,7 @@ templateKey: blog-post
 title: "Security Scanning for Pennies: The Missing Middle Between Regex and Reasoning Models"
 date: 2026-09-18T19:40:00.000Z
 description: >-
-  SAST tools are deterministic and cheap to run but blind to intent. Pointing a reasoning model at your whole repo understands intent but costs a fortune and can't be audited. There's a third option: deterministic orchestration around narrow, calibrated, probabilistic judgments — and it's roughly two orders of magnitude cheaper than either.
+  SAST tools are cheap to run, but context is where things get awkward. Reasoning models can help, at a price. There's a third option: deterministic orchestration around narrow, probabilistic judgements — with a token bill measured in pennies rather than a conversation with finance.
 tags:
   - AI
   - Security
@@ -15,59 +15,59 @@ tags:
   - SoftwareDevelopment
 ---
 
-Application security tooling has quietly sorted itself into two camps, and both of them are wrong in opposite directions.
+Application security tooling seems to have settled into two camps. Both are useful. Neither is quite what I wanted.
 
-On one side: deterministic scanners — SAST, DAST, SCA — that are fast, reproducible, and dirt cheap to *run*, but understand nothing. On the other: pointing a frontier reasoning model at your codebase and asking it to "review this for security issues" — which understands plenty, but costs real money per file and produces an answer you can't fully audit or reproduce.
+On one side: conventional scanners — SAST, DAST, SCA — that can be fast, reproducible, and dirt cheap to *run*, but vary in how much context they capture. On the other: pointing a frontier reasoning model at your codebase and asking it to "review this for security issues" — which can reason about intent, but costs real money per file and produces an answer that's harder to audit or reproduce.
 
-I spent the last few weeks building [`typesafe-security-review`](https://github.com/open-sdlc/typesafe-security-review), a scanner built on [TypeSafe](https://typesafe.ai)'s System One models, [CodeGraph](https://github.com/colbymchenry/codegraph), and the OWASP Cheat Sheet Series + CWE definitions. The point of this post isn't to sell you on a specific repo — it's to walk through *why* the architecture landed where it did, because the gap it fills is bigger than one project.
+I spent the last few weeks building [`typesafe-security-review`](https://github.com/open-sdlc/typesafe-security-review), a scanner built on [TypeSafe](https://typesafe.ai)'s System One models, [CodeGraph](https://github.com/colbymchenry/codegraph), and the OWASP Cheat Sheet Series + CWE definitions. Here's why the architecture landed where it did.
 
 ## The Left: Deterministic Tools
 
-Semgrep, Checkmarx, Fortify, SonarQube, Snyk's SCA engine — these are rule engines. Somebody wrote a pattern (a regex, an AST shape, a known-CVE version range), and the tool tells you, with total reproducibility, whether that pattern exists in your code.
+Semgrep, Checkmarx, Fortify, SonarQube, Snyk's SCA engine — different tools doing different jobs, but rules and known patterns do much of the heavy lifting. That might mean an AST shape, a data-flow rule, or a known-CVE version range. It's rather more sophisticated than grep with a logo, to be fair.
 
 This is genuinely valuable. It's fast. It's auditable — you can point at the exact rule that fired. It costs almost nothing per scan once the ruleset exists.
 
-The catch is *building and maintaining the ruleset*. Every new framework, every new idiom, every "actually that sink is safe because it's wrapped three functions up" exception is a rule someone has to write and keep current. The tools have no model of intent — they can't tell the difference between `os.system(user_input)` in a toy script and the same line behind five layers of allowlisting. That's why SAST output is famous for drowning real findings in noise, and why the *tools themselves* — despite running for pennies of compute — carry six- and seven-figure enterprise licensing costs, because the actual product being sold is the accumulated rule-authoring labor, not the CPU cycles.
+The catch is *building and maintaining the ruleset*. Every new framework, every new idiom, every "actually that sink is safe because it's wrapped three functions up" exception needs to be accounted for. Better tools can follow data flow and recognise sanitisers, but application-specific context still takes work. That's part of why SAST output can drown real findings in noise, and why enterprise licences can cost rather more than the compute. You're paying for rule-authoring labour, maintenance and support, not just CPU cycles.
 
 ## The Right: Point an LLM at Everything
 
 The obvious counter-move, once agentic coding tools got good, was to skip rules entirely: paste the diff, or the whole repo, into a frontier reasoning model and ask "what's wrong with this, security-wise?"
 
-This actually works, in the sense that a strong reasoning model *will* catch things a regex never could — a business-logic race condition, an authorization check that's technically present but checks the wrong field, a prompt injection vector that only exists because of how two features compose. That's real semantic understanding, not pattern matching.
+This actually works, in the sense that a strong reasoning model *can* catch things a regex never could — a business-logic race condition, an authorisation check that's technically present but checks the wrong field, a prompt injection vector that only exists because of how two features interact. That's useful reasoning about context, not just pattern matching.
 
 But you're paying full reasoning-model rates — extended thinking, large context windows, free-form output — for every file, every PR, every run. It's slow enough that "scan on every commit" becomes a budget conversation. And the output is prose: two runs on the identical diff can disagree, there's no calibrated confidence to threshold on, and "why did it flag this" means re-reading a paragraph of reasoning rather than pointing at a rule ID.
 
-Neither side is dumb. They're just optimized for different failure modes — the left avoids cost and false negatives on rules; the right avoids blindness to intent. Nobody has cheaply optimized for *both*.
+Neither side is daft. They're just optimised for different trade-offs: repeatable checks on one side, broader reasoning on the other. I wanted something in between, preferably without another procurement meeting.
 
-## The Middle: Deterministic Orchestration, Probabilistic Judgment
+## The Middle: Deterministic Orchestration, Probabilistic Judgement
 
-TypeSafe's whole pitch is right there in the name of the model class: **System One**. It's a Kahneman reference — System 1 is fast, intuitive judgment; System 2 is slow, deliberate reasoning. A SAST rule is System 0: no judgment at all, just matching. A reasoning model doing a security review is System 2: genuinely deliberate, genuinely expensive. What's been missing is System 1 for code — fast, calibrated, *narrow* judgment, cheap enough to run constantly.
+TypeSafe's model class is called **System One**. It's a Kahneman reference — System 1 is fast, intuitive judgement; System 2 is slow, deliberate reasoning. Loosely speaking, a SAST rule is System 0: follow the rule, no deliberation required. A reasoning model doing a security review is System 2: deliberate, and priced accordingly. What I wanted was System 1 for code — fast, calibrated, *narrow* judgement, cheap enough to run constantly.
 
 Here's what that looks like assembled end to end, using `typesafe-security-review` as the concrete example:
 
-**1. CodeGraph decides what's worth looking at — deterministically, for free.** Before any AI call happens, [CodeGraph](https://github.com/colbymchenry/codegraph) indexes the repo locally and enumerates actual functions, methods, classes, and routes. No API key, no network call, no cost. This is the same category of work a SAST tool's file-discovery step does — and it should stay deterministic, because "is this a source file worth scanning" isn't a judgment call, it's a fact.
+**1. CodeGraph finds the code — deterministically, with no model bill.** Before any AI call happens, [CodeGraph](https://github.com/colbymchenry/codegraph) indexes the repo locally and enumerates actual functions, methods, classes, and routes. Local compute, no model tokens. This is the same category of work a SAST tool's file-discovery step does — and it should stay deterministic. We don't need a neural network to decide whether we've found a Java file.
 
-**2. The taxonomy is deterministic too — it's OWASP and CWE, not the model's opinion.** Every one of the 131 classifiers in the project is grounded in a specific OWASP Cheat Sheet or a specific CWE definition, with categories quoting that source's actual language. The model isn't inventing what "insecure deserialization" means on the fly — it's answering a narrow question against an industry-vetted definition. That's the same rigor a rule-based tool has, just expressed as a natural-language criterion instead of a regex.
+**2. The taxonomy is deterministic too — it's OWASP and CWE, not the model's opinion.** Every one of the 131 classifiers in the project is grounded in a specific OWASP Cheat Sheet or a specific CWE definition, with categories quoting that source's actual language. The model isn't inventing what "insecure deserialisation" means on the fly — it's answering a narrow question against an industry-vetted definition. The criterion is explicit, as it is with a rule-based tool; the judgement against it is still probabilistic.
 
-**3. Routing prunes the search space before spending a token on the real judgment.** A router asks one cheap question per classifier — "does this cheat sheet even apply to this file?" — in a single parallel call, and only the classifiers that clear a relevance threshold actually run. Scanning a `.java` file doesn't waste a call on the Django or Laravel classifiers. In practice this prunes ~131 candidate classifiers down to somewhere around 15–20 relevant ones per file.
+**3. Routing prunes the search space before spending tokens on detailed checks.** A router asks one cheap question per classifier — "does this cheat sheet even apply to this file?" — in a single parallel call, and only the classifiers that clear a relevance threshold actually run. The aim is not to waste calls on Django or Laravel classifiers when scanning a `.java` file. In practice this prunes ~131 candidate classifiers down to somewhere around 15–20 relevant ones per file.
 
-**4. The probabilistic judgment is as narrow as it can possibly be.** Each classifier fires a batch of independent [Noul](https://docs.typesafe.ai/primitives/noul) questions — "does this look like a hardcoded credential," "does this look like unchecked deserialization of untrusted input" — against a single file's text, all in one parallel call, and gets back a calibrated 0–1 probability per category. Not a paragraph. Not a chain of thought. A typed, thresholdable number your code can act on directly.
+**4. The probabilistic judgement stays narrow.** Each classifier fires a batch of independent [Noul](https://docs.typesafe.ai/primitives/noul) questions — "does this look like a hardcoded credential?", "does this look like unchecked deserialisation of untrusted input?" — against a single file's text, all in one parallel call, and gets back a calibrated 0–1 probability per category. Not a paragraph. Not a chain of thought. A typed number your code can apply a threshold to, without first having to mark an essay.
 
-Every layer that *can* be deterministic, is. The only thing asked of the probabilistic model is the one thing regexes can't do: recognizing intent in natural language and code, against a well-specified question, at System-1 speed.
+Every layer that *can* be deterministic, is. The model handles the narrow judgements about relevance and potential vulnerabilities. The code handles what happens next.
 
-## Doing the Actual Math
+## Doing the Actual Maths
 
 TypeSafe's current model, Jev, is priced at [$0.042 per million input tokens, with output free](https://docs.typesafe.ai/models). That number is what makes "pennies" a literal claim rather than a headline.
 
-A single classifier call packs one file's text plus roughly half a dozen category questions into one request — call it 2,000–4,000 tokens for a typical source file. Run all 131 classifiers unrouted against one file and you're moving somewhere around 350,000–400,000 tokens, which prices out to **roughly 1.5–2 cents** for the whole OWASP+CWE canon against a single file. Turn routing on, and a typical file only needs its ~15–20 relevant classifiers — dropping that to **a few tenths of a cent per file**, at sub-second latency, because Jev evaluates a state and its questions in one parallel pass rather than a serial reasoning trace.
+A single classifier call packs one file's text plus roughly half a dozen category questions into one request — call it 2,000–4,000 tokens for a typical source file. At around 3,000 tokens each, running all 131 classifiers unrouted uses roughly 393,000 tokens: **about 1.65 US cents** for the project's OWASP+CWE classifier set against a single file. Turn routing on, and 15–20 classifiers at that size come to **roughly 0.19–0.25 US cents per file**, plus the router call. That's token arithmetic, not an end-to-end benchmark; file sizes, routing and concurrency all matter.
 
-Compare that to per-seat or per-scan pricing on enterprise SAST/DAST platforms, or to per-file costs of routing a reasoning model through extended thinking on every commit — and the gap isn't small, it's an order-of-magnitude-or-two gap, before you even count the analyst hours saved from *not* triaging rule-engine false positives.
+That's a small enough token bill to make frequent scanning interesting. It isn't a like-for-like comparison with an enterprise licence, though, and cheaper inference doesn't automatically mean fewer false positives. Coverage and triage time still need measuring. The spreadsheet is encouraging; it isn't a security assessment.
 
 ## What This Doesn't Solve
 
-This isn't a case for throwing away deterministic scanners — CodeGraph's file discovery and the router's relevance check *are* deterministic scanners, just aimed inward at the pipeline instead of outward at your code. It's also not a case that narrow calibrated judgments replace deep reasoning entirely: a genuinely novel, multi-step business-logic exploit chain is still System 2's job, and the sane move is to route only the low-confidence or high-stakes findings up to a reasoning model for a second look, rather than paying reasoning-model rates on every file, every time.
+This isn't a case for throwing away deterministic scanners. CodeGraph's file discovery is deterministic; the router's relevance check is a model judgement, and it can be wrong. Nor do narrow, calibrated judgements replace deep reasoning: a genuinely novel, multi-step business-logic exploit chain still deserves a reasoning model and a human having a proper look. Escalating uncertain or high-stakes findings is a sensible next layer, but it won't catch something the first pass missed entirely.
 
-The point is narrower and, I think, more useful: most of what security scanning actually needs — "does this look like X" against a well-defined taxonomy, at repo scale, on every commit — was never a job that required a slow, expensive, unauditable reasoning trace. It just needed a fast, cheap, typed judgment, wired up by deterministic code. That's the middle nobody was building, and it's why this approach can plausibly undercut both the rule-vendor's license fee and the token bill from pointing GPT at your whole repo — for the same, or better, coverage.
+The point is narrower and, I think, more useful: a useful first pass at security scanning — "does this look like X" against a well-defined taxonomy, at repo scale, on every commit — needn't pay for deep reasoning on every file. A fast, cheap, typed judgement, wired up by deterministic code, is worth trying. Keep the proven checks, spend the reasoning budget where it helps, and measure what gets missed. Less grand unifying theory, more sensible plumbing.
 
 ---
 
