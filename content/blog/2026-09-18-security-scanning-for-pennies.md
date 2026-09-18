@@ -4,6 +4,8 @@ title: "Security Scanning for Pennies: The Missing Middle Between Regex and Reas
 date: 2026-09-18T19:40:00.000Z
 description: >-
   SAST tools are cheap to run, but context is where things get awkward. Reasoning models can help, at a price. There's a third option: deterministic orchestration around narrow, probabilistic judgements — with a token bill measured in pennies rather than a conversation with finance.
+featuredpost: true
+featuredimage: /img/security-scanning-for-pennies.jpg
 tags:
   - AI
   - Security
@@ -14,6 +16,8 @@ tags:
   - LLM
   - SoftwareDevelopment
 ---
+
+![Nice knowing you SAST — enter typesafe.ai](/img/security-scanning-for-pennies.jpg)
 
 Application security tooling seems to have settled into two camps. Both are useful. Neither is quite what I wanted.
 

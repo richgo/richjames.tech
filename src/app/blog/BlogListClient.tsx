@@ -99,12 +99,20 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
             >
               <Link href={`/blog/${post.slug}`} className="block">
                 <div className="bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                  {/* Featured image placeholder */}
+                  {/* Featured image, falling back to a gradient + icon placeholder */}
                   <div className={`relative h-48 bg-gradient-to-br ${getGradient(index)} overflow-hidden`}>
+                    {post.frontMatter.featuredimage ? (
+                      <img
+                        src={post.frontMatter.featuredimage}
+                        alt={post.frontMatter.title}
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center text-6xl drop-shadow-lg">
+                        {getPostIcon(post)}
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/0 transition-colors duration-300" />
-                    <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center text-6xl drop-shadow-lg">
-                      {getPostIcon(post)}
-                    </div>
                     {/* LinkedIn Badge */}
                     {post.frontMatter.source === 'linkedin' && (
                       <div className="absolute top-3 right-3 bg-[#0077b5] p-2 rounded-full shadow-lg">

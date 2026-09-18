@@ -30,6 +30,17 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   return {
     title: post.frontMatter.title,
     description: post.frontMatter.description || '',
+    openGraph: {
+      title: post.frontMatter.title,
+      description: post.frontMatter.description || '',
+      images: post.frontMatter.featuredimage ? [post.frontMatter.featuredimage] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.frontMatter.title,
+      description: post.frontMatter.description || '',
+      images: post.frontMatter.featuredimage ? [post.frontMatter.featuredimage] : undefined,
+    },
   }
 }
 
