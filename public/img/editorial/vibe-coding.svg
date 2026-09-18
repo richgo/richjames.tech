@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="#f5eedf" opacity=".045"/></pattern></defs>
+  <rect x="0" y="0" width="1200" height="630" rx="0" fill="#102d2a" /><rect x="0" y="0" width="1200" height="630" rx="0" fill="url(#grain)" />
+  <rect x="64" y="59" width="30" height="3" rx="0" fill="#dfb977" />
+  <text x="110" y="67" font-family="DejaVu Sans Mono" font-size="15" font-weight="400" fill="#dfb977">AN EXPERIMENT IN RECURSIVE CREATION</text>
+  <line x1="64" y1="98" x2="1136" y2="98" stroke="#f5eedf" stroke-width="1" opacity=".2"/>
+  <path d="M739 159 h346 v180 h-317 l-29 23 Z" fill="#173d35" stroke="#f5eedf" stroke-opacity=".35"/><text x="759" y="193" font-family="DejaVu Sans Mono" font-size="16" font-weight="400" fill="#f5eedf">MESSAGE</text><path d="M766 222 h304 v180 h-275 l-29 23 Z" fill="#255e4e" stroke="#f5eedf" stroke-opacity=".35"/><text x="786" y="256" font-family="DejaVu Sans Mono" font-size="16" font-weight="400" fill="#f5eedf">AGENT</text><path d="M793 285 h262 v180 h-233 l-29 23 Z" fill="#40836a" stroke="#f5eedf" stroke-opacity=".35"/><text x="813" y="319" font-family="DejaVu Sans Mono" font-size="16" font-weight="400" fill="#f5eedf">TOOL</text><path d="M820 348 h220 v180 h-191 l-29 23 Z" fill="#dfb977" stroke="#f5eedf" stroke-opacity=".35"/><text x="840" y="382" font-family="DejaVu Sans Mono" font-size="16" font-weight="400" fill="#102d2a">WEBSITE</text><text x="873" y="452" font-family="DejaVu Sans Mono" font-size="48" font-weight="700" fill="#102d2a">&lt;/></text>
+  <text x="64" y="234" font-family="DejaVu Serif" font-size="53" font-weight="700" fill="#f5eedf">AI building AI.</text><text x="64" y="297.07" font-family="DejaVu Serif" font-size="53" font-weight="700" fill="#f5eedf">Via WhatsApp.</text>
+  <text x="67" y="451" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#f5eedf">A message becomes a tool.</text><text x="67" y="479" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#f5eedf">A tool becomes another tool. Then a website.</text>
+  <line x1="64" y1="549" x2="1136" y2="549" stroke="#f5eedf" stroke-width="1" opacity=".2"/>
+  <text x="64" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#f5eedf">RICH JAMES / FIELD NOTES</text>
+  <text x="942" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#dfb977">ENGINEERING</text>
+  </svg>

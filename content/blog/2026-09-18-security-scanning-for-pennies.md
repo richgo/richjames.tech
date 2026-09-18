@@ -6,6 +6,7 @@ description: >-
   SAST tools are cheap to run, but context is where things get awkward. Reasoning models can help, at a price. There's a third option: deterministic orchestration around narrow, probabilistic judgements — with a token bill measured in pennies rather than a conversation with finance.
 featuredpost: true
 featuredimage: /img/security-scanning-for-pennies.jpg
+featuredimagealt: "Nice knowing you SAST: a dinosaur faces a small robot introducing TypeSafe security scanning."
 tags:
   - AI
   - Security
@@ -16,8 +17,6 @@ tags:
   - LLM
   - SoftwareDevelopment
 ---
-
-![Nice knowing you SAST — enter typesafe.ai](/img/security-scanning-for-pennies.jpg)
 
 Application security tooling seems to have settled into two camps. Both are useful. Neither is quite what I wanted.
 
@@ -48,6 +47,12 @@ Neither side is daft. They're just optimised for different trade-offs: repeatabl
 TypeSafe's model class is called **System One**. It's a Kahneman reference — System 1 is fast, intuitive judgement; System 2 is slow, deliberate reasoning. Loosely speaking, a SAST rule is System 0: follow the rule, no deliberation required. A reasoning model doing a security review is System 2: deliberate, and priced accordingly. What I wanted was System 1 for code — fast, calibrated, *narrow* judgement, cheap enough to run constantly.
 
 Here's what that looks like assembled end to end, using `typesafe-security-review` as the concrete example:
+
+![Vertical scanning flow: repository to deterministic local CodeGraph indexing and file selection, probabilistic TypeSafe relevance routing, code-owned classifier selection, probabilistic OWASP and CWE Noul checks via Jev, independent 0-1 category probabilities, then code-owned thresholds and reporting.](/img/security-scanning-pipeline.png)
+
+The diagram shows the default routed path, repeated for each selected file. CodeGraph stays local; the router and selected classifiers receive the file's text, not the graph itself. Gold boxes mark probabilistic model calls and their output, while blue-grey boxes mark inputs and deterministic code. Routing is a model judgement too: code applies a relevance threshold to choose which classifiers run, then a separate reporting threshold to their category probabilities.
+
+Each [Noul](https://docs.typesafe.ai/primitives/noul) value is an independent probability that the answer to its yes/no question is **yes**. It is not a severity score or an overall confidence rating, and the category probabilities do not need to sum to one. Human or deeper reasoning-model review would be an **optional next layer**, not an implemented step in this pipeline.
 
 **1. CodeGraph finds the code — deterministically, with no model bill.** Before any AI call happens, [CodeGraph](https://github.com/colbymchenry/codegraph) indexes the repo locally and enumerates actual functions, methods, classes, and routes. Local compute, no model tokens. This is the same category of work a SAST tool's file-discovery step does — and it should stay deterministic. We don't need a neural network to decide whether we've found a Java file.
 

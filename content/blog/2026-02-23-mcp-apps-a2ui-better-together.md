@@ -4,6 +4,8 @@ date: "2026-02-23"
 excerpt: "Why the future of AI UIs needs both extensibility (MCP Apps) and native polish (A2UI/GenUI). A deep dive into building AIBank with dual standards."
 tags: ["AI", "MCP", "A2UI", "GenUI", "Architecture", "Flutter", "Agent-to-App"]
 featured: true
+featuredimage: /img/editorial/mcp-a2ui.jpg
+featuredimagealt: "Better together: interlocking navy and terracotta rings connect MCP Apps and A2UI."
 ---
 
 # MCP Apps vs A2UI: Better Together

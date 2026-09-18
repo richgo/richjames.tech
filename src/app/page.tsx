@@ -1,6 +1,4 @@
-import Link from 'next/link'
 import { getAllBlogPosts } from '@/lib/markdown'
-import type { MarkdownContent } from '@/lib/markdown'
 import HomeClient from './HomeClient'
 
 export default function Home() {

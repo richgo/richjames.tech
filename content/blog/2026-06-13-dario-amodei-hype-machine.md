@@ -5,7 +5,8 @@ date: 2026-06-13T08:00:00.000Z
 description: >-
   Anthropic promised the world a mythological AI overlord. What they delivered was a model that beat GPT-5.5 by a single point — then got banned by the US government three days later. Is this product development, or pre-IPO theatre?
 featuredpost: true
-featuredimage: /img/dario-hype-machine.png
+featuredimage: /img/editorial/ai-hype-machine.jpg
+featuredimagealt: "The hype machine: a theatrical mask above a spotlighted stage on a burgundy background."
 tags:
   - AI
   - Anthropic

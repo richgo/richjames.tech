@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="#f5eedf" opacity=".045"/></pattern></defs>
+  <rect x="0" y="0" width="1200" height="630" rx="0" fill="#102d2a" /><rect x="0" y="0" width="1200" height="630" rx="0" fill="url(#grain)" />
+  <rect x="64" y="59" width="30" height="3" rx="0" fill="#dfb977" />
+  <text x="110" y="67" font-family="DejaVu Sans Mono" font-size="15" font-weight="400" fill="#dfb977">TECHNOLOGY / PERSPECTIVES</text>
+  <line x1="64" y1="98" x2="1136" y2="98" stroke="#f5eedf" stroke-width="1" opacity=".2"/>
+  <circle cx="926" cy="316" r="52" fill="none" stroke="#dfb977" stroke-width="1" opacity=".5"/><circle cx="926" cy="316" r="103" fill="none" stroke="#dfb977" stroke-width="1" opacity=".5"/><circle cx="926" cy="316" r="155" fill="none" stroke="#dfb977" stroke-width="1" opacity=".5"/><line x1="744" y1="316" x2="1108" y2="316" stroke="#dfb977" stroke-width="1" /><line x1="926" y1="134" x2="926" y2="498" stroke="#dfb977" stroke-width="1" /><path d="M926 316 L1036 207 A155 155 0 0 1 1080 316 Z" fill="#dfb977" opacity=".17"/><circle cx="1010" cy="240" r="8" fill="#f5eedf" /><circle cx="837" cy="355" r="6" fill="#dfb977" /><circle cx="947" cy="363" r="7" fill="#f5eedf" /><circle cx="926" cy="316" r="6" fill="#f5eedf" />
+  <text x="64" y="234" font-family="DejaVu Serif" font-size="68" font-weight="700" fill="#f5eedf">Signals,</text><text x="64" y="314.92" font-family="DejaVu Serif" font-size="68" font-weight="700" fill="#f5eedf">not noise.</text>
+  <text x="67" y="451" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#f5eedf">Architecture decisions that matter.</text><text x="67" y="479" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#f5eedf">Tracking the evolution of software.</text>
+  <line x1="64" y1="549" x2="1136" y2="549" stroke="#f5eedf" stroke-width="1" opacity=".2"/>
+  <text x="64" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#f5eedf">RICH JAMES / FIELD NOTES</text>
+  <text x="942" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#dfb977">ENGINEERING</text>
+  </svg>

@@ -6,6 +6,7 @@ description: >-
   There's a gold rush in AI-assisted development frameworks. I tried several, then built aibank using nothing but flat Markdown files and GitHub Copilot agents. Here's what I learned.
 featuredpost: true
 featuredimage: /img/frameworks-vs-markdown.png
+featuredimagealt: "A visual comparison of a complex agent framework and a simpler Markdown-based approach."
 tags:
   - AI
   - Copilot

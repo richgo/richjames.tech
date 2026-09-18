@@ -6,7 +6,8 @@ description: >-
   How to deploy an opionionated NextJs and federated Apollo GraphQL
   implementation to kubernetes.
 featuredpost: true
-featuredimage: /img/architecture.png
+featuredimage: /img/editorial/kubernetes.jpg
+featuredimagealt: "Small apps, orchestrated: a cluster of seven hexagonal application containers."
 tags:
   - skaffold
   - helm

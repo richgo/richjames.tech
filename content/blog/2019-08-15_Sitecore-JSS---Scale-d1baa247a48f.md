@@ -3,7 +3,8 @@ templateKey: 'blog-post'
 title: 'Sitecore JSS @ Scale | DevOps'
 date: 2019-07-15T15:04:10.000Z
 featuredpost: true
-featuredimage: /img/devops.png
+featuredimage: /img/editorial/devops.jpg
+featuredimagealt: "Build, ship, start again: a mint continuous-delivery loop on a dark blue background."
 description: DevOps — IaC & ephemeral environments
 tags:
   - Sitecore

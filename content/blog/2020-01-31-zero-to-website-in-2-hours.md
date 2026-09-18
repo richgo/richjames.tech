@@ -6,7 +6,8 @@ description: >-
   Building a personal blogsite with Gatsby and Netlify(+CMS) is crazily simple -
   here's how to do it.
 featuredpost: true
-featuredimage: /img/gatsby.jpg
+featuredimage: /img/editorial/website-in-two-hours.jpg
+featuredimagealt: "Zero to website, two hours: an oversized clock dial on a burgundy editorial cover."
 tags:
   - React
   - Gatsby

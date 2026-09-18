@@ -1,173 +1,43 @@
 'use client'
 
+import { useState } from 'react'
+import { Search, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Linkedin } from 'lucide-react'
+import PostCard from '@/components/PostCard'
+import Reveal from '@/components/Reveal'
 import type { BlogPost } from '@/lib/markdown'
 
-interface BlogListClientProps {
-  posts: BlogPost[]
-}
-
-export default function BlogListClient({ posts }: BlogListClientProps) {
-  const calculateReadingTime = (content: string) => {
-    const words = content.trim().split(/\s+/).length
-    return Math.ceil(words / 200)
-  }
-
-  const getPostIcon = (post: BlogPost) => {
-    const title = post.frontMatter.title?.toLowerCase() || ''
-    const tags = post.frontMatter.tags?.map(t => t.toLowerCase()) || []
-    const content = post.content.toLowerCase()
-
-    // AI/ML related
-    if (title.includes('ai') || title.includes('machine learning') || title.includes('gpt') || 
-        tags.some(t => t.includes('ai'))) return '🤖'
-    
-    // Cloud/Infrastructure
-    if (title.includes('azure') || title.includes('cloud') || title.includes('aws') || title.includes('gcp') ||
-        tags.some(t => ['azure', 'cloud', 'aws', 'gcp'].includes(t))) return '☁️'
-    
-    // DevOps/CI/CD
-    if (title.includes('devops') || title.includes('pipeline') || title.includes('deploy') ||
-        tags.some(t => t.includes('devops'))) return '🔄'
-    
-    // Architecture/System Design
-    if (title.includes('architect') || title.includes('design') || title.includes('system') ||
-        content.includes('architecture')) return '🏗️'
-    
-    // Security
-    if (title.includes('security') || title.includes('auth') || tags.some(t => t.includes('security'))) return '🔒'
-    
-    // API/GraphQL/Backend
-    if (title.includes('api') || title.includes('graphql') || title.includes('backend')) return '🔌'
-    
-    // Frontend/UI/React
-    if (title.includes('react') || title.includes('frontend') || title.includes('ui')) return '⚛️'
-    
-    // Performance/Optimization
-    if (title.includes('performance') || title.includes('optimization') || title.includes('speed')) return '⚡'
-    
-    // Database/Data
-    if (title.includes('database') || title.includes('data') || title.includes('sql')) return '🗄️'
-    
-    // Testing/Quality
-    if (title.includes('test') || title.includes('quality')) return '✅'
-    
-    // Leadership/Team/Culture
-    if (title.includes('team') || title.includes('culture') || title.includes('lead')) return '👥'
-    
-    // Conference/Speaking
-    if (title.includes('summit') || title.includes('conference') || title.includes('speaking')) return '🎤'
-    
-    // Default tech icon
-    return '💻'
-  }
-
-  const getGradient = (index: number) => {
-    const gradients = [
-      'from-indigo-500 to-purple-600',
-      'from-cyan-500 to-blue-600',
-      'from-pink-500 to-rose-600',
-      'from-amber-500 to-orange-600',
-      'from-emerald-500 to-teal-600',
-      'from-violet-500 to-fuchsia-600',
-    ]
-    return gradients[index % gradients.length]
-  }
+export default function BlogListClient({ posts }: { posts: BlogPost[] }) {
+  const [query, setQuery] = useState('')
+  const [filter, setFilter] = useState('All writing')
+  const filtered = posts.filter(post => {
+    const matchesType = filter === 'All writing' || (filter === 'Articles' ? post.frontMatter.source !== 'linkedin' : post.frontMatter.source === 'linkedin')
+    const text = `${post.frontMatter.title} ${post.frontMatter.description || ''} ${post.frontMatter.tags?.join(' ') || ''}`.toLowerCase()
+    return matchesType && text.includes(query.trim().toLowerCase())
+  })
 
   return (
-    <section className="min-h-screen bg-slate-900 pt-24 pb-16">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h1 className="text-5xl font-bold text-slate-50 mb-4">Blog</h1>
-          <p className="text-xl text-slate-400 mb-12">Technical articles and insights</p>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post, index) => (
-            <motion.article
-              key={post.slug}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group"
-            >
-              <Link href={`/blog/${post.slug}`} className="block">
-                <div className="bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                  {/* Featured image, falling back to a gradient + icon placeholder */}
-                  <div className={`relative h-48 bg-gradient-to-br ${getGradient(index)} overflow-hidden`}>
-                    {post.frontMatter.featuredimage ? (
-                      <img
-                        src={post.frontMatter.featuredimage}
-                        alt={post.frontMatter.title}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center text-6xl drop-shadow-lg">
-                        {getPostIcon(post)}
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/0 transition-colors duration-300" />
-                    {/* LinkedIn Badge */}
-                    {post.frontMatter.source === 'linkedin' && (
-                      <div className="absolute top-3 right-3 bg-[#0077b5] p-2 rounded-full shadow-lg">
-                        <Linkedin className="w-4 h-4 text-white" />
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h2 className="text-2xl font-bold text-slate-50 mb-3 group-hover:text-indigo-400 transition-colors">
-                      <span className="relative inline-block">
-                        {post.frontMatter.title}
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 group-hover:w-full transition-all duration-300" />
-                      </span>
-                    </h2>
-                    
-                    <div className="flex items-center gap-4 text-sm text-slate-400 mb-4">
-                      {post.frontMatter.date && (
-                        <time>
-                          {new Date(post.frontMatter.date).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric'
-                          })}
-                        </time>
-                      )}
-                      <span>•</span>
-                      <span>{calculateReadingTime(post.content)} min read</span>
-                    </div>
-                    
-                    {post.frontMatter.description && (
-                      <p className="text-slate-300 mb-4 line-clamp-3 flex-1">
-                        {post.frontMatter.description}
-                      </p>
-                    )}
-                    
-                    {post.frontMatter.tags && post.frontMatter.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {post.frontMatter.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-3 py-1 text-xs font-medium rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all duration-200"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            </motion.article>
+    <section className="site-container archive-page">
+      <header className="archive-header">
+        <p className="eyebrow">IDEAS, EXPERIMENTS & OCCASIONAL OPINIONS</p>
+        <h1>The <em>field notes.</em></h1>
+        <div className="archive-description"><p>Engineering in practice. What worked, what didn&apos;t, and what I&apos;m building next.</p><Link href="/tags" className="button-text">Browse topics <ArrowUpRight size={18} /></Link></div>
+      </header>
+      <div className="archive-toolbar">
+        <div className="archive-filters" role="group" aria-label="Filter writing">
+          {['All writing', 'Articles', 'LinkedIn notes'].map(label => (
+            <button key={label} type="button" aria-pressed={filter === label} onClick={() => setFilter(label)}>{label}</button>
           ))}
         </div>
+        <label className="archive-search"><Search size={17} aria-hidden="true" /><span className="sr-only">Search articles</span><input type="search" placeholder="Find something interesting..." value={query} onChange={event => setQuery(event.target.value)} /></label>
       </div>
+      <p className="archive-count eyebrow" aria-live="polite">{filtered.length} {filtered.length === 1 ? 'STORY' : 'STORIES'} / NEWEST FIRST</p>
+      <div className="post-grid">
+        {filtered.map((post, index) => (
+          <Reveal key={post.slug} delay={(index % 3) * 0.06}><PostCard post={post} priority={index < 3} /></Reveal>
+        ))}
+      </div>
+      {filtered.length === 0 && <div className="archive-empty"><h2>No notes on that one. Yet.</h2><p>Try another search, or look through the full archive.</p><button className="button-primary" onClick={() => { setQuery(''); setFilter('All writing') }}>Show all writing</button></div>}
     </section>
   )
 }

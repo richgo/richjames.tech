@@ -3,7 +3,8 @@ templateKey: 'blog-post'
 title: 'Sitecore JSS @ Scale | The transition to headless'
 date: 2019-06-22T15:04:10.000Z
 featuredpost: true
-featuredimage: /img/headless.png
+featuredimage: /img/editorial/headless.jpg
+featuredimagealt: "The move to headless: a browser window separates content from its delivery channel."
 description: How we started our journey towards Sitecore JSS and React
 tags:
   - Sitecore

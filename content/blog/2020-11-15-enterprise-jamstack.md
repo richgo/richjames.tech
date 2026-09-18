@@ -6,7 +6,8 @@ description: >-
   Smashing together the best of enterprise, open source and cloud to deliver
   blistering fast, resilient experiences.
 featuredpost: true
-featuredimage: /img/enterprisejamstack.jpeg
+featuredimage: /img/editorial/enterprise-jamstack.jpg
+featuredimagealt: "Enterprise meets Jamstack: three architectural layers labelled enterprise, open source and cloud."
 tags:
   - React NextJs Sitecore Uniform Jamstack Enterprise
 ---

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="#182d38" opacity=".045"/></pattern></defs>
+  <rect x="0" y="0" width="1200" height="630" rx="0" fill="#f0eadd" /><rect x="0" y="0" width="1200" height="630" rx="0" fill="url(#grain)" />
+  <rect x="64" y="59" width="30" height="3" rx="0" fill="#b74f32" />
+  <text x="110" y="67" font-family="DejaVu Sans Mono" font-size="15" font-weight="400" fill="#b74f32">PEOPLE / OPPORTUNITY</text>
+  <line x1="64" y1="98" x2="1136" y2="98" stroke="#182d38" stroke-width="1" opacity=".2"/>
+  <rect x="741" y="404" width="66" height="95" rx="2" fill="#182d38" /><rect x="827" y="342" width="66" height="157" rx="2" fill="#527b71" /><rect x="913" y="280" width="66" height="219" rx="2" fill="#90a391" /><rect x="999" y="218" width="66" height="281" rx="2" fill="#b74f32" /><path d="M760 329 L1073 162 M1020 156 L1081 157 L1064 215" fill="none" stroke="#b74f32" stroke-width="5"/>
+  <text x="64" y="234" font-family="DejaVu Serif" font-size="58" font-weight="700" fill="#182d38">Build what</text><text x="64" y="303.02" font-family="DejaVu Serif" font-size="58" font-weight="700" fill="#182d38">comes next.</text>
+  <text x="67" y="451" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#182d38">Engineering teams. Meaningful problems.</text><text x="67" y="479" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#182d38">Room to make an impact.</text>
+  <line x1="64" y1="549" x2="1136" y2="549" stroke="#182d38" stroke-width="1" opacity=".2"/>
+  <text x="64" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#182d38">RICH JAMES / FIELD NOTES</text>
+  <text x="942" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#b74f32">ENGINEERING</text>
+  </svg>

@@ -11,6 +11,7 @@ export interface FrontMatter {
   description?: string
   featuredpost?: boolean
   featuredimage?: string
+  featuredimagealt?: string
   tags?: string[]
   linkedinUrl?: string
   source?: string

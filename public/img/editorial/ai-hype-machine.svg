@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="#fff1dd" opacity=".045"/></pattern></defs>
+  <rect x="0" y="0" width="1200" height="630" rx="0" fill="#321c2a" /><rect x="0" y="0" width="1200" height="630" rx="0" fill="url(#grain)" />
+  <rect x="64" y="59" width="30" height="3" rx="0" fill="#f2aa75" />
+  <text x="110" y="67" font-family="DejaVu Sans Mono" font-size="15" font-weight="400" fill="#f2aa75">OPINION / AI AND THE ATTENTION ECONOMY</text>
+  <line x1="64" y1="98" x2="1136" y2="98" stroke="#fff1dd" stroke-width="1" opacity=".2"/>
+  <path d="M880 157 L725 486 H1100 L992 157 Z" fill="#f2aa75" opacity=".09"/><rect x="746" y="444" width="354" height="39" rx="3" fill="#f2aa75" /><rect x="771" y="483" width="304" height="17" rx="2" fill="#f2aa75" /><path d="M787 195 Q908 270 1041 195 L1017 298 Q907 344 810 298 Z" fill="#f2aa75"/><path d="M816 275 Q866 240 885 270 M943 270 Q978 237 1016 267" fill="none" stroke="#321c2a" stroke-width="10"/><line x1="845" y1="159" x2="827" y2="129" stroke="#f2aa75" stroke-width="3" /><line x1="917" y1="147" x2="917" y2="112" stroke="#f2aa75" stroke-width="3" /><line x1="988" y1="160" x2="1007" y2="130" stroke="#f2aa75" stroke-width="3" /><text x="827" y="401" font-family="DejaVu Sans Mono" font-size="16" font-weight="400" fill="#fff1dd">THE NEXT BIG THING</text>
+  <text x="64" y="234" font-family="DejaVu Serif" font-size="67" font-weight="700" fill="#fff1dd">The hype</text><text x="64" y="313.73" font-family="DejaVu Serif" font-size="67" font-weight="700" fill="#fff1dd">machine.</text>
+  <text x="67" y="451" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#fff1dd">Mythos. Fable. A very public performance.</text><text x="67" y="479" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#fff1dd">Looking past the launch-day spectacle.</text>
+  <line x1="64" y1="549" x2="1136" y2="549" stroke="#fff1dd" stroke-width="1" opacity=".2"/>
+  <text x="64" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#fff1dd">RICH JAMES / FIELD NOTES</text>
+  <text x="942" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#f2aa75">ENGINEERING</text>
+  </svg>

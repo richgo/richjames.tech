@@ -4,13 +4,13 @@ title: 'Sitecore JSS @ Scale | Architecture'
 date: 2019-07-15T15:04:10.000Z
 featuredpost: true
 featuredimage: /img/architecture.jpg
+featuredimagealt: "A sweeping modern bridge, illustrating connected architectural structures."
 description: Building for multi-site with decoupled front-ends and a microservice architecture
 tags:
   - Sitecore
   - JSS
   - Architecture
 ---
-![architecture](/img/architecture.jpg)
 # Sitecore JSS @ Scale
 
 2\. Building for multi-site with decoupled front-ends and a microservice architecture

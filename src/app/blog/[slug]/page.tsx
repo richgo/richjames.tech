@@ -31,9 +31,12 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
     title: post.frontMatter.title,
     description: post.frontMatter.description || '',
     openGraph: {
+      type: 'article',
+      url: `/blog/${slug}`,
+      publishedTime: new Date(post.frontMatter.date).toISOString(),
       title: post.frontMatter.title,
       description: post.frontMatter.description || '',
-      images: post.frontMatter.featuredimage ? [post.frontMatter.featuredimage] : undefined,
+      images: post.frontMatter.featuredimage ? [{ url: post.frontMatter.featuredimage, alt: post.frontMatter.featuredimagealt || post.frontMatter.title }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',

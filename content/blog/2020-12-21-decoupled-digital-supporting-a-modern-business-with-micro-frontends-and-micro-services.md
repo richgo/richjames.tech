@@ -11,7 +11,8 @@ description: >-
   trying to convince your business leaders to invest in a modern architecture
   like micro-frontends and federated GraphQL.
 featuredpost: true
-featuredimage: /img/gqlarch.png
+featuredimage: /img/editorial/decoupled-digital.jpg
+featuredimagealt: "Decouple the digital estate: six independent interface modules arranged into one composition."
 tags:
   - NextJs
   - React

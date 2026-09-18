@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="#f5eedf" opacity=".045"/></pattern></defs>
+  <rect x="0" y="0" width="1200" height="630" rx="0" fill="#102d2a" /><rect x="0" y="0" width="1200" height="630" rx="0" fill="url(#grain)" />
+  <rect x="64" y="59" width="30" height="3" rx="0" fill="#dfb977" />
+  <text x="110" y="67" font-family="DejaVu Sans Mono" font-size="15" font-weight="400" fill="#dfb977">ENTERPRISE ARCHITECTURE</text>
+  <line x1="64" y1="98" x2="1136" y2="98" stroke="#f5eedf" stroke-width="1" opacity=".2"/>
+  <path d="M737 194 l215 -48 105 68 -215 48 Z" fill="#214a44" stroke="#f5eedf" stroke-opacity=".25"/>
+    <path d="M737 194 l105 68 215 -48 v27 l-215 48 -105 -68 Z" fill="#214a44" opacity=".65"/><text x="806" y="216" font-family="DejaVu Sans Mono" font-size="15" font-weight="400" fill="#f5eedf">ENTERPRISE</text><path d="M757 289 l215 -48 105 68 -215 48 Z" fill="#438878" stroke="#f5eedf" stroke-opacity=".25"/>
+    <path d="M757 289 l105 68 215 -48 v27 l-215 48 -105 -68 Z" fill="#438878" opacity=".65"/><text x="826" y="311" font-family="DejaVu Sans Mono" font-size="15" font-weight="400" fill="#f5eedf">OPEN SOURCE</text><path d="M777 384 l215 -48 105 68 -215 48 Z" fill="#dfb977" stroke="#f5eedf" stroke-opacity=".25"/>
+    <path d="M777 384 l105 68 215 -48 v27 l-215 48 -105 -68 Z" fill="#dfb977" opacity=".65"/><text x="846" y="406" font-family="DejaVu Sans Mono" font-size="15" font-weight="400" fill="#102d2a">CLOUD</text>
+  <text x="64" y="234" font-family="DejaVu Serif" font-size="53" font-weight="700" fill="#f5eedf">Enterprise.</text><text x="64" y="297.07" font-family="DejaVu Serif" font-size="53" font-weight="700" fill="#f5eedf">Meet Jamstack.</text>
+  <text x="67" y="451" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#f5eedf">A serious platform with a lighter footprint.</text><text x="67" y="479" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#f5eedf">Fast by design. Resilient by default.</text>
+  <line x1="64" y1="549" x2="1136" y2="549" stroke="#f5eedf" stroke-width="1" opacity=".2"/>
+  <text x="64" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#f5eedf">RICH JAMES / FIELD NOTES</text>
+  <text x="942" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#dfb977">ENGINEERING</text>
+  </svg>

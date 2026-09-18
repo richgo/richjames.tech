@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="#182d38" opacity=".045"/></pattern></defs>
+  <rect x="0" y="0" width="1200" height="630" rx="0" fill="#f0eadd" /><rect x="0" y="0" width="1200" height="630" rx="0" fill="url(#grain)" />
+  <rect x="64" y="59" width="30" height="3" rx="0" fill="#b74f32" />
+  <text x="110" y="67" font-family="DejaVu Sans Mono" font-size="15" font-weight="400" fill="#b74f32">SECURITY / OPEN SOURCE</text>
+  <line x1="64" y1="98" x2="1136" y2="98" stroke="#182d38" stroke-width="1" opacity=".2"/>
+  <rect x="749" y="221" width="174" height="89" rx="44" fill="none" stroke="#182d38" stroke-width="18" transform="rotate(-30 836 266)"/><rect x="832" y="266" width="174" height="89" rx="44" fill="none" stroke="#b74f32" stroke-width="18" transform="rotate(-30 919 311)"/><rect x="915" y="311" width="174" height="89" rx="44" fill="none" stroke="#182d38" stroke-width="18" transform="rotate(-30 1002 356)"/><text x="775" y="468" font-family="DejaVu Sans Mono" font-size="16" font-weight="400" fill="#182d38">SOURCE > BUILD > VERIFY</text>
+  <text x="64" y="234" font-family="DejaVu Serif" font-size="57" font-weight="700" fill="#182d38">Trust the</text><text x="64" y="301.83" font-family="DejaVu Serif" font-size="57" font-weight="700" fill="#182d38">supply chain.</text>
+  <text x="67" y="451" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#182d38">Provenance is part of the product.</text><text x="67" y="479" font-family="DejaVu Sans" font-size="19" font-weight="400" fill="#182d38">A stronger foundation for open source.</text>
+  <line x1="64" y1="549" x2="1136" y2="549" stroke="#182d38" stroke-width="1" opacity=".2"/>
+  <text x="64" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#182d38">RICH JAMES / FIELD NOTES</text>
+  <text x="942" y="585" font-family="DejaVu Sans Mono" font-size="13" font-weight="400" fill="#b74f32">ENGINEERING</text>
+  </svg>

@@ -18,7 +18,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Article artwork and presentation
+
+Posts live in `content/blog/`. Set `featuredimage` to a local `/img/...` path
+and `featuredimagealt` to a description of the artwork. Store the asset in
+`public/img/`; use an optimised JPEG or PNG so social preview crawlers can
+read it. The cover appears automatically above the article, on home/archive/
+topic/related cards, and in Open Graph and Twitter metadata. Do not repeat
+the cover as the first Markdown image. Keep diagrams and other inline images
+in the article body.
+
+Shared cards use Next.js responsive image optimisation. Site typography uses
+local system fonts, with no build-time font downloads. Entrance animations
+are finite, scroll reveals run once, and the site's CSS and Framer Motion
+respect `prefers-reduced-motion`.
 
 ## Learn More
 

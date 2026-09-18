@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1810" viewBox="0 0 720 1810" role="img" aria-labelledby="title description">
+  <title id="title">Security scanning: code orchestrates, Jev judges</title>
+  <desc id="description">A vertical flow from a repository to local deterministic CodeGraph indexing and file selection, probabilistic TypeSafe relevance routing, code-owned relevance thresholds and classifier selection, probabilistic OWASP and CWE Noul checks via Jev, independent zero-to-one yes probabilities per category, and code-owned thresholds and reporting. Model inputs are each selected file's text. Probabilities are not severity scores or overall confidence.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L6 5 L1 9" fill="none" stroke="#e6c59b" stroke-width="2"/>
+    </marker>
+    <style>
+      text { font-family: "DejaVu Sans", sans-serif; fill: #f3f0e7; }
+      .heading { font-size: 35px; font-weight: 700; }
+      .body { font-size: 28px; fill: #d4d9df; }
+      .label { font-size: 23px; font-weight: 700; letter-spacing: 1px; fill: #b4c5d7; }
+      .model-label { fill: #e6c59b; }
+      .connector { stroke: #e6c59b; stroke-width: 2; marker-end: url(#arrow); }
+      .code { fill: #17202b; stroke: #657b92; stroke-width: 1.5; }
+      .model { fill: #241f1c; stroke: #e6c59b; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="720" height="1810" rx="20" fill="#10151c"/>
+  <rect x="40" y="38" width="32" height="3" fill="#e6c59b"/>
+  <text x="87" y="47" class="label model-label">TYPESAFE / SECURITY SCANNING</text>
+  <text x="40" y="102" class="heading">Code orchestrates.</text>
+  <text x="40" y="144" class="heading">Jev judges.</text>
+
+  <rect x="40" y="178" width="640" height="144" rx="12" class="code"/>
+  <text x="68" y="215" class="label">01 / INPUT</text>
+  <text x="68" y="260" class="heading">Repository</text>
+  <text x="68" y="298" class="body">Local checkout or cloned repository.</text>
+  <path d="M360 332 V353" class="connector"/>
+
+  <rect x="40" y="366" width="640" height="184" rx="12" class="code"/>
+  <text x="68" y="403" class="label">02 / DETERMINISTIC LOCAL CODE</text>
+  <text x="68" y="448" class="heading">CodeGraph index + selection</text>
+  <text x="68" y="489" class="body">Index locally; select and rank files.</text>
+  <text x="68" y="526" class="body">Read each selected file's text.</text>
+  <path d="M360 560 V581" class="connector"/>
+
+  <rect x="40" y="594" width="640" height="184" rx="12" class="model"/>
+  <text x="68" y="631" class="label model-label">03 / PROBABILISTIC MODEL CALL</text>
+  <text x="68" y="676" class="heading">TypeSafe relevance router</text>
+  <text x="68" y="717" class="body">Does each classifier apply to this file?</text>
+  <text x="68" y="754" class="body">Noul returns relevance probabilities.</text>
+  <path d="M360 788 V809" class="connector"/>
+
+  <rect x="40" y="822" width="640" height="164" rx="12" class="code"/>
+  <text x="68" y="859" class="label">04 / DETERMINISTIC CODE</text>
+  <text x="68" y="904" class="heading">Choose classifiers</text>
+  <text x="68" y="947" class="body">Code applies the relevance threshold.</text>
+  <path d="M360 996 V1017" class="connector"/>
+
+  <rect x="40" y="1030" width="640" height="184" rx="12" class="model"/>
+  <text x="68" y="1067" class="label model-label">05 / PROBABILISTIC MODEL CALLS</text>
+  <text x="68" y="1112" class="heading">OWASP / CWE checks via Jev</text>
+  <text x="68" y="1153" class="body">Selected classifiers ask Noul questions.</text>
+  <text x="68" y="1190" class="body">Each check uses the same file's text.</text>
+  <path d="M360 1224 V1245" class="connector"/>
+
+  <rect x="40" y="1258" width="640" height="204" rx="12" class="model"/>
+  <text x="68" y="1295" class="label model-label">06 / TYPED MODEL OUTPUT</text>
+  <text x="68" y="1340" class="heading">0-1 category probabilities</text>
+  <text x="68" y="1381" class="body">Independent probability of yes per check.</text>
+  <text x="68" y="1422" class="body">Not severity. Not overall confidence.</text>
+  <path d="M360 1472 V1493" class="connector"/>
+
+  <rect x="40" y="1506" width="640" height="184" rx="12" class="code"/>
+  <text x="68" y="1543" class="label">07 / DETERMINISTIC CODE</text>
+  <text x="68" y="1588" class="heading">Threshold + report</text>
+  <text x="68" y="1629" class="body">Filter category probabilities in code.</text>
+  <text x="68" y="1666" class="body">Combine findings into a repo report.</text>
+
+  <line x1="40" y1="1723" x2="680" y2="1723" stroke="#46515d"/>
+  <text x="40" y="1760" class="body">Simplified default routed path.</text>
+  <text x="40" y="1794" class="body">Code owns thresholds, not the model.</text>
+</svg>

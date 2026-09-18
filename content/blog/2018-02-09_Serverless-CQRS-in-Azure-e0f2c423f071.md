@@ -4,6 +4,7 @@ title: 'Serverless CQRS in Azure'
 date: 2018-02-09T15:04:10.000Z
 featuredpost: true
 featuredimage: /img/serverless.png
+featuredimagealt: "Azure serverless services connected around a central cloud."
 description: How we started our journey towards Sitecore JSS and React
 tags:
   - Azure
@@ -11,7 +12,6 @@ tags:
   - CQRS
   - LogicApps
 ---
-![serverless](/img/serverless.png)
 # Serverless CQRS in Azure
 
 Part 1: Introduction, Commands & Event sourcing

@@ -5,7 +5,8 @@ date: 2026-02-11T12:17:00.000Z
 description: >-
   A story about AI building AI tools that build AI tools that build websites. Meta-circular development through six layers of abstraction, from WhatsApp messages to production deployments.
 featuredpost: true
-featuredimage: /img/vibe-coding-architecture.png
+featuredimage: /img/editorial/vibe-coding.jpg
+featuredimagealt: "AI building AI via WhatsApp: nested message, agent, tool and website speech bubbles."
 tags:
   - AI
   - VibeCoding
