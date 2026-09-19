@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowDown, ArrowUpRight, Braces, Layers3, Workflow } from 'lucide-react'
-import { motion, useReducedMotion } from 'framer-motion'
 import PostCard from '@/components/PostCard'
 import Reveal from '@/components/Reveal'
 import type { MarkdownContent } from '@/lib/markdown'
@@ -15,7 +14,6 @@ const disciplines = [
 ]
 
 export default function HomeClient({ posts }: { posts: MarkdownContent[] }) {
-  const reducedMotion = useReducedMotion()
   const latest = posts[0]
 
   return (
@@ -38,13 +36,7 @@ export default function HomeClient({ posts }: { posts: MarkdownContent[] }) {
             <a href="#latest" className="hero-scroll"><ArrowDown size={15} /> KEEP EXPLORING</a>
           </div>
           {latest && (
-            <motion.div
-              className="hero-feature-wrap"
-              initial={false}
-              animate={{ y: 0 }}
-              whileHover={reducedMotion ? undefined : { y: -6 }}
-              transition={{ duration: 0.4 }}
-            >
+            <div className="hero-feature-wrap">
               <div className="feature-topline"><span>THE LATEST THINKING</span><span>01 / FIELD NOTES</span></div>
               <Link href={`/blog/${latest.slug}`} className="hero-feature group">
                 <div className="hero-feature-image">
@@ -54,7 +46,7 @@ export default function HomeClient({ posts }: { posts: MarkdownContent[] }) {
                       alt={latest.frontMatter.featuredimagealt || latest.frontMatter.title}
                       fill priority
                       sizes="(max-width: 900px) 100vw, 46vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+                      className="object-cover"
                     />
                   )}
                   <span className="feature-label">{latest.frontMatter.tags?.[0] || 'Engineering'} / IN FOCUS</span>
@@ -65,7 +57,7 @@ export default function HomeClient({ posts }: { posts: MarkdownContent[] }) {
                 </div>
               </Link>
               <div className="feature-bottomline"><span>IDEAS INTO IMPLEMENTATION.</span><span className="signal-bars" aria-hidden="true"><i /><i /><i /><i /><i /></span></div>
-            </motion.div>
+            </div>
           )}
         </div>
       </section>

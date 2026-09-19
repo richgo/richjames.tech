@@ -42,3 +42,7 @@ next-env.d.ts
 
 # LinkedIn cookies
 .linkedin-cookies.json
+
+# Dotfiles and dot-directories at any depth
+.*
+!.gitignore

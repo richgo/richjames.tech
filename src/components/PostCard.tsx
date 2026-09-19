@@ -19,7 +19,7 @@ export default function PostCard({ post, priority = false }: { post: BlogPost; p
               fill
               sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
               priority={priority}
-              className="object-contain transition-opacity duration-500 group-hover:opacity-90"
+              className="object-contain"
             />
           ) : (
             <div className="post-card-fallback" aria-hidden="true"><span>RJ / FIELD NOTES</span></div>

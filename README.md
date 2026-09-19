@@ -33,6 +33,14 @@ local system fonts, with no build-time font downloads. Entrance animations
 are finite, scroll reveals run once, and the site's CSS and Framer Motion
 respect `prefers-reduced-motion`.
 
+Cards, artwork, and Credly badges share lift, light-sweep, and image-detail
+hover effects, with matching focus treatments on links. Touch devices retain
+the static presentation. The About page's career timeline scrolls independently
+with a progress rail, newer/earlier controls, and native keyboard scrolling.
+Its entries are maintained in `src/app/about/AboutClient.tsx`; all listed roles
+remain available in the scroll region. Reduced-motion mode disables decorative
+movement and uses instant scrolling for the timeline controls.
+
 ## Credly badges
 
 The About page renders a static snapshot of public Credly badges, ordered by

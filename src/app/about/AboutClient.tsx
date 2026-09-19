@@ -2,6 +2,7 @@
 
 import { Github, Linkedin, Mail, Twitter } from 'lucide-react'
 import Reveal from '@/components/Reveal'
+import CareerTimeline from '@/components/CareerTimeline'
 import Image from 'next/image'
 import credly from '@/data/credly-badges.json'
 
@@ -76,19 +77,7 @@ export default function AboutClient() {
 
       <section className="site-container about-body">
         <Reveal>
-          <div>
-            <h2>Experience</h2>
-            <div className="timeline">
-              {experience.map(item => (
-                <div className="timeline-item" key={item.title}>
-                  <p className="timeline-year">{item.year}</p>
-                  <h3>{item.title}</h3>
-                  <p className="timeline-company">{item.company}</p>
-                  <p>{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <CareerTimeline entries={experience} />
         </Reveal>
 
         <Reveal delay={0.1}>
@@ -123,20 +112,22 @@ export default function AboutClient() {
             </a>
           </div>
           <ul className="certification-grid">
-            {credly.badges.map(badge => (
+            {credly.badges.map((badge, index) => (
               <li key={badge.id}>
-                <a className="certification-card" href={badge.url} target="_blank" rel="noopener noreferrer">
-                  <div className="certification-logo">
-                    <Image src={badge.image} alt="" width={160} height={160} />
-                  </div>
-                  <p className="eyebrow">{badge.issuer}</p>
-                  <h3>{badge.name}</h3>
-                  <p className="certification-date">Issued <time dateTime={badge.issued}>{badge.issued}</time></p>
-                  {badge.expires && (
-                    <p className="certification-date">Expiry <time dateTime={badge.expires}>{badge.expires}</time></p>
-                  )}
-                  <span className="certification-verify">Verify on Credly ↗</span>
-                </a>
+                <Reveal delay={(index % 4) * 0.07}>
+                  <a className="certification-card" href={badge.url} target="_blank" rel="noopener noreferrer">
+                    <div className="certification-logo">
+                      <Image src={badge.image} alt="" width={160} height={160} />
+                    </div>
+                    <p className="eyebrow">{badge.issuer}</p>
+                    <h3>{badge.name}</h3>
+                    <p className="certification-date">Issued <time dateTime={badge.issued}>{badge.issued}</time></p>
+                    {badge.expires && (
+                      <p className="certification-date">Expiry <time dateTime={badge.expires}>{badge.expires}</time></p>
+                    )}
+                    <span className="certification-verify">Verify on Credly ↗</span>
+                  </a>
+                </Reveal>
               </li>
             ))}
           </ul>
