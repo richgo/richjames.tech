@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="2180" viewBox="0 0 960 2180" role="img" aria-labelledby="title description">
+  <title id="title">TypeSafe security review: from code to a decision</title>
+  <desc id="description">Repository inputs are indexed locally with CodeGraph or a file-walk fallback. Single files, text and stdin go straight to the coordinator. TypeSafe routes relevant classifiers, produces independent category probabilities, and code buckets findings into Pass, Review or Failed. Optional coding-agent review reads flagged files and returns strict JSON verdicts. Errors remain Review. The final report hides Pass findings from the table but repository JSON retains them.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1">
+      <stop stop-color="#1e2c38"/><stop offset="1" stop-color="#0c121b"/>
+    </linearGradient>
+    <linearGradient id="gold" x2="1" y2="1">
+      <stop stop-color="#3b3228"/><stop offset="1" stop-color="#22252a"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#c3d3e2" stroke-opacity=".035"/>
+    </pattern>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0 0L6 3L0 6" fill="none" stroke="#879aaa" stroke-width="1.4"/>
+    </marker>
+    <style>
+      text { font-family: "DejaVu Sans", sans-serif; fill: #f3f0e7; }
+      .eyebrow { font-size: 15px; letter-spacing: 3px; fill: #e6c59b; }
+      .heading { font-size: 26px; font-weight: 600; }
+      .body { font-size: 20px; fill: #bcc9d6; }
+      .small { font-size: 17px; fill: #bcc9d6; }
+      .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 17px; fill: #a8c3d9; }
+      .node { fill: #1b2835; stroke: #496073; stroke-width: 1.5; }
+      .model { fill: url(#gold); stroke: #c6a576; stroke-width: 1.5; }
+      .line { fill: none; stroke: #879aaa; stroke-width: 2; marker-end: url(#arrow); }
+      .optional { fill: none; stroke: #b9a4dc; stroke-width: 2; stroke-dasharray: 6 6; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="960" height="2180" rx="24" fill="url(#background)"/>
+  <rect width="960" height="2180" rx="24" fill="url(#grid)"/>
+  <path d="M48 48H112" stroke="#e6c59b" stroke-width="4"/>
+  <text x="48" y="88" class="eyebrow">TYPESAFE / SECURITY REVIEW</text>
+  <text x="48" y="139" font-size="38" font-weight="600">From code to a decision.</text>
+  <text x="48" y="177" class="body">Deterministic plumbing. Narrow AI judgements.</text>
+  <rect x="48" y="207" width="12" height="12" rx="3" fill="#7392ac"/>
+  <text x="70" y="220" class="small">Code-owned</text>
+  <rect x="252" y="207" width="12" height="12" rx="3" fill="#e6c59b"/>
+  <text x="274" y="220" class="small">TypeSafe model</text>
+  <rect x="504" y="207" width="12" height="12" rx="3" fill="#b9a4dc"/>
+  <text x="526" y="220" class="small">Optional coding agent</text>
+
+  <rect x="48" y="264" width="408" height="92" rx="14" class="node"/>
+  <text x="72" y="302" class="heading">Repository</text>
+  <text x="72" y="331" class="mono">local path / --repo-url</text>
+  <rect x="504" y="264" width="408" height="92" rx="14" class="node"/>
+  <text x="528" y="302" class="heading">Single input</text>
+  <text x="528" y="331" class="mono">file / text / stdin</text>
+  <path d="M252 356V389" class="line"/>
+  <rect x="48" y="393" width="408" height="139" rx="14" class="node"/>
+  <text x="72" y="432" class="heading">Discover executable code</text>
+  <text x="72" y="465" class="body">Local CodeGraph index</text>
+  <text x="72" y="498" class="small">Auto-install; file-walk fallback</text>
+  <path d="M252 532V551H480V578" class="line"/>
+  <path d="M708 356V551H480" fill="none" stroke="#879aaa" stroke-width="2"/>
+  <rect x="144" y="582" width="672" height="101" rx="14" class="node"/>
+  <text x="172" y="621" class="heading">01 / Coordinate each file</text>
+  <text x="172" y="654" class="mono">run_all_classifiers.py</text>
+  <path d="M480 683V717" class="line"/>
+  <rect x="144" y="721" width="672" height="134" rx="14" class="model"/>
+  <text x="172" y="762" class="heading">02 / Route for relevance</text>
+  <text x="172" y="795" class="body">One Noul per classifier: does this apply?</text>
+  <text x="172" y="827" class="small">Code selects relevant checks; --no-route runs all</text>
+  <path d="M480 855V889" class="line"/>
+  <rect x="144" y="893" width="672" height="134" rx="14" class="model"/>
+  <text x="172" y="934" class="heading">03 / Run selected classifiers</text>
+  <text x="172" y="967" class="body">131 available checks grounded in OWASP + CWE</text>
+  <text x="172" y="999" class="small">Concurrent calls; independent 0-1 category probabilities</text>
+  <path d="M480 1027V1061" class="line"/>
+  <rect x="144" y="1065" width="672" height="101" rx="14" class="node"/>
+  <text x="172" y="1104" class="heading">04 / Apply confidence bands</text>
+  <text x="172" y="1137" class="body">Code owns the thresholds, not the model.</text>
+  <path d="M480 1166V1188H188V1216M480 1188V1216M480 1188H772V1216" class="line"/>
+
+  <rect x="48" y="1220" width="280" height="143" rx="14" fill="#192e2b" stroke="#75aa95"/>
+  <text x="72" y="1262" class="heading" style="fill:#acdac6">Pass</text>
+  <text x="72" y="1296" class="body">p &lt; 0.40</text>
+  <text x="72" y="1330" class="small">Hidden from table</text>
+  <rect x="340" y="1220" width="280" height="143" rx="14" fill="#302b23" stroke="#c6a576"/>
+  <text x="364" y="1262" class="heading" style="fill:#e6c59b">Review</text>
+  <text x="364" y="1296" class="body">0.40 &#8804; p &#8804; 0.65</text>
+  <text x="364" y="1330" class="small">Shown; may escalate</text>
+  <rect x="632" y="1220" width="280" height="143" rx="14" fill="#34262c" stroke="#bc8190"/>
+  <text x="656" y="1262" class="heading" style="fill:#edb2bb">Failed</text>
+  <text x="656" y="1296" class="body">p &gt; 0.65</text>
+  <text x="656" y="1330" class="small">Shown in table</text>
+
+  <path d="M480 1363V1442" class="optional"/>
+  <text x="502" y="1407" class="mono" style="fill:#cfbce9">--llm-review only</text>
+  <rect x="112" y="1446" width="736" height="337" rx="16" fill="#242333" stroke="#9c85bd" stroke-width="1.5"/>
+  <text x="140" y="1487" class="eyebrow" style="fill:#cfbce9">05 / OPTIONAL SECOND OPINION</text>
+  <text x="140" y="1529" class="heading">Let a coding agent investigate.</text>
+  <text x="140" y="1570" class="body">1. Send file paths + finding metadata over stdin.</text>
+  <text x="140" y="1606" class="body">2. Copilot / Claude / Codex reads the flagged files.</text>
+  <text x="140" y="1642" class="body">3. Parse a strict fenced JSON verdict array.</text>
+  <path d="M140 1664H820" stroke="#9c85bd" stroke-opacity=".35"/>
+  <text x="140" y="1696" class="small">pass verdict → Pass     /     fail verdict → Failed</text>
+  <text x="140" y="1726" class="small">CLI error or unparseable output → remains Review</text>
+  <text x="140" y="1756" class="small">Off by default. Agent has repository tools and file access.</text>
+
+  <path d="M188 1363V1404H72V1830H480" fill="none" stroke="#879aaa" stroke-width="2"/>
+  <path d="M772 1363V1404H888V1830H480" fill="none" stroke="#879aaa" stroke-width="2"/>
+  <path d="M480 1783V1862" class="line"/>
+  <rect x="112" y="1866" width="736" height="139" rx="14" class="node"/>
+  <text x="140" y="1908" class="heading">06 / Report, without losing the evidence</text>
+  <text x="140" y="1945" class="body">Printed table: Review + Failed findings</text>
+  <text x="140" y="1977" class="body">Repository --json: includes Pass findings too</text>
+  <text x="48" y="2056" class="small">Without --llm-review, Review findings go straight to the report.</text>
+  <text x="48" y="2086" class="small">Defaults shown; thresholds are configurable. Probabilities are not severity.</text>
+  <path d="M48 2110H912" stroke="#496073"/>
+  <text x="48" y="2146" class="mono">open-sdlc/typesafe-security-review</text>
+  <text x="912" y="2146" text-anchor="end" class="small">RICHJAMES.TECH / 19 SEP 2026</text>
+</svg>
