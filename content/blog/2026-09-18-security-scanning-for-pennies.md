@@ -22,7 +22,7 @@ Application security tooling seems to have settled into two camps. Both are usef
 
 On one side: conventional scanners — SAST, DAST, SCA — that can be fast, reproducible, and dirt cheap to *run*, but vary in how much context they capture. On the other: pointing a frontier reasoning model at your codebase and asking it to "review this for security issues" — which can reason about intent, but costs real money per file and produces an answer that's harder to audit or reproduce.
 
-I spent the last few weeks building [`typesafe-security-review`](https://github.com/open-sdlc/typesafe-security-review), a scanner built on [TypeSafe](https://typesafe.ai)'s System One models, [CodeGraph](https://github.com/colbymchenry/codegraph), and the OWASP Cheat Sheet Series + CWE definitions. Here's why the architecture landed where it did.
+I spent the last few hours building [`typesafe-security-review`](https://github.com/open-sdlc/typesafe-security-review), a scanner built on [TypeSafe](https://typesafe.ai)'s System One models, [CodeGraph](https://github.com/colbymchenry/codegraph), and the OWASP Cheat Sheet Series + CWE definitions. Here's why the architecture landed where it did.
 
 ## The Left: Deterministic Tools
 
@@ -38,7 +38,7 @@ The obvious counter-move, once agentic coding tools got good, was to skip rules 
 
 This actually works, in the sense that a strong reasoning model *can* catch things a regex never could — a business-logic race condition, an authorisation check that's technically present but checks the wrong field, a prompt injection vector that only exists because of how two features interact. That's useful reasoning about context, not just pattern matching.
 
-But you're paying full reasoning-model rates — extended thinking, large context windows, free-form output — for every file, every PR, every run. It's slow enough that "scan on every commit" becomes a budget conversation. And the output is prose: two runs on the identical diff can disagree, there's no calibrated confidence to threshold on, and "why did it flag this" means re-reading a paragraph of reasoning rather than pointing at a rule ID.
+But you're paying full reasoning-model rates — extended thinking, large context windows, free-form output — for every file, every PR, every run. It's slow enough that "scan on every commit" becomes a budget conversation. And the output is prose: two runs on the identical diff can disagree, there's no calibrated confidence to threshold on, and "why did it flag this" means re-reading a paragraph of reasoning rather than pointing at a rule ID. You can tame this process with skills and subagents, as I tried to demonstrate with security review that maps to OWASP cheatsheats in the [Skills Bank Security plugin](https://github.com/open-sdlc/skills-bank/tree/main/plugins/skills-bank-security). Whilst this approach works, it often costs north of $10 per full repository scan.
 
 Neither side is daft. They're just optimised for different trade-offs: repeatable checks on one side, broader reasoning on the other. I wanted something in between, preferably without another procurement meeting.
 

@@ -1,24 +1,5 @@
-<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="hexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Hexagon shape -->
-  <path d="M8 32 L20 10 L44 10 L56 32 L44 54 L20 54 Z" 
-        stroke="url(#hexGradient)" 
-        stroke-width="3" 
-        fill="none"
-        stroke-linejoin="miter"/>
-  
-  <!-- RJ initials -->
-  <text x="32" y="42" 
-        font-family="system-ui, -apple-system, sans-serif" 
-        font-size="24" 
-        font-weight="700" 
-        fill="url(#hexGradient)" 
-        text-anchor="middle">RJ</text>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="12" fill="#10151c"/>
+  <path d="M13 46V18H23C29 18 33 21 33 27C33 31 31 34 27 35L35 46H28L21 36H19V46H13ZM19 24V30H23C26 30 27 29 27 27C27 25 26 24 23 24H19Z" fill="#f3f0e7"/>
+  <path d="M39 18H51V36C51 43 47 47 41 47C38 47 36 46 34 44L38 39C39 40 40 41 41 41C44 41 45 39 45 36V24H39V18Z" fill="#e6c59b"/>
 </svg>
