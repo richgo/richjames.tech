@@ -33,6 +33,16 @@ local system fonts, with no build-time font downloads. Entrance animations
 are finite, scroll reveals run once, and the site's CSS and Framer Motion
 respect `prefers-reduced-motion`.
 
+## Credly badges
+
+The About page renders a static snapshot of public Credly badges, ordered by
+issue date (newest first), with local logos and links to credential verification.
+Expiry dates are shown where provided, including for historical credentials.
+
+To refresh the snapshot and logos, run `node scripts/import-credly.mjs`, then
+commit `src/data/credly-badges.json` and `public/img/credly/` with the site.
+Normal builds and page views do not require a Credly connection or login.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

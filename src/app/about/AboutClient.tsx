@@ -2,6 +2,8 @@
 
 import { Github, Linkedin, Mail, Twitter } from 'lucide-react'
 import Reveal from '@/components/Reveal'
+import Image from 'next/image'
+import credly from '@/data/credly-badges.json'
 
 const experience = [
   {
@@ -106,6 +108,38 @@ export default function AboutClient() {
               </ul>
             </div>
           </div>
+        </Reveal>
+      </section>
+
+      <section className="site-container certifications" aria-labelledby="certifications-heading">
+        <Reveal>
+          <div className="certifications-heading">
+            <div>
+              <p className="eyebrow">CONTINUOUS LEARNING</p>
+              <h2 id="certifications-heading">Certifications &amp; badges</h2>
+            </div>
+            <a className="button-text" href={credly.profile} target="_blank" rel="noopener noreferrer">
+              View Credly profile ↗
+            </a>
+          </div>
+          <ul className="certification-grid">
+            {credly.badges.map(badge => (
+              <li key={badge.id}>
+                <a className="certification-card" href={badge.url} target="_blank" rel="noopener noreferrer">
+                  <div className="certification-logo">
+                    <Image src={badge.image} alt="" width={160} height={160} />
+                  </div>
+                  <p className="eyebrow">{badge.issuer}</p>
+                  <h3>{badge.name}</h3>
+                  <p className="certification-date">Issued <time dateTime={badge.issued}>{badge.issued}</time></p>
+                  {badge.expires && (
+                    <p className="certification-date">Expiry <time dateTime={badge.expires}>{badge.expires}</time></p>
+                  )}
+                  <span className="certification-verify">Verify on Credly ↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </Reveal>
       </section>
 

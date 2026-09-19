@@ -1,0 +1,122 @@
+{
+  "profile": "https://www.credly.com/users/richard-gobbett/badges",
+  "badges": [
+    {
+      "id": "df4423bc-6eb1-47d7-81cd-5f489e5cda97",
+      "name": "Professional Cloud Architect Certification",
+      "issuer": "Google Cloud",
+      "issued": "2026-01-16",
+      "expires": "2028-01-16",
+      "image": "/img/credly/df4423bc-6eb1-47d7-81cd-5f489e5cda97.png",
+      "url": "https://www.credly.com/badges/df4423bc-6eb1-47d7-81cd-5f489e5cda97/public_url"
+    },
+    {
+      "id": "6b5fdf6c-b409-42ef-a96e-c14566b98577",
+      "name": "Generative AI Leader Certification",
+      "issuer": "Google Cloud",
+      "issued": "2026-01-02",
+      "expires": "2029-01-02",
+      "image": "/img/credly/6b5fdf6c-b409-42ef-a96e-c14566b98577.png",
+      "url": "https://www.credly.com/badges/6b5fdf6c-b409-42ef-a96e-c14566b98577/public_url"
+    },
+    {
+      "id": "92262a1d-74e5-4434-aa78-d376fd349384",
+      "name": "Microsoft Certified: Azure Administrator Associate",
+      "issuer": "Microsoft",
+      "issued": "2022-06-10",
+      "expires": "2023-06-10",
+      "image": "/img/credly/92262a1d-74e5-4434-aa78-d376fd349384.png",
+      "url": "https://www.credly.com/badges/92262a1d-74e5-4434-aa78-d376fd349384/public_url"
+    },
+    {
+      "id": "550af612-fe73-45ca-bc54-53bd34010ca6",
+      "name": "Microsoft Certified: Azure AI Engineer Associate",
+      "issuer": "Microsoft",
+      "issued": "2022-05-31",
+      "expires": "2024-05-31",
+      "image": "/img/credly/550af612-fe73-45ca-bc54-53bd34010ca6.png",
+      "url": "https://www.credly.com/badges/550af612-fe73-45ca-bc54-53bd34010ca6/public_url"
+    },
+    {
+      "id": "90cb36d2-2730-4ab9-bfc2-5ea705bb6c8f",
+      "name": "Exam 486: Developing ASP.NET MVC Web Applications",
+      "issuer": "Microsoft",
+      "issued": "2017-12-13",
+      "expires": null,
+      "image": "/img/credly/90cb36d2-2730-4ab9-bfc2-5ea705bb6c8f.png",
+      "url": "https://www.credly.com/badges/90cb36d2-2730-4ab9-bfc2-5ea705bb6c8f/public_url"
+    },
+    {
+      "id": "dff8720c-ac82-4bd5-a4c9-468501dda111",
+      "name": "MCSA: Web Applications - Certified 2017",
+      "issuer": "Microsoft",
+      "issued": "2017-12-13",
+      "expires": null,
+      "image": "/img/credly/dff8720c-ac82-4bd5-a4c9-468501dda111.png",
+      "url": "https://www.credly.com/badges/dff8720c-ac82-4bd5-a4c9-468501dda111/public_url"
+    },
+    {
+      "id": "1139e997-3adc-4ec4-95f2-f4cd22a6455c",
+      "name": "MCSD: App Builder — Certified 2017",
+      "issuer": "Microsoft",
+      "issued": "2017-12-13",
+      "expires": null,
+      "image": "/img/credly/1139e997-3adc-4ec4-95f2-f4cd22a6455c.png",
+      "url": "https://www.credly.com/badges/1139e997-3adc-4ec4-95f2-f4cd22a6455c/public_url"
+    },
+    {
+      "id": "390a6365-2ab8-4b87-bcdb-cf1b455f2325",
+      "name": "Exam 483: Programming in C#",
+      "issuer": "Microsoft",
+      "issued": "2017-11-29",
+      "expires": null,
+      "image": "/img/credly/390a6365-2ab8-4b87-bcdb-cf1b455f2325.png",
+      "url": "https://www.credly.com/badges/390a6365-2ab8-4b87-bcdb-cf1b455f2325/public_url"
+    },
+    {
+      "id": "45ac8c45-0112-4f23-8e55-15164fc5c849",
+      "name": "Exam 534: Architecting Microsoft Azure Solutions",
+      "issuer": "Microsoft",
+      "issued": "2017-05-24",
+      "expires": null,
+      "image": "/img/credly/45ac8c45-0112-4f23-8e55-15164fc5c849.png",
+      "url": "https://www.credly.com/badges/45ac8c45-0112-4f23-8e55-15164fc5c849/public_url"
+    },
+    {
+      "id": "356ad02f-9339-4915-b937-d939109e24f3",
+      "name": "MCSE: Cloud Platform and Infrastructure — Certified 2017",
+      "issuer": "Microsoft",
+      "issued": "2017-05-24",
+      "expires": null,
+      "image": "/img/credly/356ad02f-9339-4915-b937-d939109e24f3.png",
+      "url": "https://www.credly.com/badges/356ad02f-9339-4915-b937-d939109e24f3/public_url"
+    },
+    {
+      "id": "66e5b767-1fb4-4f84-a56f-e7b66fe931f3",
+      "name": "Exam 532: Developing Microsoft Azure Solutions",
+      "issuer": "Microsoft",
+      "issued": "2017-04-25",
+      "expires": null,
+      "image": "/img/credly/66e5b767-1fb4-4f84-a56f-e7b66fe931f3.png",
+      "url": "https://www.credly.com/badges/66e5b767-1fb4-4f84-a56f-e7b66fe931f3/public_url"
+    },
+    {
+      "id": "a14427a8-932e-4780-9f2f-6782ce12d11d",
+      "name": "MCSA: Cloud Platform - Certified 2017",
+      "issuer": "Microsoft",
+      "issued": "2017-04-25",
+      "expires": null,
+      "image": "/img/credly/a14427a8-932e-4780-9f2f-6782ce12d11d.png",
+      "url": "https://www.credly.com/badges/a14427a8-932e-4780-9f2f-6782ce12d11d/public_url"
+    },
+    {
+      "id": "f15e301b-edee-4de8-b520-84079c9ca151",
+      "name": "Exam 533: Implementing Microsoft Azure Infrastructure Solutions",
+      "issuer": "Microsoft",
+      "issued": "2017-04-07",
+      "expires": null,
+      "image": "/img/credly/f15e301b-edee-4de8-b520-84079c9ca151.png",
+      "url": "https://www.credly.com/badges/f15e301b-edee-4de8-b520-84079c9ca151/public_url"
+    }
+  ]
+}
