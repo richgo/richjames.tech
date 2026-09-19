@@ -6,7 +6,7 @@ title: About me
 
 A highly experienced technology & AI leader with in-depth software development and architectural knowledge. 25 yrs experience developing and delivering enterprise, AI, web, desktop, mobile and serverless applications. Experience leading multiple (35) cross-functional teams. A problem solver with an entrepreneurial mindset.
 
-- 15 years technical leadership and management experience across full lifecycle software development.
+- 20 years technical leadership and management experience across full lifecycle software development.
   
 - Adept at recruiting, mentoring, coaching, creating a culture of learning.
   
@@ -14,6 +14,6 @@ A highly experienced technology & AI leader with in-depth software development a
   
 - Driven multiple complex DevOps & cloud transformations in the largest UK banks.
 
-- Expert generalist, with numerous proffesional GCP & Azure certs.
+- Expert generalist, with numerous professional GCP & Azure certs.
 
 Find me on linkedIn at the link below.

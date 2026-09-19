@@ -43,7 +43,7 @@ const skills = [
 ]
 
 const achievements = [
-  '10 years technical leadership and management experience',
+  '20 years technical leadership and management experience',
   'Adept at recruiting, mentoring, coaching, creating a culture of learning',
   'Strong experience in consulting, strategic planning, portfolio design',
   'Driven complex DevOps initiatives and ran multiple SCRUM/Kanban teams',
