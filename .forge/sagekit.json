@@ -1,0 +1,31 @@
+{
+  "inputs": [
+    "architecture/site.calm.json",
+    "architecture/README.md",
+    ".forge/verify-change",
+    "test/github-activity.test.mjs",
+    "test/browser/site.spec.mjs"
+  ],
+  "gates": {
+    "requirements": {
+      "mode": "required",
+      "query": "GitHub activity approved request product requirements"
+    },
+    "release": {
+      "mode": "required",
+      "query": "GitHub activity acceptance browser link security and independent verification",
+      "decision": {
+        "kind": "choice",
+        "instructions": "Recommend the next step for the verified GitHub activity change. Base the advice on the independently checked receipt and approved GitHub activity constraints. Send the change to human review or request more evidence. This advice does not authorize a production deployment.",
+        "state": {
+          "independent_replay": "passed",
+          "release_authority": "human"
+        },
+        "criteria": {
+          "review": "Send the independently verified change for human review.",
+          "more-evidence": "Ask for additional evidence before requesting human review."
+        }
+      }
+    }
+  }
+}
