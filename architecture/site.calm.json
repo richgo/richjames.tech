@@ -1,0 +1,88 @@
+{
+  "$schema": "https://calm.finos.org/release/1.2/meta/calm.json",
+  "nodes": [
+    {
+      "unique-id": "browser",
+      "node-type": "actor",
+      "name": "Website visitor"
+    },
+    {
+      "unique-id": "next-web",
+      "node-type": "service",
+      "name": "Next.js 16 website",
+      "description": "React 19 app router with server and client components"
+    },
+    {
+      "unique-id": "markdown-content",
+      "node-type": "database",
+      "name": "Versioned Markdown articles",
+      "description": "content/blog read by src/lib/markdown.ts"
+    },
+    {
+      "unique-id": "github-api",
+      "node-type": "system",
+      "name": "GitHub public events API",
+      "description": "External unauthenticated activity feed; may rate limit"
+    },
+    {
+      "unique-id": "azure-static-web-apps",
+      "node-type": "system",
+      "name": "Azure Static Web Apps",
+      "description": "GitHub Actions deployment configuration"
+    }
+  ],
+  "relationships": [
+    {
+      "unique-id": "visitor-site",
+      "relationship-type": {
+        "connects": {
+          "source": {
+            "node": "browser"
+          },
+          "destination": {
+            "node": "next-web"
+          }
+        }
+      }
+    },
+    {
+      "unique-id": "site-content",
+      "relationship-type": {
+        "connects": {
+          "source": {
+            "node": "next-web"
+          },
+          "destination": {
+            "node": "markdown-content"
+          }
+        }
+      }
+    },
+    {
+      "unique-id": "site-github",
+      "relationship-type": {
+        "connects": {
+          "source": {
+            "node": "next-web"
+          },
+          "destination": {
+            "node": "github-api"
+          }
+        }
+      }
+    },
+    {
+      "unique-id": "deploy-site",
+      "relationship-type": {
+        "connects": {
+          "source": {
+            "node": "azure-static-web-apps"
+          },
+          "destination": {
+            "node": "next-web"
+          }
+        }
+      }
+    }
+  ]
+}
