@@ -46,3 +46,12 @@ next-env.d.ts
 # Dotfiles and dot-directories at any depth
 .*
 !.gitignore
+
+# Playwright evidence is generated locally.
+/test-results/
+
+# APMX stages a plain tree and honors .gitignore.
+!.forge/
+!.forge/verify-change
+!.forge/sagekit.json
+!.forge/seed-sagekit.py
