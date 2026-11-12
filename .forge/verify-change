@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+patch="${1:?Provide an unapplied candidate patch}"
+shift
+if [[ "$(printf '%s\n' "$@" | LC_ALL=C sort)" != $'activity.fallback\nactivity.links\nactivity.render\nsite.qualification' ]]; then
+  echo "Expected the four approved STORY-005 check IDs" >&2
+  exit 2
+fi
+[[ -f "$patch" && -s "$patch" && ! -L "$patch" ]] || exit 2
+patch="$(realpath "$patch")"
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$root"
+
+git apply --check -- "$patch"
+records="$(mktemp)"
+candidate="$(mktemp -d)"
+trap 'rm -f -- "$records"; rm -rf -- "$candidate"' EXIT
+git apply --numstat -z -- "$patch" > "$records"
+while IFS= read -r -d '' record; do
+  path="${record#*$'\t'}"
+  path="${path#*$'\t'}"
+  case "$path" in
+    src/app/HomeClient.tsx|src/components/GitHubActivity.tsx|src/lib/github-activity.ts|src/app/globals.css) ;;
+    *) echo "Candidate changed protected path: $path" >&2; exit 1 ;;
+  esac
+done < "$records"
+
+cp -R architecture content public src test ./*.config.mjs package.json package-lock.json tsconfig.json "$candidate/"
+# The hosted workflow checks out the exact base before making the plain APMX
+# tree. Restore the tracked Next.js routes that the native exporter cannot scan.
+route_files=(
+  'src/app/blog/[slug]/BlogPostClient.tsx'
+  'src/app/blog/[slug]/page.tsx'
+  'src/app/tags/[tag]/TagPageClient.tsx'
+  'src/app/tags/[tag]/page.tsx'
+)
+missing_routes=()
+for route in "${route_files[@]}"; do
+  [[ -f "$candidate/$route" ]] || missing_routes+=("$route")
+done
+if (( ${#missing_routes[@]} )); then
+  checkout="${GITHUB_WORKSPACE:?Missing the hosted source checkout}/caller"
+  revision="${APMX_BASE_COMMIT:?Missing the approved APMX base commit}"
+  [[ "$revision" =~ ^[0-9a-f]{40}$ && "$(git -C "$checkout" rev-parse HEAD)" == "$revision" ]] || exit 1
+  git -C "$checkout" archive "$revision" -- "${missing_routes[@]}" | tar -x -C "$candidate"
+  printf 'Restored %s protected Next.js route files from %s\n' "${#missing_routes[@]}" "$revision"
+fi
+cd "$candidate"
+git apply -- "$patch"
+for path in src/app/HomeClient.tsx src/components/GitHubActivity.tsx src/lib/github-activity.ts src/app/globals.css; do
+  [[ -f "$path" && ! -L "$path" ]] || exit 1
+done
+unset COPILOT_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
+npm ci --ignore-scripts --no-audit --no-fund
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npx --yes --package @finos/calm-cli@1.68.0 calm validate -a architecture/site.calm.json --format json --strict
+npx playwright install chromium
+npx playwright test

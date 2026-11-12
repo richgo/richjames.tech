@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowDown, ArrowUpRight, Braces, Layers3, Workflow } from 'lucide-react'
+import GitHubActivity from '@/components/GitHubActivity'
 import PostCard from '@/components/PostCard'
 import Reveal from '@/components/Reveal'
 import type { MarkdownContent } from '@/lib/markdown'
@@ -90,6 +91,8 @@ export default function HomeClient({ posts }: { posts: MarkdownContent[] }) {
           ))}
         </div>
       </section>
+
+      <GitHubActivity />
 
       <section className="site-container">
         <Reveal>

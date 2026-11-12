@@ -46,3 +46,20 @@ next-env.d.ts
 # Dotfiles and dot-directories at any depth
 .*
 !.gitignore
+
+# Playwright evidence is generated locally.
+/test-results/
+
+# APMX stages a plain tree and honors .gitignore.
+!.forge/
+!.forge/verify-change
+!.forge/sagekit.json
+!.forge/seed-sagekit.py
+!.forge/probe-sagekit.py
+
+# APMX 0.8.0 rejects bracketed paths when exporting its plain-tree capture.
+# These files stay tracked. The checker restores them from the exact run commit.
+/src/app/blog/\[slug\]/BlogPostClient.tsx
+/src/app/blog/\[slug\]/page.tsx
+/src/app/tags/\[tag\]/TagPageClient.tsx
+/src/app/tags/\[tag\]/page.tsx
