@@ -25,6 +25,8 @@ test('AC-007 rejects unsafe repository names and untrusted repository URLs', () 
     event(2, 'richgo/..'),
     event(3, 'richgo/forge-kit', 'https://evil.test/richgo/forge-kit'),
     event(4, 'richgo/forge-kit', 'https://api.github.com/repos/richgo/other'),
+    event(5, 'richgo/forge-kit', 'https://api.github.com:9443/repos/richgo/forge-kit'),
+    event(6, 'richgo/forge-kit', 'https://user@api.github.com/repos/richgo/forge-kit'),
   ]), [])
 })
 

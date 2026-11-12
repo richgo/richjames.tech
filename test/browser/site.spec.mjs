@@ -26,11 +26,17 @@ test('AC-002 and AC-003 archive and topic routes', async ({ page }) => {
   await page.goto('/tags')
   const topic = await page.locator('main a[href^="/tags/"]').first().getAttribute('href')
   expect((await page.goto(topic)).ok()).toBe(true)
-  await expect(page.locator('main a[href^="/blog/"]').first()).toBeVisible()
+  const posts = page.locator('.topic-post')
+  await expect(posts.first().getByRole('article')).toBeVisible()
+  for (const post of await posts.all()) {
+    await expect(post.locator('a[aria-current="page"]')).toHaveAttribute('href', topic)
+  }
 })
 
 test('AC-004 profile credentials and contact links', async ({ page }) => {
   await page.goto('/about')
+  await expect(page.getByRole('heading', { name: 'Career timeline' })).toBeVisible()
+  await expect(page.locator('.timeline-item').first()).toBeAttached()
   await expect(page.locator('main a[href*="credly.com"]').first()).toBeVisible()
   await page.goto('/contact')
   await expect(page.locator('main a[href="mailto:contact@richjames.tech"]')).toBeVisible()
@@ -47,6 +53,8 @@ test('AC-005 renders the first four supported events from the browser request', 
   for (let i = 0; i < 4; i++) {
     const entry = panel.getByRole('listitem').nth(i)
     await expect(entry).toContainText('richgo/project-' + i)
+    await expect(entry).toContainText(/push/i)
+    await expect(entry).not.toContainText(/0 commits?/i)
     await expect(entry.getByRole('link')).toHaveAttribute('href', 'https://github.com/richgo/project-' + i)
   }
 })
@@ -67,3 +75,11 @@ for (const [name, reply] of [
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   })
 }
+
+test('AC-006 falls back when the request stalls', async ({ page }) => {
+  await page.route(endpoint, () => {})
+  await page.goto('/')
+  const panel = page.getByRole('region', { name: 'GitHub activity' })
+  await expect(panel.getByRole('status')).toContainText(/unavailable|could not|couldn.t/i, { timeout: 8000 })
+  await expect(panel.locator(`a[href="${profile}"]`)).toBeVisible()
+})
