@@ -28,3 +28,19 @@ delivery. The PR's independent browser suite also covers AC-001 through AC-004.
 The live public site returned HTTP 200 from Netlify during source inventory.
 Azure's legacy preview workflows failed before deployment. A verified
 delivery still needs an authorized Netlify release and a live observation.
+
+
+## Hosted qualification on 12 November 2026
+
+The SageKit requirements gate and live TypeSafe provider probe passed in
+[the hosted retry](https://github.com/richgo/richjames.tech/actions/runs/43273964054).
+SageKit recorded `fallback-required` from Jev 1.13.0 using the pinned corpus.
+Copilot rejected planning with the monthly quota error in both the
+[default-model run](https://github.com/richgo/richjames.tech/actions/runs/43273399981)
+and the retry with GPT-5.3-Codex. The independent APMX replay, APMX signing
+and SageKit release gate require a successful Copilot producer receipt.
+
+The PR carries a locally repaired website patch based on its original draft.
+The independent website CI attestation covers the website acceptance
+evidence for the checked commit. The native APMX qualification can be
+retried from `forgekit-brownfield-proof-5` when Copilot quota is available.
