@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+patch="${1:?Provide an unapplied candidate patch}"
+[[ -f "$patch" && -s "$patch" && ! -L "$patch" ]] || exit 2
+patch="$(realpath "$patch")"
+root="$(git rev-parse --show-toplevel)"
+cd "$root"
+git apply --check -- "$patch"
+while IFS= read -r path; do
+  case "$path" in
+    src/app/HomeClient.tsx|src/components/GitHubActivity.tsx|src/lib/github-activity.ts|src/app/globals.css) ;;
+    *) echo "Candidate changed protected path: $path" >&2; exit 1 ;;
+  esac
+done < <(git apply --name-only -- "$patch")
+candidate="$(mktemp -d)"
+trap 'rm -rf -- "$candidate"' EXIT
+git archive HEAD | tar -x -C "$candidate"
+cd "$candidate"
+git apply -- "$patch"
+npm ci --ignore-scripts --no-audit --no-fund
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npx --yes --package @finos/calm-cli@1.68.0 calm validate -a architecture/site.calm.json --format json
