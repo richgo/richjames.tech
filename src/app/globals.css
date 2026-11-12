@@ -524,3 +524,10 @@ body {
     margin: 0 0 1em;
   }
 }
+
+/* Public GitHub activity: responsive, accessible, consistent with site cards. */
+.github-activity-list { list-style: none; padding: 0; margin: 1.5rem 0 4rem; display: grid; gap: .75rem; }
+.github-activity-list li { display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(150,160,175,.28); border-radius: .75rem; padding: 1rem 1.25rem; }
+.github-activity-list li span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.github-activity-list li a { display: inline-flex; padding: .5rem; color: inherit; border-radius: .35rem; }
+.github-activity-list li a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
