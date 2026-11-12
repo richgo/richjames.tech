@@ -1,0 +1,20 @@
+name: ForgeKit brownfield APMX change
+on:
+  workflow_dispatch:
+permissions: {}
+jobs:
+  change:
+    uses: richgo/forge-kit/.github/workflows/apmx-factory.yml@3ac67083c7862323d8d6bdc913b1eb392c91e25f
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    with:
+      workspace: .
+      request: >-
+        Implement STORY-005, AC-005 through AC-008, from the reviewed
+        product-requirements.md and request.md in richjames.tech.
+        Only modify the explicitly permitted application paths.
+        Independently validate the CALM model and site acceptance suite.
+    secrets:
+      COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
