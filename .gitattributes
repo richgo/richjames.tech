@@ -1,2 +1,6 @@
 .github/workflows/*.lock.yml linguist-generated=true merge=ours
 /.forge/verify-change text eol=lf
+/.forge/sagekit-index/index.faiss binary
+/request.md text eol=lf
+/product-requirements.md text eol=lf
+/architecture/README.md text eol=lf

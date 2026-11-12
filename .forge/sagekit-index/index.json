@@ -1,0 +1,37 @@
+{
+  "revision": "c1b6dbacdfeddf5fd1b0b94b261a0d615670ea5ad87122cde0eea18840924221",
+  "embedding_profile": "1d0ca16140a23b03fa9cda4161fac44b82c70eae0620d01e4a611ef15d6aeb55",
+  "profile": {
+    "name": "experimental:sagekit-hash",
+    "revision": "ffffffffffffffffffffffffffffffffffffffff",
+    "representation": "text",
+    "dimensions": 512,
+    "fields": [
+      "text"
+    ]
+  },
+  "metric": "inner_product",
+  "record_ids": [
+    "0f58f2cfc1a733804c37ead8b6bf8f2299f90cc404fab7e78185f9cb551948d5",
+    "ac48eb6fde97f2765a7b4d6cc8a1755ccb727b51bf07bfa0131b4c13cbc22ef8",
+    "c4aad161bb7d04367b730645091ab50a808991e13dfa338374dcdfe59692ae33"
+  ],
+  "sources": {
+    "0f58f2cfc1a733804c37ead8b6bf8f2299f90cc404fab7e78185f9cb551948d5": {
+      "uri": "https://api.github.com/repos/richgo/richjames.tech/git/blobs/efd391dafe8522bb504045240a6270d2daf2cd97",
+      "revision": "efd391dafe8522bb504045240a6270d2daf2cd97",
+      "locator": ""
+    },
+    "ac48eb6fde97f2765a7b4d6cc8a1755ccb727b51bf07bfa0131b4c13cbc22ef8": {
+      "uri": "https://api.github.com/repos/richgo/richjames.tech/git/blobs/00525cd29db6ea6dcf1e8ddfb96fbbfeb2916b1a",
+      "revision": "00525cd29db6ea6dcf1e8ddfb96fbbfeb2916b1a",
+      "locator": ""
+    },
+    "c4aad161bb7d04367b730645091ab50a808991e13dfa338374dcdfe59692ae33": {
+      "uri": "https://api.github.com/repos/richgo/richjames.tech/git/blobs/fd82c88c52296880b784907f39fcf6fbcb0a6d4e",
+      "revision": "fd82c88c52296880b784907f39fcf6fbcb0a6d4e",
+      "locator": ""
+    }
+  },
+  "index_sha256": "1652bbd7dd619876e200461dc0c54759f0bb01602d095ef4222f7b5ef82e8502"
+}

@@ -55,6 +55,7 @@ next-env.d.ts
 !.forge/verify-change
 !.forge/sagekit.json
 !.forge/seed-sagekit.py
+!.forge/sagekit-index.py
 !.forge/probe-sagekit.py
 
 # APMX 0.8.0 rejects bracketed paths when exporting its plain-tree capture.

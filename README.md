@@ -51,6 +51,28 @@ To refresh the snapshot and logos, run `node scripts/import-credly.mjs`, then
 commit `src/data/credly-badges.json` and `public/img/credly/` with the site.
 Normal builds and page views do not require a Credly connection or login.
 
+## SageKit FAISS index
+
+The native index and its metadata are tracked in `.forge/sagekit-index/`.
+They cover `request.md`, `product-requirements.md`, and `architecture/README.md`.
+The metadata records the embedding profile, checksum, record IDs in FAISS row
+order, and source Git blobs.
+
+After changing those documents, run these commands from the repository root
+with Python 3.13 and Git. Replace `<fresh-corpus-directory>` with a new directory
+outside the repository.
+
+```text
+python -m pip install "sagekit[faiss] @ git+https://github.com/richgo/sage-kit.git@43640fbdf498ab1043237296ad1bf39de5f750c7"
+python .forge/seed-sagekit.py <fresh-corpus-directory>
+python .forge/sagekit-index.py write <fresh-corpus-directory>
+python .forge/sagekit-index.py verify <fresh-corpus-directory>
+```
+
+Commit both index files with the source edits. The FAISS check runs on changes
+to the source documents or index, and the qualification workflow checks the
+committed index before preparing the SageKit gate.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
