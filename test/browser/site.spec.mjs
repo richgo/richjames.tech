@@ -53,6 +53,8 @@ test('AC-005 renders the first four supported events from the browser request', 
   for (let i = 0; i < 4; i++) {
     const entry = panel.getByRole('listitem').nth(i)
     await expect(entry).toContainText('richgo/project-' + i)
+    await expect(entry).toContainText(/push/i)
+    await expect(entry).not.toContainText(/0 commits?/i)
     await expect(entry.getByRole('link')).toHaveAttribute('href', 'https://github.com/richgo/project-' + i)
   }
 })
@@ -73,3 +75,11 @@ for (const [name, reply] of [
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   })
 }
+
+test('AC-006 falls back when the request stalls', async ({ page }) => {
+  await page.route(endpoint, () => {})
+  await page.goto('/')
+  const panel = page.getByRole('region', { name: 'GitHub activity' })
+  await expect(panel.getByRole('status')).toContainText(/unavailable|could not|couldn.t/i, { timeout: 8000 })
+  await expect(panel.locator(`a[href="${profile}"]`)).toBeVisible()
+})

@@ -29,18 +29,20 @@ The live public site returned HTTP 200 from Netlify during source inventory.
 Azure's legacy preview workflows failed before deployment. A verified
 delivery still needs an authorized Netlify release and a live observation.
 
-
 ## Hosted qualification on 12 November 2026
 
-The SageKit requirements gate and live TypeSafe provider probe passed in
-[the hosted retry](https://github.com/richgo/richjames.tech/actions/runs/43273964054).
-SageKit recorded `fallback-required` from Jev 1.13.0 using the pinned corpus.
-Copilot rejected planning with the monthly quota error in both the
-[default-model run](https://github.com/richgo/richjames.tech/actions/runs/43273399981)
-and the retry with GPT-5.3-Codex. The independent APMX replay, APMX signing
-and SageKit release gate require a successful Copilot producer receipt.
+| Input tag | Hosted run | Result |
+| --- | --- | --- |
+| `forgekit-brownfield-proof-5` | [Original run and retry](https://github.com/richgo/richjames.tech/actions/runs/43273964054) | Quota initially blocked Copilot. The retry passed planning and specification and exposed the native exporter’s bracketed-route failure. |
+| `forgekit-brownfield-proof-6` | [Initial signed delivery](https://github.com/richgo/richjames.tech/actions/runs/43287110009) | Copilot, independent replay, APMX signatures and the receipt-bound SageKit release decision passed. |
+| `forgekit-brownfield-proof-7` | [Signed repair](https://github.com/richgo/richjames.tech/actions/runs/43289300673) | Copilot repaired the current PushEvent label, request timeout and URL validation. The independent replay and both signing stages passed. |
 
-The PR carries a locally repaired website patch based on its original draft.
-The independent website CI attestation covers the website acceptance
-evidence for the checked commit. The native APMX qualification can be
-retried from `forgekit-brownfield-proof-5` when Copilot quota is available.
+The checked-in implementation takes `src/app/HomeClient.tsx` from the
+initial delivery and both activity modules from the repair delivery.
+The verifier restores four tracked Next.js route files from the exact
+reviewed checkout when APMX 0.8.0 excludes their bracketed paths from its
+export inventory. These routes remain part of the production build and
+independent browser acceptance.
+
+Production promotion remains subject to human review. The pull request
+and its Netlify Deploy Preview carry the candidate for that review.
