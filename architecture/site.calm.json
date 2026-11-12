@@ -2,38 +2,64 @@
   "$schema": "https://calm.finos.org/release/1.2/meta/calm.json",
   "nodes": [
     {
-      "unique-id": "browser",
+      "unique-id": "visitor",
       "node-type": "actor",
-      "name": "Website visitor"
+      "name": "Website visitor",
+      "description": "A reader navigating the public portfolio."
+    },
+    {
+      "unique-id": "browser",
+      "node-type": "service",
+      "name": "Web browser",
+      "description": "Runs the hydrated Next.js client and makes the planned public GitHub Events request."
     },
     {
       "unique-id": "next-web",
       "node-type": "service",
       "name": "Next.js 16 website",
-      "description": "React 19 app router with server and client components"
+      "description": "React 19 App Router serves prerendered pages and client assets."
     },
     {
       "unique-id": "markdown-content",
-      "node-type": "database",
+      "node-type": "data-asset",
       "name": "Versioned Markdown articles",
-      "description": "content/blog read by src/lib/markdown.ts"
+      "description": "Build-time filesystem input under content/blog, parsed by src/lib/markdown.ts."
+    },
+    {
+      "unique-id": "credly-snapshot",
+      "node-type": "data-asset",
+      "name": "Credential snapshot",
+      "description": "Bundled data from src/data/credly-badges.json rendered on About."
     },
     {
       "unique-id": "github-api",
       "node-type": "system",
-      "name": "GitHub public events API",
-      "description": "External unauthenticated activity feed; may rate limit"
+      "name": "GitHub Events API",
+      "description": "Planned STORY-005 dependency. The browser reads public events directly."
     },
     {
-      "unique-id": "azure-static-web-apps",
+      "unique-id": "netlify",
       "node-type": "system",
-      "name": "Azure Static Web Apps",
-      "description": "GitHub Actions deployment configuration"
+      "name": "Netlify",
+      "description": "Configured Next.js deployment target. The public domain returned HTTP 200 with Server: Netlify during qualification."
     }
   ],
   "relationships": [
     {
-      "unique-id": "visitor-site",
+      "unique-id": "visitor-browser",
+      "description": "The visitor navigates with their browser.",
+      "relationship-type": {
+        "interacts": {
+          "actor": "visitor",
+          "nodes": [
+            "browser"
+          ]
+        }
+      }
+    },
+    {
+      "unique-id": "browser-site",
+      "description": "The browser loads the website and client assets.",
       "relationship-type": {
         "connects": {
           "source": {
@@ -43,10 +69,12 @@
             "node": "next-web"
           }
         }
-      }
+      },
+      "protocol": "HTTPS"
     },
     {
       "unique-id": "site-content",
+      "description": "Next.js reads local Markdown at build time.",
       "relationship-type": {
         "connects": {
           "source": {
@@ -59,28 +87,43 @@
       }
     },
     {
-      "unique-id": "site-github",
+      "unique-id": "site-credentials",
+      "description": "The application bundles the checked-in credential data.",
       "relationship-type": {
         "connects": {
           "source": {
             "node": "next-web"
           },
           "destination": {
-            "node": "github-api"
+            "node": "credly-snapshot"
           }
         }
       }
     },
     {
-      "unique-id": "deploy-site",
+      "unique-id": "browser-github",
+      "description": "Planned STORY-005 browser-side GET to the public Events API.",
       "relationship-type": {
         "connects": {
           "source": {
-            "node": "azure-static-web-apps"
+            "node": "browser"
           },
           "destination": {
-            "node": "next-web"
+            "node": "github-api"
           }
+        }
+      },
+      "protocol": "HTTPS"
+    },
+    {
+      "unique-id": "site-hosting",
+      "description": "Netlify serves the public website.",
+      "relationship-type": {
+        "deployed-in": {
+          "container": "netlify",
+          "nodes": [
+            "next-web"
+          ]
         }
       }
     }

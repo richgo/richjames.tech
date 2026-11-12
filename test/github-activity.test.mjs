@@ -5,21 +5,30 @@ import ts from 'typescript'
 
 const source = readFileSync(new URL('../src/lib/github-activity.ts', import.meta.url), 'utf8')
 const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText
-const module = { exports: {} }
-new Function('module', 'exports', js)(module, module.exports)
-const { mapGitHubEvents } = module.exports
+const compiled = { exports: {} }
+new Function('module', 'exports', js)(compiled, compiled.exports)
+const { mapGitHubEvents } = compiled.exports
+const event = (id, name, url) => ({
+  id: String(id), type: 'PushEvent', repo: { name, url }, created_at: '2026-11-12T12:00:00Z',
+})
 
-test('maps supported public events with safe GitHub URLs', () => {
-  const items = mapGitHubEvents([{ id: '1', type: 'PushEvent', repo: { name: 'richgo/forge-kit' }, created_at: '2026-11-12T12:00:00Z' }])
+test('maps a public event with a GitHub repository link', () => {
+  const items = mapGitHubEvents([event(1, 'richgo/forge-kit', 'https://api.github.com/repos/richgo/forge-kit')])
   assert.equal(items.length, 1)
   assert.equal(items[0].url, 'https://github.com/richgo/forge-kit')
 })
-test('rejects malformed, unsupported and malicious repository names', () => {
+
+test('AC-007 rejects unsafe repository names and untrusted repository URLs', () => {
   assert.deepEqual(mapGitHubEvents(null), [])
-  assert.deepEqual(mapGitHubEvents([{ id: '1', type: 'PushEvent', repo: { name: 'evil/x?redirect=https://evil.test' }, created_at: '2026-11-12T12:00:00Z' }]), [])
-  assert.deepEqual(mapGitHubEvents([{ id: '1', type: 'WatchEvent', repo: { name: 'richgo/forge-kit' }, created_at: '2026-11-12T12:00:00Z' }]), [])
+  assert.deepEqual(mapGitHubEvents([
+    event(1, 'evil/x?redirect=https://evil.test'),
+    event(2, 'richgo/..'),
+    event(3, 'richgo/forge-kit', 'https://evil.test/richgo/forge-kit'),
+    event(4, 'richgo/forge-kit', 'https://api.github.com/repos/richgo/other'),
+  ]), [])
 })
-test('limits activity to four items', () => {
-  const items = Array.from({length: 10}, (_, i) => ({ id: String(i), type: 'PushEvent', repo: { name: 'richgo/forge-kit' }, created_at: '2026-11-12T12:00:00Z' }))
+
+test('limits activity to four supported entries', () => {
+  const items = Array.from({ length: 10 }, (_, i) => event(i, 'richgo/forge-kit'))
   assert.equal(mapGitHubEvents(items).length, 4)
 })

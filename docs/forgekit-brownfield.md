@@ -1,52 +1,30 @@
-# ForgeKit brownfield qualification — richjames.tech
+# ForgeKit brownfield qualification
 
-## Observed source architecture
+The approved baseline uses the [source-derived CALM model](../architecture/site.calm.json),
+the [product requirements](../product-requirements.md) and the [STORY-005 request](../request.md).
+The reviewed checker runs type checking, lint, mapper tests, a production build,
+strict FINOS CALM validation and Chromium acceptance in a separate candidate tree.
 
-The source inventory is recorded in [architecture/README.md](../architecture/README.md)
-and its machine-readable [CALM model](../architecture/site.calm.json).
-The reverse-engineered product inventory and stable acceptance criteria
-are in [product-requirements.md](../product-requirements.md).
-These are reviewed inputs, not agent-generated acceptance oracles.
+SageKit is ForgeKit's decision layer. The qualification uses a disposable
+SageKit corpus seeded with public evidence from the reviewed commit. The
+requirements gate pins the corpus, policy and approved input hashes before
+the agent runs. The release gate checks the independently replayed APMX
+receipt digest and asks SageKit for a typed recommendation through TypeSafe
+System One. A human reviews the recommendation and the signed source patch.
 
-## Change
+The reviewed tag triggers the pinned ForgeKit APMX workflow. Copilot receives
+`COPILOT_GITHUB_TOKEN` in the producer job. The SageKit release job maps
+`FORGE_JEV_TOKEN` to SageKit's `TYPESAFE_API_KEY` for that step only.
+Use the checked-in request with the pinned native software-factory skills.
+The preexisting draft is preserved in the PR's first commit. The tagged
+qualification input starts from the website without the proposed activity
+implementation so the patch can be attributed to the producer.
 
-STORY-005 adds a visible public GitHub activity panel to the homepage,
-using GitHub's public Events API. The integration is intentionally
-read-only and requires no token. Unsupported, malformed or unsafe data
-is discarded, and the UI has a graceful failure state.
+Review the APMX receipt, delivery, GitHub attestations and SageKit gate
+artifacts from the same run. Check the signer, source tag and commit,
+receipt digest, patch scope and AC-005 through AC-008 before accepting the
+delivery. The PR's independent browser suite also covers AC-001 through AC-004.
 
-A LinkedIn feed would require authorized API access or manual exports;
-the public GitHub API exercises the third-party integration and visible
-UI without scraping or storing personal access tokens.
-
-## ForgeKit installation and qualification
-
-- The project has the ForgeKit contract inputs
-  `product-requirements.md`, `request.md`, and `.forge/verify-change`.
-- `.github/workflows/forgekit.yml` calls the pinned reusable ForgeKit
-  APMX workflow. A configured `COPILOT_GITHUB_TOKEN` secret is required.
-- `.github/workflows/forgekit-brownfield-qualification.yml` runs the
-  independent application acceptance and CALM validation.
-- `npm ci` installs the website dependencies. APMX and the factory skills
-  are resolved by the pinned hosted factory when it actually runs.
-
-The ForgeKit initialization CLI cannot overwrite authored, reviewed
-requirements and verifier inputs. Do not run `forgekit init` over these
-files. The files follow its consumer interface and are installed in this
-branch; a successful hosted APMX run is still required to demonstrate
-end-to-end factory execution.
-
-## Evidence required before declaring the goal complete
-
-1. Validate the CALM JSON with the pinned FINOS CLI and review it against
-   source and deployment evidence.
-2. Run clean-room `npm ci`, typecheck, lint, tests and production build.
-3. Dispatch the hosted ForgeKit workflow and inspect agent-generated
-   patch, independent replay, signed attestation and source revision.
-4. Review/merge the resulting feature and verify it visibly on the live
-   site, including third-party failure behavior.
-5. Record the deployed digest, observation and rollback readiness.
-
-Do not claim a signed factory run or a live deployment based solely on
-this source branch. The requested **Sage Kit** package is not identified
-by a verified repository or package reference and has not been installed.
+The live public site returned HTTP 200 from Netlify during source inventory.
+Azure's legacy preview workflows failed before deployment. A verified
+delivery still needs an authorized Netlify release and a live observation.

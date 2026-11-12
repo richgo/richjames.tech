@@ -1,46 +1,116 @@
-# Product requirements — richjames.tech
+# Product requirements
 
 ## Epic EPIC-001 — Publish an accessible engineering portfolio
+
 Outcome: Visitors can learn about Rich James and discover his work.
-Owner: `next-web`.
 
 ### Feature FEAT-001 — Landing page
-Story STORY-001: As a visitor I can read the introduction and navigate
-to articles, About and contact.
-- AC-001 Given the homepage, when it renders, then the hero and navigation
-  are available and the latest articles link to their canonical pages.
+
+Outcome: Visitors can discover the portfolio.
+
+#### Story STORY-001 — Discover the portfolio
+
+Architecture owner: `next-web`
+
+As a visitor, I can discover the portfolio.
+
+##### Acceptance AC-001 — Discover the portfolio
+
+- Given the homepage loads
+- When I inspect the hero and navigation
+- Then the introduction and canonical article links are available
+- Check: `site.home`
 
 ### Feature FEAT-002 — Markdown article archive
-Story STORY-002: As a reader I can browse and read dated posts.
-- AC-002 Given `content/blog/*.md`, when the site builds, then article
-  cards and individual routes resolve from the frontmatter.
+
+Outcome: Visitors can read dated articles.
+
+#### Story STORY-002 — Read dated articles
+
+Architecture owner: `next-web`
+
+As a visitor, I can read dated articles.
+
+##### Acceptance AC-002 — Read dated articles
+
+- Given the checked-in Markdown is available
+- When I open the archive and follow an article link
+- Then the archive and article routes resolve
+- Check: `site.blog`
 
 ### Feature FEAT-003 — Topic discovery
-Story STORY-003: As a reader I can browse posts by topic.
-- AC-003 Given posts with tags, when I visit the tag index and a tag page,
-  then I see the matching posts.
+
+Outcome: Visitors can find posts by topic.
+
+#### Story STORY-003 — Find posts by topic
+
+Architecture owner: `next-web`
+
+As a visitor, I can find posts by topic.
+
+##### Acceptance AC-003 — Find posts by topic
+
+- Given posts have tags
+- When I open the tag index and follow a topic
+- Then I see matching articles
+- Check: `site.tags`
 
 ### Feature FEAT-004 — Profile and contact
-Story STORY-004: As a visitor I can read the career timeline, credentials
-and find contact links.
-- AC-004 Given About and Contact routes, when rendered, then the links and
-  locally snapshotted credentials remain accessible.
+
+Outcome: Visitors can find credentials and contact details.
+
+#### Story STORY-004 — Find credentials and contact details
+
+Architecture owner: `next-web`
+
+As a visitor, I can find credentials and contact details.
+
+##### Acceptance AC-004 — Find credentials and contact details
+
+- Given the portfolio is available
+- When I visit About and Contact
+- Then the career history, credentials and contact links are accessible
+- Check: `site.profile`
 
 ## Epic EPIC-002 — Demonstrate externally sourced engineering activity
-Outcome: A visible homepage integration shows recent public open-source
-activity without relying on credentials. Owner: `next-web`.
+
+Outcome: Visitors can discover current public open-source work from the homepage.
 
 ### Feature FEAT-005 — GitHub public activity
-Story STORY-005: As a visitor I can see recent public GitHub activity
-on the homepage and follow the activity to its repository.
-- AC-005 Given valid GitHub public events, when the activity panel loads,
-  then at most four recent supported events appear with readable labels
-  and safe links to GitHub.
-- AC-006 Given API rate limiting, network failure, empty or malformed data,
-  when the panel loads, then the homepage still works and displays a
-  non-blocking fallback link to the public GitHub profile.
-- AC-007 Given an untrusted event URL or non-GitHub repository name,
-  when mapping events, then it is rejected rather than rendered as a link.
-- AC-008 Given the source branch, when independent verification runs, then
-  type checking, linting, unit tests, production build and CALM validation
-  must succeed without changing protected acceptance criteria.
+
+Outcome: Visitors can follow recent GitHub events to their repositories.
+
+#### Story STORY-005 — Browse recent GitHub activity
+
+Architecture owner: `next-web`
+
+As a visitor, I can see recent public GitHub activity on the homepage and
+open the corresponding repositories.
+
+##### Acceptance AC-005 — Display recent activity
+
+- Given GitHub returns valid supported events
+- When the panel loads
+- Then at most four events appear in feed order with readable labels and safe GitHub links
+- Check: `activity.render`
+
+##### Acceptance AC-006 — Preserve the homepage when the feed fails
+
+- Given GitHub is rate limited, unreachable, empty or malformed
+- When the panel finishes loading
+- Then the homepage stays usable and links to the public GitHub profile
+- Check: `activity.fallback`
+
+##### Acceptance AC-007 — Reject unsafe event links
+
+- Given the payload supplies unsafe repository names or untrusted repository URLs
+- When the event mapper receives it
+- Then unsafe entries produce no repository links
+- Check: `activity.links`
+
+##### Acceptance AC-008 — Verify the candidate independently
+
+- Given a candidate patch for this story
+- When the independent verifier applies it to a clean copy
+- Then type checking, lint, unit tests, production build and strict CALM validation succeed
+- Check: `site.qualification`

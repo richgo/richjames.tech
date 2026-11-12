@@ -15,7 +15,7 @@ export interface FrontMatter {
   tags?: string[]
   linkedinUrl?: string
   source?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export interface MarkdownContent {

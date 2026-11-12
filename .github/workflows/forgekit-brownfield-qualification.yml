@@ -20,7 +20,9 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm run typecheck
       - run: npm run lint
-      - run: npm test
-      - run: npm run build
       - name: Validate FINOS CALM architecture
-        run: npx --yes --package @finos/calm-cli@1.68.0 calm validate -a architecture/site.calm.json --format json
+        run: npx --yes --package @finos/calm-cli@1.68.0 calm validate -a architecture/site.calm.json --format json --strict
+      - run: npm run build
+      - run: npm test
+      - run: npx playwright install chromium
+      - run: npx playwright test

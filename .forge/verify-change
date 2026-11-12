@@ -1,25 +1,42 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
 patch="${1:?Provide an unapplied candidate patch}"
+shift
+if [[ "$(printf '%s\n' "$@" | LC_ALL=C sort)" != $'activity.fallback\nactivity.links\nactivity.render\nsite.qualification' ]]; then
+  echo "Expected the four approved STORY-005 check IDs" >&2
+  exit 2
+fi
 [[ -f "$patch" && -s "$patch" && ! -L "$patch" ]] || exit 2
 patch="$(realpath "$patch")"
-root="$(git rev-parse --show-toplevel)"
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
+
 git apply --check -- "$patch"
-while IFS= read -r path; do
+records="$(mktemp)"
+candidate="$(mktemp -d)"
+trap 'rm -f -- "$records"; rm -rf -- "$candidate"' EXIT
+git apply --numstat -z -- "$patch" > "$records"
+while IFS= read -r -d '' record; do
+  path="${record#*$'\t'}"
+  path="${path#*$'\t'}"
   case "$path" in
     src/app/HomeClient.tsx|src/components/GitHubActivity.tsx|src/lib/github-activity.ts|src/app/globals.css) ;;
     *) echo "Candidate changed protected path: $path" >&2; exit 1 ;;
   esac
-done < <(git apply --name-only -- "$patch")
-candidate="$(mktemp -d)"
-trap 'rm -rf -- "$candidate"' EXIT
-git archive HEAD | tar -x -C "$candidate"
+done < "$records"
+
+cp -R architecture content public src test ./*.config.mjs package.json package-lock.json tsconfig.json "$candidate/"
 cd "$candidate"
 git apply -- "$patch"
+for path in src/app/HomeClient.tsx src/components/GitHubActivity.tsx src/lib/github-activity.ts src/app/globals.css; do
+  [[ -f "$path" && ! -L "$path" ]] || exit 1
+done
 npm ci --ignore-scripts --no-audit --no-fund
 npm run typecheck
 npm run lint
 npm test
 npm run build
-npx --yes --package @finos/calm-cli@1.68.0 calm validate -a architecture/site.calm.json --format json
+npx --yes --package @finos/calm-cli@1.68.0 calm validate -a architecture/site.calm.json --format json --strict
+npx playwright install chromium
+npx playwright test
