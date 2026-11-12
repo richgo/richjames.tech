@@ -1,8 +1,8 @@
-"""Export and verify the pinned qualification corpus as a native FAISS index."""
+"""Write or verify the repository FAISS index for a seeded qualification corpus."""
 
 import argparse
 from dataclasses import asdict
-from hashlib import file_digest
+from hashlib import sha256
 import json
 from pathlib import Path
 
@@ -13,16 +13,17 @@ from sagekit.application import Principal
 from sagekit.config import create_application
 
 
-def pinned_vectors(corpus, pin_path):
-    pin = json.loads(pin_path.read_text(encoding="utf-8"))["pin"]
+INDEX_DIRECTORY = Path(__file__).resolve().parent / "sagekit-index"
+
+
+def corpus_vectors(corpus):
     app = create_application(corpus)
     principal = Principal()
     snapshot = app.snapshot(principal)
-    if any(snapshot[key] != pin[key] for key in ("revision", "embedding_profile")):
-        raise ValueError("corpus revision or embedding profile differs from the SageKit pin")
 
-    records = app.list(principal, revision=snapshot["revision"])
-    ids = sorted(record["id"] for record in records)
+    records = sorted(app.list(principal, revision=snapshot["revision"]),
+                     key=lambda record: record["id"])
+    ids = [record["id"] for record in records]
     rows = app.search.vectors.load(set(ids))
     if not ids or set(rows) != set(ids):
         raise ValueError("the pinned corpus must have a stored vector for every record")
@@ -33,43 +34,37 @@ def pinned_vectors(corpus, pin_path):
         "profile": {**asdict(profile), "fields": list(profile.fields)},
         "metric": "inner_product",
         "record_ids": ids,
+        "sources": {record["id"]: record["source"] for record in records},
     }
     return metadata, np.asarray([rows[key] for key in ids], dtype=np.float32)
-
-
-def sha256(path):
-    with path.open("rb") as stream:
-        return file_digest(stream, "sha256").hexdigest()
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("write", "verify"))
     parser.add_argument("corpus", type=Path)
-    parser.add_argument("pin", type=Path)
-    parser.add_argument("artifact", type=Path)
     args = parser.parse_args()
 
-    expected, vectors = pinned_vectors(args.corpus, args.pin)
+    metadata, vectors = corpus_vectors(args.corpus)
     count, dimensions = vectors.shape
-    index_path = args.artifact / "index.faiss"
-    metadata_path = args.artifact / "index.json"
+    index_path = INDEX_DIRECTORY / "index.faiss"
+    metadata_path = INDEX_DIRECTORY / "index.json"
+    expected = faiss.IndexFlatIP(dimensions)
+    expected.add(vectors)
+    expected_bytes = faiss.serialize_index(expected).tobytes()
+    metadata["index_sha256"] = sha256(expected_bytes).hexdigest()
 
     if args.action == "write":
-        args.artifact.mkdir(parents=True, exist_ok=True)
-        index = faiss.IndexFlatIP(dimensions)
-        index.add(vectors)
-        faiss.write_index(index, str(index_path))
-        metadata_path.write_text(
-            json.dumps({**expected, "index_sha256": sha256(index_path)}, indent=2) + "\n",
-            encoding="utf-8",
-        )
+        INDEX_DIRECTORY.mkdir(parents=True, exist_ok=True)
+        index_path.write_bytes(expected_bytes)
+        metadata_path.write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
         print(f"Wrote {count} vectors x {dimensions} dimensions to {index_path}")
         return
 
-    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
-    if metadata != {**expected, "index_sha256": sha256(index_path)}:
-        raise ValueError("FAISS metadata or index checksum differs from the pinned corpus")
+    # Check against the locally built index before letting FAISS parse PR data.
+    if (json.loads(metadata_path.read_text(encoding="utf-8")) != metadata
+            or index_path.read_bytes() != expected_bytes):
+        raise ValueError("the committed FAISS index is stale or corrupt, regenerate both index files")
     index = faiss.read_index(str(index_path))
     if (not isinstance(index, faiss.IndexFlatIP) or index.d != dimensions
             or index.ntotal != count or index.metric_type != faiss.METRIC_INNER_PRODUCT):
