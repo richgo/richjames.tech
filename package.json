@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test test/*.test.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "^5.15.8",
