@@ -1,0 +1,24 @@
+// Generated from CALM sha256:7402b72c7df6f04a76e1a56820caeee111efd205bc21ab715e3199247006feb5
+specification {
+  element component
+}
+model {
+  n_browser = component "Web browser"
+  n_credly_hsnapshot = component "Credential snapshot"
+  n_github_hapi = component "GitHub Events API"
+  n_markdown_hcontent = component "Versioned Markdown articles"
+  n_netlify = component "Netlify"
+  n_next_hweb = component "Next.js 16 website"
+  n_visitor = component "Website visitor"
+  n_browser -> n_github_hapi "browser-github (connects)"
+  n_browser -> n_next_hweb "browser-site (connects)"
+  n_next_hweb -> n_markdown_hcontent "site-content (connects)"
+  n_next_hweb -> n_credly_hsnapshot "site-credentials (connects)"
+  n_next_hweb -> n_netlify "site-hosting (deployed-in)"
+  n_visitor -> n_browser "visitor-browser (interacts)"
+}
+views {
+  view index {
+    include *
+  }
+}

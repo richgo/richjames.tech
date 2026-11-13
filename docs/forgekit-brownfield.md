@@ -46,3 +46,46 @@ independent browser acceptance.
 
 Production promotion remains subject to human review. The pull request
 and its Netlify Deploy Preview carry the candidate for that review.
+
+## OpenSpec 2.0 brownfield reference
+
+The [OpenSpec change](../openspec/changes/qualify-github-activity/proposal.md)
+maps the four criteria for STORY-005 to named scenarios through
+[the reviewed binding](../.forge/openspec.json). The product requirements and
+request retain the existing epic, feature and story IDs. The
+[LikeC4 projection](../architecture/site.c4) and the CALM model reference the
+same website, browser and public GitHub API.
+
+On 13 November 2026, OpenSpec 2.0.0 validated the change in strict mode and
+the ForgeKit preflight emitted the binding and artifact SHA-256 digests.
+On the current brownfield baseline `d05341d7a6dfd72d5e74bb095da399d49240fa77`,
+the production build generated 106 pages, the three mapper tests and nine
+Chromium tests passed, and strict CALM validation reported zero errors or
+warnings. Type checking and lint succeeded, with one existing unused
+argument warning in `lambda/hello.js`. LikeC4 1.60.0 validated the generated view.
+
+The historical [repair](https://github.com/richgo/richjames.tech/actions/runs/43289300673)
+and [initial delivery](https://github.com/richgo/richjames.tech/actions/runs/43287110009)
+were independently re-verified against their pinned signer workflow, source
+commits and tags. Both the SLSA verification summary and the APMX in-toto
+receipt bundle matched the delivered files. The signed SageKit release
+artifacts matched each receipt. The [website acceptance run](https://github.com/richgo/richjames.tech/actions/runs/43310965905)
+also carried verified browser, CALM and source attestations.
+
+The repair delivered two files under the independently replayed receipt
+`b8fc676b7b5b1af17561a003233081375930f3dccb91e9cb4a12c6eb61886f82`.
+Reconstruct a source patch by copying the two attested delivery files over
+the reviewed source at `efbae4a35f9acc3a6260910fbac3af647318c883` and
+exporting `git diff`. Use the unchanged reviewed source with the patch as
+input to the protected checker.
+
+```bash
+./.forge/verify-change /path/to/changes.diff \
+  activity.fallback activity.links activity.render site.qualification
+```
+
+The checker applied the patch to a disposable copy and repeated the
+production build, strict CALM validation, three mapper tests and nine browser
+tests. This reference repeats the earlier signed run and adds local OpenSpec
+qualification. The hosted runs used the earlier ForgeKit revision and skipped
+their publication step.
