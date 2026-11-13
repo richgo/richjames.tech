@@ -56,6 +56,8 @@ next-env.d.ts
 !.forge/sagekit.json
 !.forge/seed-sagekit.py
 !.forge/probe-sagekit.py
+!/.forge/openspec.json
+!/openspec/changes/*/.openspec.yaml
 
 # APMX 0.8.0 rejects bracketed paths when exporting its plain-tree capture.
 # These files stay tracked. The checker restores them from the exact run commit.

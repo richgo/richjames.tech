@@ -9,14 +9,32 @@ jobs:
   verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: project
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
+          path: project
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22'
           cache: npm
+          cache-dependency-path: project/package-lock.json
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          repository: richgo/forge-kit
+          ref: 1f132c11bacc5fdf77455617f6786849f2f7b327
+          path: forgekit-toolchain
+          persist-credentials: false
+      - name: Validate the reviewed OpenSpec change
+        run: |
+          mkdir -p "$RUNNER_TEMP/acceptance"
+          set -o pipefail
+          npm --prefix ../forgekit-toolchain/toolchain/openspec ci --ignore-scripts --engine-strict
+          node ../forgekit-toolchain/bin/forgekit.mjs openspec validate --workspace . --optional \
+            | tee "$RUNNER_TEMP/acceptance/openspec.json"
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm run typecheck
       - run: npm run lint

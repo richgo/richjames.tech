@@ -13,3 +13,7 @@ Validate the [CALM model](site.calm.json) with
 `npx --yes --package @finos/calm-cli@1.68.0 calm validate -a architecture/site.calm.json --format json --strict`.
 Review the inventory against the cited source and observed host. Browser
 acceptance verifies the planned GitHub edge when the candidate adds it.
+
+[The LikeC4 view](site.c4) is generated from this CALM model by ForgeKit's
+agent-delivery architecture planner. Run
+`npx --yes --package likec4@1.60.0 likec4 validate architecture` to validate it.

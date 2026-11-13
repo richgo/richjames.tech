@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "change": "qualify-github-activity",
+  "acceptance": {
+    "AC-005": {
+      "spec": "openspec/changes/qualify-github-activity/specs/github-activity/spec.md",
+      "scenario": "Display recent supported events"
+    },
+    "AC-006": {
+      "spec": "openspec/changes/qualify-github-activity/specs/github-activity/spec.md",
+      "scenario": "Keep the homepage usable when the feed fails"
+    },
+    "AC-007": {
+      "spec": "openspec/changes/qualify-github-activity/specs/github-activity/spec.md",
+      "scenario": "Exclude unsafe repository links"
+    },
+    "AC-008": {
+      "spec": "openspec/changes/qualify-github-activity/specs/github-activity/spec.md",
+      "scenario": "Replay a candidate against the approved checks"
+    }
+  }
+}
